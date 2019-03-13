@@ -19,7 +19,9 @@ from . import views
 app_name = 'inv_manage'
 
 urlpatterns = [
-		path('', views.inv_manage, name='inv_manage'),
+    path('home/neworder/', views.neworder, name='neworder'),
+    path('home/', views.home, name='home'),
+    path('', views.authentication, name='authentication')
 ]
 
 from django.conf import settings
