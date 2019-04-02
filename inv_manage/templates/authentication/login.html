@@ -1,0 +1,22 @@
+{% extends "authentication/base.html" %}
+
+{% block main %}
+<h1>Welcome</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <label for="username">Username: </label>
+        <input id="username" name="username" type="text">
+    </div>
+    <div class="row">
+        <label for="password">Password: </label>
+        <input id="password" name="password" type="password">
+    </div>
+    <div class="row">
+        <button type="submit" id="login-btn">Login</button>
+    </div>
+    <div class="row">
+        <a href="#">Forgot Password</a>
+    </div>
+</form>
+{% endblock %}
