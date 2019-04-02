@@ -2,3 +2,5 @@ shaved_ice/settings.py
 db.sqlite3
 .vscode
 screen drafts
+__pycache__
+static/admin
