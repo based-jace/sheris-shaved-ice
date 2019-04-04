@@ -1,0 +1,8 @@
+.top-nav{
+    height: 60px;
+}
+
+.main-cont{
+    margin-top: 60px;
+    min-height: calc(100vh - 100px);
+}

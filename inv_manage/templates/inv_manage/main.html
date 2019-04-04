@@ -1,10 +1,17 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% block add_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/inv_manage.css' %}">
+{% endblock %}
+
 {% block navbar %}
-    <nav>
+    <nav class="top-nav">
         <div class="nav-buttons">
-            <a href="#"><span>Home</span></a>
-            <a href="#"><span>Inventory</span></a>
-            <a href="#"><span>Orders</span></a>
+            <a href="{% url 'inv_manage:home' %}"><span>Home</span></a>
+            <a href="{% url 'inv_manage:inventory' %}"><span>Inventory</span></a>
+            <a href="{% url 'inv_manage:orders' %}"><span>Orders</span></a>
         </div>
         <a href="{% url 'inv_manage:logout' %}">
             <span>Logout</span>

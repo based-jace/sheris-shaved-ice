@@ -21,12 +21,13 @@ h1{
 } */
 
 header{
+    width: 100vw;
     position: absolute;
     top: 0;
 }
 
 .main-cont{
-    #display: flex;
+    display: flex;
     min-height: calc(100vh - 40px);
 }
 
