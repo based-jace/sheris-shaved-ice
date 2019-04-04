@@ -7,7 +7,8 @@
     <title>{% block title %}Login{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Bevan|Niramit" rel="stylesheet"> 
-    <link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+    {% block add_styles %}{% endblock %}
     
     <script src="main.js"></script>
 </head>
@@ -15,6 +16,20 @@
     <div class="container">
         {% block container %}
         <div class="main-cont">
+            <header>
+                {% block navbar %}
+                {% endblock %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div role="alert">
+                            {{ message }}
+                            <button class="close-parent">
+                                x
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </header>
             <main>
                 {% block main %}
 

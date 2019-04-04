@@ -1,4 +1,10 @@
-{% extends "authentication/base.html" %}
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block add_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/auth.css' %}">
+{% endblock %}
 
 {% block main %}
 <h1>Welcome</h1>

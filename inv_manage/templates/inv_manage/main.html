@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block navbar %}
+    <nav>
+        <div class="nav-buttons">
+            <a href="#"><span>Home</span></a>
+            <a href="#"><span>Inventory</span></a>
+            <a href="#"><span>Orders</span></a>
+        </div>
+        <a href="{% url 'inv_manage:logout' %}">
+            <span>Logout</span>
+        </a>
+    </nav>
+{% endblock navbar %}

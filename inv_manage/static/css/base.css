@@ -1,0 +1,46 @@
+html, body, div, h1, h2, h3, h4, h5, h6{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Niramit', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6{
+    font-family: 'Bevan', cursive;
+}
+
+h1{
+    font-size: 3.5em;
+}
+
+/* .container{
+    min-height: 100vh;
+    width: 100vw;
+} */
+
+header{
+    position: absolute;
+    top: 0;
+}
+
+.main-cont{
+    #display: flex;
+    min-height: calc(100vh - 40px);
+}
+
+label{
+    text-align: left;
+    display: inline-block;
+    width: 80px;
+}
+
+footer{
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    background: black;
+}
