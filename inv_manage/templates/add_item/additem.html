@@ -1,0 +1,13 @@
+{% block main %}
+<h1>Add a new item to the database here.</h1>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="row">
+        <label for="itemname">Item Name: </label>
+        <input id="itemname" name="itemname" type="text">
+    </div>
+    <div class="row">
+        <button type="submit" id="createitem-btn">Create Item</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% block body %}
+
+    <div class='container'>
+        <h1>stuff</h1>
+        <h2>data</h2>
+        {% for type in types %}
+            <h1>{{ type.name }}</h1>
+        {% endfor %}
+    </div>
+
+{% endblock %}

@@ -4,6 +4,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
 
+
+from .models import Type
+
 # Create your views here.
 
 def check_auth(request, page):
@@ -56,9 +59,13 @@ def previous_orders(request):
 
 @never_cache
 def add_item(request):
-    #return check_auth(request)
-    #return check_auth(request, 'inv_manage/inventory.html')
-    return HttpResponse("Add a new item to the database here.") 
+    type_instance = Type()
+    if request.method == 'POST':
+        type_instance.name = request.POST.get('itemname')
+        type_instance.save()
+        return redirect('inv_manage:previousorder')
+    else:    
+        return render(request,'add_item/additem.html')
         # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
         #   including categories.
 
