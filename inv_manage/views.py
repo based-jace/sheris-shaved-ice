@@ -5,9 +5,9 @@ from django.contrib import messages
 
 # Create your views here.
 
-def check_auth(request):
+def check_auth(request, page):
     if request.user.is_authenticated:
-        pass
+        return render(request, page)
     else:
         return redirect('inv_manage:home')
 
@@ -37,25 +37,26 @@ def home(request):
         return login_user(request)
 
 def neworder(request):
-    check_auth(request)
-    return HttpResponse("Enter order info here.")
+    return check_auth(request, 'inv_manage/neworder.html')
+    #return render(request, page)
 
 def inv_manage(request):
-    check_auth(request)
-    return HttpResponse("View and edit current inventory here.")
+    return check_auth(request, 'inv_manage/inventory.html')
+    #return render(request, 'inv_manage/inventory.html')
 
 def previous_orders(request):
-    check_auth(request)
-    return HttpResponse("View past orders here.")
+    return check_auth(request, 'inv_manage/orders.html')
+    #return render(request, 'inv_manage/orders.html')
 
 def add_item(request):
-    check_auth(request)
+    #return check_auth(request)
+    #return check_auth(request, 'inv_manage/inventory.html')
     return HttpResponse("Add a new item to the database here.") 
         # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
         #   including categories.
 
 def edit_item(request):
-    check_auth(request)
+    #return check_auth(request)
     return HttpResponse("Edit database items.") 
         # "items" here fits the same definition as that above. This might be able to be combined with the
         #   page above.
