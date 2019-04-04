@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,21 +16,21 @@
 <body>
     <div class="container">
         {% block container %}
+        <header>
+            {% block navbar %}
+            {% endblock %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div role="alert">
+                        {{ message }}
+                        <button class="close-parent">
+                            x
+                        </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </header>
         <div class="main-cont">
-            <header>
-                {% block navbar %}
-                {% endblock %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <div role="alert">
-                            {{ message }}
-                            <button class="close-parent">
-                                x
-                            </button>
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            </header>
             <main>
                 {% block main %}
 

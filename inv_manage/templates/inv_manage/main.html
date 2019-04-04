@@ -1,6 +1,13 @@
 {% extends "base.html" %}
+
+{% load static %}
+
+{% block add_styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/inv_manage.css' %}">
+{% endblock %}
+
 {% block navbar %}
-    <nav>
+    <nav class="top-nav">
         <div class="nav-buttons">
             <a href="{% url 'inv_manage:home' %}"><span>Home</span></a>
             <a href="{% url 'inv_manage:inventory' %}"><span>Inventory</span></a>
