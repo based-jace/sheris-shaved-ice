@@ -1,72 +1,96 @@
-html, body, div, h1, h2, h3, h4, h5, h6{
-    margin: 0;
-    padding: 0;
+html, body, div, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
 }
 
-body{
-    font-family: 'Niramit', sans-serif;
+button {
+  background: none;
+  font-size: 16px;
+  border: none;
+  margin: 0px;
+  padding: 0px;
 }
 
-h1, h2, h3, h4, h5, h6{
-    font-family: 'Bevan', cursive;
+body {
+  font-family: 'Niramit', sans-serif;
 }
 
-h1{
-    font-size: 3.5em;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bevan', cursive;
+}
+
+h1 {
+  font-size: 3.5em;
 }
 
 /* .container{
     min-height: 100vh;
     width: 100vw;
 } */
-
-header{
-    width: 100vw;
-    position: absolute;
-    top: 0;
+header {
+  width: 100%;
+  position: absolute;
+  top: 0;
 }
 
-.message-cont{
-    width: 100%;
-    display: flex;
-    position: relative;
-    justify-content: center;
+.message-cont {
+  height: 30px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
 }
 
-.message{
-    width: 100%;
-    text-align: center;
+.message-cont .message {
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  color: white;
 }
 
-.message-success{
-    background: green;
+.message-cont .message-success {
+  background: green;
 }
 
-.message-error{
-    background: red;
+.message-cont .message-error {
+  background: red;
 }
 
-.message-cont > button{
-    position: absolute;
-    right: 0;
+.message-cont > button {
+  position: absolute;
+  right: 0;
+  height: 100%;
+  width: 30px;
 }
 
-.main-cont{
-    display: flex;
-    min-height: calc(100vh - 40px);
+.main-cont {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: calc(100vh - 40px);
 }
 
-label{
-    text-align: left;
-    display: inline-block;
-    width: 80px;
+footer {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 40px;
+  background: black;
+  width: 100%;
 }
-
-footer{
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 40px;
-    background: black;
-}
+/*# sourceMappingURL=base.css.map */

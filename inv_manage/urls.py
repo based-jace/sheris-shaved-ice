@@ -21,7 +21,6 @@ app_name = 'inv_manage'
 urlpatterns = [
     path('orders/neworder/', views.neworder, name='neworder'),
     path('orders/', views.previous_orders, name='orders'),
-    #path('home/', views.home, name='home'),
     path('inventory/', views.inv_manage, name='inventory'),
     path('logout/', views.logout_user, name='logout'),
     path('', views.home, name='home'),

@@ -13,8 +13,10 @@
             <a href="{% url 'inv_manage:inventory' %}"><span>Inventory</span></a>
             <a href="{% url 'inv_manage:orders' %}"><span>Orders</span></a>
         </div>
-        <a href="{% url 'inv_manage:logout' %}">
-            <span>Logout</span>
-        </a>
+        <div class="logout-btn">
+            <a href="{% url 'inv_manage:logout' %}">
+                <span>Logout</span>
+            </a>
+        </div>
     </nav>
 {% endblock navbar %}

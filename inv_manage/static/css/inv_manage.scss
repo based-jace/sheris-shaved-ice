@@ -1,0 +1,21 @@
+$navbar-height: 60px;
+$footer-height: 40px;
+
+.top-nav{
+    display: flex;
+    height: $navbar-height;
+    width: 100%;
+    background: black;
+    align-items: center;
+
+    .logout-btn{
+        position: absolute;
+        right: 0;
+    }
+}
+
+.main-cont{
+    margin-top: $navbar-height;
+    min-height: calc(100vh - (#{$footer-height} + #{$navbar-height}));
+}
+
