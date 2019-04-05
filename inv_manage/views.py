@@ -65,6 +65,7 @@ def add_item(request):
         type_instance.save()
         return redirect('inv_manage:previousorder')
     else:    
+        #TODO create a additem template
         return render(request,'add_item/additem.html')
         # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
         #   including categories.

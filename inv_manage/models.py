@@ -8,7 +8,7 @@ class Type(models.Model):
         return self.name
 
 class Attributes(models.Model):
-    yype_id = models.ForeignKey(Type,on_delete=models.CASCADE)
+    type_id = models.ForeignKey(Type,on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=256,blank=True,null=True)
     def __str__(self):
