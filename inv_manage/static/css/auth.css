@@ -1,7 +1,37 @@
-.main-cont{
-    text-align: center;
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    align-items: center;
+.main-cont {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
+form {
+  width: 80%;
+  margin: auto;
+}
+
+form label {
+  text-align: left;
+  display: inline-block;
+  width: 80px;
+}
+
+form .form-input {
+  width: 150px;
+}
+
+form #login-btn {
+  background: lightskyblue;
+  width: calc(150px + 80px + 10px);
+  border: black solid 1px;
+  border-radius: 4px;
+  padding: 2px 0;
+  margin: 4px 0;
+}
+/*# sourceMappingURL=auth.css.map */

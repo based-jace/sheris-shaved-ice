@@ -1,8 +1,22 @@
-.top-nav{
-    height: 60px;
+.top-nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 60px;
+  width: 100%;
+  background: black;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-.main-cont{
-    margin-top: 60px;
-    min-height: calc(100vh - 100px);
+.top-nav .logout-btn {
+  position: absolute;
+  right: 0;
 }
+
+.main-cont {
+  margin-top: 60px;
+  min-height: calc(100vh - (40px + 60px));
+}
+/*# sourceMappingURL=inv_manage.css.map */
