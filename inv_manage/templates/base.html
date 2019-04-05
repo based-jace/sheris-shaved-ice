@@ -22,7 +22,7 @@
             {% if messages %}
                 {% for message in messages %}
                     <div class="message-cont">
-                        <div class="message" {% if message.tags %} class="{{ message }}" {% endif %}>
+                        <div class="message message-{{ message.tags }}">
                             {{ message }}
                         </div>
                         <button class="close-parent">

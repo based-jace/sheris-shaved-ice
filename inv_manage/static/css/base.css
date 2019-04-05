@@ -28,14 +28,22 @@ header{
 
 .message-cont{
     width: 100%;
-    background: green;
     display: flex;
     position: relative;
     justify-content: center;
 }
 
 .message{
+    width: 100%;
     text-align: center;
+}
+
+.message-success{
+    background: green;
+}
+
+.message-error{
+    background: red;
 }
 
 .message-cont > button{
