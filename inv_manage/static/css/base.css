@@ -26,6 +26,31 @@ header{
     top: 0;
 }
 
+.message-cont{
+    width: 100%;
+    display: flex;
+    position: relative;
+    justify-content: center;
+}
+
+.message{
+    width: 100%;
+    text-align: center;
+}
+
+.message-success{
+    background: green;
+}
+
+.message-error{
+    background: red;
+}
+
+.message-cont > button{
+    position: absolute;
+    right: 0;
+}
+
 .main-cont{
     display: flex;
     min-height: calc(100vh - 40px);
