@@ -1,3 +1,7 @@
+body {
+  background: #6aaac4;
+}
+
 .main-cont {
   text-align: center;
   display: -webkit-box;
@@ -11,9 +15,20 @@
           align-items: center;
 }
 
+.main-cont main {
+  padding: 50px 100px;
+  background: #cbe3ed;
+  border-radius: 8px;
+  border: 1px solid #3e5963;
+}
+
 form {
   width: 80%;
   margin: auto;
+}
+
+form .form-input, form #login-btn {
+  border-radius: 3px;
 }
 
 form label {
@@ -24,14 +39,38 @@ form label {
 
 form .form-input {
   width: 150px;
+  padding: 1px 3px;
+  border: 1px slategrey solid;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+form .form-input:hover {
+  border-color: black;
+}
+
+form .form-input:focus {
+  border-color: lightseagreen;
 }
 
 form #login-btn {
-  background: lightskyblue;
-  width: calc(150px + 80px + 10px);
-  border: black solid 1px;
-  border-radius: 4px;
+  background: lightblue;
+  width: calc(150px + 80px + 14px);
+  border: #79a0af solid 1px;
   padding: 2px 0;
-  margin: 4px 0;
+  margin: 6px 0;
+  -webkit-transition: .1s;
+  transition: .1s;
+}
+
+form #login-btn:hover {
+  background: lightskyblue;
+  border-color: #678793;
+}
+
+form #login-btn:active {
+  background: cadetblue;
+  border-color: #3e5963;
+  color: white;
 }
 /*# sourceMappingURL=auth.css.map */

@@ -1,16 +1,30 @@
 $input-width: 150px;
 $label-width: 80px;
 
+body{
+    background: #6aaac4;
+}
+
 .main-cont{
     text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    main{
+        padding: 50px 100px;
+        background: #cbe3ed;
+        border-radius: 8px;
+        border: 1px solid #3e5963
+    }
 }
 
 form{
     width: 80%;
     margin: auto;
+
+    .form-input, #login-btn{
+        border-radius: 3px;
+    }
 
     label{
         text-align: left;
@@ -20,15 +34,38 @@ form{
 
     .form-input{
         width: $input-width;
+        padding: 1px 3px;
+        border: 1px slategrey solid;
+        
+        transition: .15s;
+
+        &:hover{
+            border-color: black;
+        }
+        &:focus{
+            border-color: lightseagreen;
+        }
     }
     
     #login-btn{
-        background: lightskyblue;
-        width: calc(#{$input-width} + #{$label-width} + 10px);
-        border: black solid 1px;
-        border-radius: 4px;
+        background: lightblue;
+        width: calc(#{$input-width} + #{$label-width} + 14px);
+        border: #79a0af solid 1px;
         padding: 2px 0;
-        margin: 4px 0;
+        margin: 6px 0;
+
+        transition: .1s;
+
+        &:hover{
+            background: lightskyblue;
+            border-color: #678793;
+        }
+
+        &:active{
+            background: cadetblue;
+            border-color: #3e5963;
+            color: white;
+        }
     }
 }
 
