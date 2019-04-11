@@ -1,5 +1,21 @@
 {% extends 'inv_manage/home.html' %}
 
 {% block main %}
-Enter order info here.
+<h2>Enter order info here.</h2>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div id='orderitem'>
+        <select name='attname'>
+            {% for attribute in attributes %}
+            {{type.name}}
+            <option value='{{ forloop.counter0 }}'>{{attribute.name}}</option>
+            {% endfor %}
+        </select>    
+        <label for='quantity'>Quantity</label>
+        <input type='text' name='quantity' id='quantity'>   
+        <label for='cost'>Cost</label>
+        <input type='text' name='cost' id='cost'>    
+    </div>
+    <button type="submit" id='submit-btn'>Submit</button>
+</form>
 {% endblock %}

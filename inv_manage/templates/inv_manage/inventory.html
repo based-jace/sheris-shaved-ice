@@ -1,5 +1,33 @@
 {% extends 'inv_manage/home.html' %}
 
 {% block main %}
-View current inventory here.
+<table>
+    <tr>
+        <td></td>
+        <td>Name</td>
+        <td>Description</td>
+        <td>Type Name</td>
+        <td>quantity</td>
+        <td>Add</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+    {% for item in items %}
+    
+        <form>
+            <tr>
+                <td><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></td>
+                <td>{{item.item_id.name}}</td>
+                <td>{{item.item_id.description}}</td>
+                <td>{{item.item_id.type_id.name}}</td>
+                <td>{{item.quantity}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+        </form>
+    
+    {% endfor %}
+</table>
 {% endblock %}

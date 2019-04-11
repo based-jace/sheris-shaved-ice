@@ -1,5 +1,24 @@
 {% extends 'inv_manage/home.html' %}
 
 {% block main %}
-View past orders here.
+<h2>View past orders here.</h2>
+<div id='neworder'>
+    <a href="{% url 'inv_manage:neworder' %}"><span>New Order</span></a>
+</div>
+<table>
+    <tr>
+        <td>Item Name</td>
+        <td>Purchase Date</td>
+        <td>Quantity</td>
+        <td>Price of Purchase</td>
+    </tr>
+{% for order in orders %}
+    <tr>
+        <td> {{ order.item_id.name }}</td>
+        <td>{{ order.purchase_id.purchase_date }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.total_amount }}</td>
+    </tr>
+{% endfor %}
+</table>
 {% endblock %}
