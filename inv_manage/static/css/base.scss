@@ -1,20 +1,35 @@
 $footer-height: 40px;
 $alert-height: 30px;
 
+$input-width: 150px;
+$label-width: 80px;
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
 html, body, div, h1, h2, h3, h4, h5, h6{
     margin: 0;
     padding: 0;
 }
 
-button{
-    background: none;
-    font-size   : 16px;
-    border  : none;
-    margin      : 0px;
-    padding     : 0px;
+.form-input, button, select, a{
+    border-radius: 3px;
 }
 
-body{
+a > span{
+    padding: 8px 12px;
+}
+
+button{
+    background: none;
+    font-size: 16px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+body, input{
     font-family: 'Niramit', sans-serif;
 }
 
@@ -24,6 +39,21 @@ h1, h2, h3, h4, h5, h6{
 
 h1{
     font-size: 3.5em;
+}
+
+select, .form-input{
+    font-size: .9em;
+    margin: 2px;
+    /* Remove controls from Firefox */
+    &[type=number] {
+        -moz-appearance: textfield;
+    }
+    
+    /* Re-applies the controls on :hover and :focus */
+    &[type="number"]:hover,
+    &[type="number"]:focus {
+        -moz-appearance: number-input;
+    }
 }
 
 /* .container{
@@ -72,6 +102,52 @@ header{
 .main-cont{
     display: flex;
     min-height: calc(100vh - #{$footer-height});
+}
+
+
+
+form{
+    label{
+        text-align: left;
+        display: inline-block; 
+        width: $label-width;
+    }
+
+    .form-input, select{
+        width: $input-width;
+        padding: 1px 3px;
+        border: 1px slategrey solid;
+        
+        transition: .15s;
+
+        &:hover{
+            border-color: black;
+        }
+        &:focus{
+            border-color: lightseagreen;
+        }
+    }
+
+    .submit-btn{
+        background: lightblue;
+        width: calc(#{$input-width} + #{$label-width} + 14px);
+        border: #79a0af solid 1px;
+        padding: 2px 0;
+        margin: 6px 0;
+
+        transition: .1s;
+
+        &:hover{
+            background: lightskyblue;
+            border-color: #678793;
+        }
+
+        &:active{
+            background: cadetblue;
+            border-color: #3e5963;
+            color: white;
+        }
+    }
 }
 
 footer{
