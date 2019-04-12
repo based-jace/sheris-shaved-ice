@@ -1,14 +1,17 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
 
+from .models import Type
+from .db_methods import db_methods
+
 # Create your views here.
 
-def check_auth(request, page):
+def check_auth(request, page, context=None):
     if request.user.is_authenticated:
-        return render(request, page)
+        return render(request, page, context)
     else:
         return redirect('inv_manage:home')
 
@@ -56,9 +59,11 @@ def previous_orders(request):
 
 @never_cache
 def add_item(request):
-    #return check_auth(request)
-    #return check_auth(request, 'inv_manage/inventory.html')
-    return HttpResponse("Add a new item to the database here.") 
+    types = Type.objects.all()
+    if request.method == 'POST':
+        db_methods.add_item(atts=request.POST)
+        messages.success(request, 'Item has been successfully added.')
+    return check_auth(request, "inv_manage/add_item.html", context={'types':types})
         # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
         #   including categories.
 
@@ -68,3 +73,8 @@ def edit_item(request):
     return HttpResponse("Edit database items.") 
         # "items" here fits the same definition as that above. This might be able to be combined with the
         #   page above.
+
+@never_cache
+def add_type(request):
+    if request.method == "POST":
+        return JsonResponse({'message':'Thank You'})
