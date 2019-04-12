@@ -22,7 +22,7 @@ class Item(models.Model):
         return self.item_id.name
 
 class Purchase(models.Model):
-    #item_id = models.ForeignKey(Item,on_delete=models.CASCADE)
+    #item_id = models.ForeignKey(PurchaseItemLink,on_delete=models.CASCADE)
     purchase_date = models.DateField('purchase date')
     total_amount = models.DecimalField(max_digits=10,decimal_places=2)
     
@@ -31,7 +31,7 @@ class PurchaseItemLink(models.Model):
     items_id = models.ForeignKey(Item,on_delete=models.CASCADE)
 
 class PurchaseItem(models.Model):
-    #item_id = models.ForeignKey(Item,on_delete=models.CASCADE)
-    purchase_id = models.ForeignKey(Purchase,on_delete=models.CASCADE)
+    item_id = models.ForeignKey(Item,on_delete=models.CASCADE)
+    #purchase_id = models.ForeignKey(Purchase,on_delete=models.CASCADE)
     quantity = models.IntegerField()
     total_amount = models.DecimalField(max_digits=10,decimal_places=2)

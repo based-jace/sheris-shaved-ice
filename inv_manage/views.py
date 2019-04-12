@@ -3,20 +3,19 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
-from django.shortcuts import get_object_or_404
-from decimal import Decimal
-import datetime
+#from django.shortcuts import get_object_or_404
+#from decimal import Decimal
+#import datetime
 
-from .databaseutils import item_creation
+from .databaseutils import db_methods
 
-from .models import Type,Attributes,Item,Purchase,PurchaseItem
-
-from .models import Type
-from .db_methods import db_methods
+from .models import Type, Attributes, Item, Purchase, PurchaseItemLink, PurchaseItem
 
 # Create your views here.
 
-def check_auth(request, page, context=None):
+def check_auth(request, page, context=None): # Redirects to login if not authorized
+                                             # This prevents you from being able to go back
+                                             # And view info if not logged in
     if request.user.is_authenticated:
         return render(request, page, context)
     else:
@@ -51,39 +50,23 @@ def home(request):
 
 @never_cache
 def neworder(request):
-    attributes = Attributes.objects.all() 
+    attributes = Attributes.objects.all() # < Unnecessary? Can change to just item?
     #TODO Make it so you can enter multipe items at one time.
-    #TODO Make it look cleaner
     if request.method == 'POST':
-        purchase = Purchase()
-        purchase.total_amount = 0.00
-        #TODO set of a while loop to go through the different rows of orders.
-        purchase.purchase_date = datetime.date.today()
-        purchase.total_amount += float(request.POST.get('cost'))
-        purchase.save()
-        purchaseItem = PurchaseItem.objects.create(item_id=attributes[int(request.POST.get('attname'))],purchase_id=purchase,quantity=int(request.POST.get('quantity')),total_amount=Decimal(request.POST.get('cost')))
-        purchaseItem.save()
-        #Checks to see if there are any instances of the object in the datbase
-        count = Item.objects.filter(item_id=purchaseItem.item_id).count()
-        #Creates an item       
-        item_creation(count,purchaseItem)
+        atts = dict(request.POST)
+        db_methods.neworder(atts)
 
-        return render(request, 'inv_manage/neworder.html',{'attributes':attributes})
-    else:
-        return render(request, 'inv_manage/neworder.html',{'attributes':attributes})
-    #return render(request, page)
+    return check_auth(request, 'inv_manage/neworder.html',context={'attributes':attributes})
 
 @never_cache
 def inv_manage(request):
     items = Item.objects.all()
-    #return check_auth(request, 'inv_manage/inventory.html')
-    return render(request, 'inv_manage/inventory.html',{'items':items})
+    return check_auth(request, 'inv_manage/inventory.html',context={'items':items})
 
 @never_cache
 def previous_orders(request):
     orders = PurchaseItem.objects.all()
-    #return check_auth(request, 'inv_manage/orders.html')
-    return render(request, 'inv_manage/orders.html',{'orders':orders})
+    return check_auth(request, 'inv_manage/orders.html', context={'orders':orders})
         
 #Adding an attribute       
 # attribute = Attributes.objects.create(type_id=types[int(request.POST.get('typename'))])
@@ -94,7 +77,6 @@ def previous_orders(request):
 
 @never_cache
 def add_item(request):
-
     types = Type.objects.all()
     if request.method == 'POST':
         db_methods.add_item(atts=request.POST)

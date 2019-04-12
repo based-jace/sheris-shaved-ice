@@ -17,7 +17,7 @@ class db_methods:
             if i in atts:
                 att_stuff[i] = atts[i][0]
 
-        type_id = Type.objects.get(id=int(att_stuff['type_id']) + 1 )
+        type_id = Type.objects.get(id=att_stuff['type_id'])
         att_stuff['type_id'] = type_id
         attributes = Attributes(**att_stuff)
         attributes.save()
