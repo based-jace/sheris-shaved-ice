@@ -1,0 +1,16 @@
+{% extends 'inv_manage/home.html' %}
+
+{% block main %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <select name='attname'>
+        {% for attribute in attributes %}
+        {{type.name}}
+        <option value='{{ forloop.counter0 }}'>{{attribute.name}}</option>
+        {% endfor %}
+    </select>
+    <label for='quantity'>Quantity</label>
+    <input type='text' name='quantity' id='quantity'>
+    <button type="submit" id="submit-btn">Submit</button>
+</form>
+{% endblock %}
