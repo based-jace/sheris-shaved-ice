@@ -77,10 +77,15 @@ def previous_orders(request):
 
 @never_cache
 def add_item(request):
+        # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
+        # including categories.
+
     types = Type.objects.all()
+    
     if request.method == 'POST':
         db_methods.add_item(atts=request.POST)
         messages.success(request, 'Item has been successfully added.')
+
     return check_auth(request, "inv_manage/add_item.html", context={'types':types})
   
     '''
@@ -95,9 +100,6 @@ def add_item(request):
     else:    
         return render(request,'inv_manage/additem.html',{'attributes':attributes})
     '''
-
-        # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
-        #   including categories.
 
 @never_cache
 def edit_item(request):
