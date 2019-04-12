@@ -69,7 +69,8 @@ class db_methods:
             'items_id': item
         }
 
-        purchase_item_link = PurchaseItemLink()
+        purchase_item_link = PurchaseItemLink(**pil_stuff)
+        purchase_item_link.save()
 
         item.quantity += int(item_stuff['quantity'])
         item.save()
