@@ -5,17 +5,17 @@
 <form action="" method="POST">
     {% csrf_token %}
     <div id='orderitem'>
-        <select name='attname'>
+        <select class="form-input" name='attname' required>
             {% for attribute in attributes %}
             {{type.name}}
             <option value='{{ forloop.counter0 }}'>{{attribute.name}}</option>
             {% endfor %}
         </select>    
         <label for='quantity'>Quantity</label>
-        <input type='text' name='quantity' id='quantity'>   
+        <input class="form-input" type='number' name='quantity' id='quantity' min='0' required>   
         <label for='cost'>Cost</label>
-        <input type='text' name='cost' id='cost'>    
+        <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" required>    
     </div>
-    <button type="submit" id='submit-btn'>Submit</button>
+    <button class="submit-btn" type="submit" id='submit-btn'>Submit</button>
 </form>
 {% endblock %}
