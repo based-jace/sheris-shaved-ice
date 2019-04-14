@@ -4,3 +4,4 @@ db.sqlite3
 screen drafts
 __pycache__
 static/admin
+migrations
