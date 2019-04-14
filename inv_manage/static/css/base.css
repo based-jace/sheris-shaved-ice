@@ -129,7 +129,7 @@ form .form-input:focus, form select:focus {
 }
 
 form .submit-btn {
-  background: lightblue;
+  background: white;
   width: calc(150px + 80px + 14px);
   border: #79a0af solid 1px;
   padding: 2px 0;
@@ -161,7 +161,7 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   height: 40px;
-  background: black;
+  background: darkblue;
   width: 100%;
 }
 /*# sourceMappingURL=base.css.map */

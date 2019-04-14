@@ -9,7 +9,7 @@ from django.views.decorators.cache import never_cache
 
 from .databaseutils import db_methods
 
-from .models import Type, Attributes, Item, Purchase, PurchaseItemLink, PurchaseItem
+from .models import Type, Attributes, Item, Purchase, PurchaseItem
 
 # Create your views here.
 

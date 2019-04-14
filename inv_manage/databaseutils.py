@@ -1,7 +1,7 @@
 from decimal import Decimal
 import datetime
 
-from .models import Item, Attributes, Type, Purchase, PurchaseItem, PurchaseItemLink
+from .models import Item, Attributes, Type, Purchase, PurchaseItem
 
 class db_methods:
     @staticmethod
@@ -56,6 +56,7 @@ class db_methods:
         item = Item.objects.get(id=int(atts['attname'][0]) + 1) # PK starts at 1
 
         item_stuff = {
+            'purchase_id': purchase,
             'item_id': item,
             'quantity': atts['quantity'][0],
             'total_amount': atts['cost'][0]
@@ -64,13 +65,13 @@ class db_methods:
         purchase_item = PurchaseItem(**item_stuff)
         purchase_item.save()
 
-        pil_stuff = {
-            'purchase_id': purchase,
-            'items_id': item
-        }
+        # pil_stuff = {
+        #     'purchase_id': purchase,
+        #     'items_id': item
+        # }
 
-        purchase_item_link = PurchaseItemLink(**pil_stuff)
-        purchase_item_link.save()
+        # purchase_item_link = PurchaseItemLink(**pil_stuff)
+        # purchase_item_link.save()
 
         item.quantity += int(item_stuff['quantity'])
         item.save()

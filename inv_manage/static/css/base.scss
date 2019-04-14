@@ -129,7 +129,7 @@ form{
     }
 
     .submit-btn{
-        background: lightblue;
+        background: white;
         width: calc(#{$input-width} + #{$label-width} + 14px);
         border: #79a0af solid 1px;
         padding: 2px 0;
@@ -156,6 +156,6 @@ footer{
     align-items: center;
     justify-content: center;
     height: $footer-height;
-    background: black;
+    background: darkblue;
     width: 100%;
 }
