@@ -1,7 +1,3 @@
-body {
-  background: #6aaac4;
-}
-
 .main-cont {
   text-align: center;
   display: -webkit-box;
@@ -17,14 +13,27 @@ body {
 
 .main-cont main {
   padding: 50px 100px;
-  background: #cbe3ed;
+  background: darkblue;
   border-radius: 8px;
-  border: 1px solid #3e5963;
+  border: 2px solid darkblue;
+  -webkit-transition: .15s ease-in-out;
+  transition: .15s ease-in-out;
+}
+
+.main-cont main:hover {
+  border-color: yellow;
+  -webkit-box-shadow: 0 0 16px yellow;
+          box-shadow: 0 0 16px yellow;
+}
+
+.main-cont main h1 {
+  color: yellow;
 }
 
 form {
   width: 80%;
   margin: auto;
+  color: yellow;
 }
 
 form .form-input, form #login-btn {
@@ -50,27 +59,6 @@ form .form-input:hover {
 }
 
 form .form-input:focus {
-  border-color: lightseagreen;
-}
-
-form #login-btn {
-  background: lightblue;
-  width: calc(150px + 80px + 14px);
-  border: #79a0af solid 1px;
-  padding: 2px 0;
-  margin: 6px 0;
-  -webkit-transition: .1s;
-  transition: .1s;
-}
-
-form #login-btn:hover {
-  background: lightskyblue;
-  border-color: #678793;
-}
-
-form #login-btn:active {
-  background: cadetblue;
-  border-color: #3e5963;
-  color: white;
+  border-color: yellow;
 }
 /*# sourceMappingURL=auth.css.map */
