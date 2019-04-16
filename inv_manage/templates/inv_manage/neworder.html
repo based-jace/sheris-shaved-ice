@@ -25,9 +25,9 @@
     {% csrf_token %}
     <div id='orderitem'>
         <select class="form-input" name='attname' required>
-            {% for attribute in attributes %}
-            {{attribute.name}}
-            <option value='{{ forloop.counter0 }}'>{{attribute.name}}</option>
+            {% for item in items %}
+            {{item.item_id.name}}
+            <option value='{{ item.id }}'>{{item.item_id.name}}</option>
             {% endfor %}
         </select>    
         <label for='quantity'>Quantity</label>

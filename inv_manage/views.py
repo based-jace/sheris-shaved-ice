@@ -51,14 +51,14 @@ def home(request):
 
 @never_cache
 def neworder(request):
-    attributes = Attributes.objects.all() # < Unnecessary? Can change to just item?
+    items = Item.objects.all() # < Unnecessary? Can change to just item?
     orders = PurchaseItem.objects.all()
     #TODO Make it so you can enter multipe items at one time.
     if request.method == 'POST':
         atts = dict(request.POST)
         db_methods.neworder(atts)
 
-    return check_auth(request, 'inv_manage/neworder.html',context={'attributes':attributes,'orders':orders})
+    return check_auth(request, 'inv_manage/neworder.html',context={'items':items,'orders':orders})
 
 @never_cache
 def inv_manage(request):

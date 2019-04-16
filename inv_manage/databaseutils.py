@@ -53,7 +53,7 @@ class db_methods:
 
         #TODO set of a while loop to go through the different rows of orders.
 
-        item = Item.objects.get(id=int(atts['attname'][0]) + 1) # PK starts at 1
+        item = Item.objects.get(id=int(atts['attname'][0])) # PK starts at 1
 
         item_stuff = {
             'purchase_id': purchase,
@@ -65,14 +65,6 @@ class db_methods:
 
         purchase_item = PurchaseItem(**item_stuff)
         purchase_item.save()
-
-        # pil_stuff = {
-        #     'purchase_id': purchase,
-        #     'items_id': item
-        # }
-
-        # purchase_item_link = PurchaseItemLink(**pil_stuff)
-        # purchase_item_link.save()
 
         item.quantity += int(item_stuff['quantity'])
         item.save()
@@ -113,8 +105,10 @@ class db_methods:
     def delete_selected(atts):        
         selected_stuff = atts.getlist('checkbox')
         
-        for i in selected_stuff:
+        for i in selected_stuff:            
             attribute = Item.objects.get(pk=i).item_id            
             Item.objects.get(pk=i).delete()
             attribute.delete()
 
+    # @staticmethod 
+    # def editorder(atts,order_id):
