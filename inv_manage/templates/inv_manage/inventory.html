@@ -18,13 +18,14 @@
             <th class='edit-column'>Edit</th>
             <th class="delete-column">X</th>
     </tr>
-    <form>
+    <form action="" method="POST">
+    {% csrf_token %}
     {% for item in items %}
     
         
             <tr>
                 
-                <td class="center"><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></td>
+                <td class="center"><input type="checkbox" name="checkbox" value="{{item.id}}"></td>
                 <td>{{item.item_id.name}}</td>
                 <td>{{item.item_id.description}}</td>
                 <td>{{item.item_id.type_id.name}}</td>
@@ -37,6 +38,7 @@
         
     
     {% endfor %}
+            <button type="submit" id='submit-btn'>Delete Selected</button>
     </form>
 </table>
 {% endblock %}

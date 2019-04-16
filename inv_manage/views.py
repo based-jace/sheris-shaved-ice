@@ -63,6 +63,10 @@ def neworder(request):
 @never_cache
 def inv_manage(request):
     items = Item.objects.all()
+
+    if request.method == "POST":
+        db_methods.delete_selected(request.POST)
+
     return check_auth(request, 'inv_manage/inventory.html',context={'items':items})
 
 @never_cache
