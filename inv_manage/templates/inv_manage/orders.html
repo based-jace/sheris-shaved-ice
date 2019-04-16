@@ -1,16 +1,18 @@
 {% extends 'inv_manage/home.html' %}
 
+{% load static %}
+
 {% block main %}
-<h2>View past orders here.</h2>
+<h2 class="page-header">Past Orders</h2>
 <div id='neworder'>
     <a href="{% url 'inv_manage:neworder' %}"><span>New Order</span></a>
 </div>
-<table>
+<table id="data-table">
     <tr>
-        <td>Item Name</td>
-        <td>Purchase Date</td>
-        <td>Quantity</td>
-        <td>Price of Purchase</td>
+        <th>Purchase Date</th>
+        <th>Number of Items</th>
+        <th>Price of Purchase</th>
+        <th>View Order</th>
     </tr>
 {% for order in orders %}
     <tr>
@@ -18,7 +20,13 @@
         <td>{{ order.purchase_id.purchase_date }}</td>
         <td>{{ order.quantity }}</td>
         <td>{{ order.total_amount }}</td>
+        <td></td>
     </tr>
 {% endfor %}
 </table>
+{% endblock %}
+
+{% block add_scripts %}
+<script src="{% static 'js/colResizable.min.js' %}"></script>
+<script src="{% static 'js/table.js' %}"></script>
 {% endblock %}
