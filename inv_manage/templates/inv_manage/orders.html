@@ -3,16 +3,17 @@
 {% load static %}
 
 {% block main %}
-<h2 class="page-header">Past Orders</h2>
+<h1 class="page-header">Past Orders</h1>
 <div id='neworder'>
     <a href="{% url 'inv_manage:neworder' %}"><span>New Order</span></a>
 </div>
 <table id="data-table">
     <tr>
+        <th>Item Name</th>
         <th>Purchase Date</th>
         <th>Number of Items</th>
         <th>Price of Purchase</th>
-        <th>View Order</th>
+        <th>Edit Order</th>
     </tr>
 {% for order in orders %}
     <tr>
@@ -20,7 +21,7 @@
         <td>{{ order.purchase_id.purchase_date }}</td>
         <td>{{ order.quantity }}</td>
         <td>{{ order.total_amount }}</td>
-        <td></td>
+        <td><a href="{% url 'inv_manage:editorder' order.id  %}">X</a></td>
     </tr>
 {% endfor %}
 </table>

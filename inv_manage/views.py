@@ -130,3 +130,19 @@ def edit_item(request,item_id):
 def add_type(request):
     if request.method == "POST":
         return JsonResponse({'message':'Thank You'})
+
+@never_cache
+def edit_order(request,order_id):
+    items = Item.objects.all()
+
+    try:
+        order = PurchaseItem.objects.get(pk=order_id)
+    except PurchaseItem.DoesNotExist:
+        raise Http404("Order does not exist.")
+    
+    if request.method == "POST":
+        db_methods.editorder(atts=request.POST,order=order)
+        messages.success(request, 'Order has successfully been updated.')
+        return redirect('inv_manage:orders')
+
+    return check_auth(request,'inv_manage/editorder.html',context={'items':items,'order':order})

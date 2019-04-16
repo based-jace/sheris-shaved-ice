@@ -110,5 +110,9 @@ class db_methods:
             Item.objects.get(pk=i).delete()
             attribute.delete()
 
-    # @staticmethod 
-    # def editorder(atts,order_id):
+    @staticmethod 
+    def editorder(atts,order):
+        order.item_id = Item.objects.get(id=int(atts['attname']))
+        order.quantity = atts['quantity']
+        order.total_amount = atts['cost']
+        order.save()
