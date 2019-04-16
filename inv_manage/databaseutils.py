@@ -1,7 +1,7 @@
 from decimal import Decimal
 import datetime
 
-from .models import Item, Attributes, Type, Purchase, PurchaseItem, PurchaseItemLink
+from .models import Item, Attributes, Type, Purchase, PurchaseItem
 
 class db_methods:
     @staticmethod
@@ -57,20 +57,13 @@ class db_methods:
 
         item_stuff = {
             'item_id': item,
+            'purchase_id':purchase,
             'quantity': atts['quantity'][0],
             'total_amount': atts['cost'][0]
         }
 
         purchase_item = PurchaseItem(**item_stuff)
         purchase_item.save()
-
-        pil_stuff = {
-            'purchase_id': purchase,
-            'items_id': item
-        }
-
-        purchase_item_link = PurchaseItemLink(**pil_stuff)
-        purchase_item_link.save()
 
         item.quantity += int(item_stuff['quantity'])
         item.save()
@@ -81,3 +74,30 @@ class db_methods:
         #count = Item.objects.filter(item_id=purchaseItem.item_id).count()
         #Creates an item       
         #db_methods.item_creation(count,purchaseItem)
+
+    @staticmethod
+    def edititem(atts,item_id,attribute_id):
+
+        type_id1 = atts['type_id']
+        type_id = Type.objects.get(id=int(type_id1)+1 )
+
+        attribute_stuff = {
+            'id':attribute_id,
+            'type_id':type_id,
+            'name':atts['name'],
+            'description':atts['description']
+        }
+
+        updated_attribute = Attributes(**attribute_stuff)
+        updated_attribute.save()
+
+        item_stuff = {
+            'id':item_id,
+            'item_id':updated_attribute,
+            'quantity':atts['quantity']
+        }
+
+        updated_item = Item(**item_stuff)
+        updated_item.save()
+        
+        

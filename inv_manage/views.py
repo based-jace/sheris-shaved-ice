@@ -3,13 +3,14 @@ from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
+from django.http import Http404
 #from django.shortcuts import get_object_or_404
 #from decimal import Decimal
 #import datetime
 
 from .databaseutils import db_methods
 
-from .models import Type, Attributes, Item, Purchase, PurchaseItemLink, PurchaseItem
+from .models import Type, Attributes, Item, Purchase, PurchaseItem
 
 # Create your views here.
 
@@ -51,12 +52,13 @@ def home(request):
 @never_cache
 def neworder(request):
     attributes = Attributes.objects.all() # < Unnecessary? Can change to just item?
+    orders = PurchaseItem.objects.all()
     #TODO Make it so you can enter multipe items at one time.
     if request.method == 'POST':
         atts = dict(request.POST)
         db_methods.neworder(atts)
 
-    return check_auth(request, 'inv_manage/neworder.html',context={'attributes':attributes})
+    return check_auth(request, 'inv_manage/neworder.html',context={'attributes':attributes,'orders':orders})
 
 @never_cache
 def inv_manage(request):
@@ -102,9 +104,21 @@ def add_item(request):
     '''
 
 @never_cache
-def edit_item(request):
+def edit_item(request,item_id):
     #return check_auth(request)
-    return HttpResponse("Edit database items.") 
+    types = Type.objects.all()
+    try:
+        item = Item.objects.get(pk=item_id)
+    except Item.DoesNotExist:
+        raise Http404("Item is not in the inventory")
+
+    if request.method == 'POST':
+        db_methods.edititem(atts=request.POST,item_id=item_id,attribute_id=item.item_id.id)
+        messages.success(request, 'Item has successfully been updated.')
+        return redirect('inv_manage:inventory')
+
+    return check_auth(request,'inv_manage/edititem.html',context={'item':item,'types':types})
+    
         # "items" here fits the same definition as that above. This might be able to be combined with the
         #   page above.
 

@@ -14,7 +14,7 @@
     </tr>
 {% for order in orders %}
     <tr>
-        <td> {{ order.item_id.name }}</td>
+        <td> {{ order.item_id.item_id.name }}</td>
         <td>{{ order.purchase_id.purchase_date }}</td>
         <td>{{ order.quantity }}</td>
         <td>{{ order.total_amount }}</td>

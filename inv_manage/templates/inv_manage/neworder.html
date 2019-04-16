@@ -2,12 +2,31 @@
 
 {% block main %}
 <h2>Enter order info here.</h2>
+
+<h2>View past orders here.</h2>
+<table>
+    <tr>
+        <td>Item Name</td>
+        <td>Purchase Date</td>
+        <td>Quantity</td>
+        <td>Price of Purchase</td>
+    </tr>
+{% for order in orders %}
+    <tr>
+        <td> {{ order.item_id.item_id.name }}</td>
+        <td>{{ order.purchase_id.purchase_date }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>{{ order.total_amount }}</td>
+    </tr>
+{% endfor %}
+</table>
+
 <form action="" method="POST">
     {% csrf_token %}
     <div id='orderitem'>
         <select class="form-input" name='attname' required>
             {% for attribute in attributes %}
-            {{type.name}}
+            {{attribute.name}}
             <option value='{{ forloop.counter0 }}'>{{attribute.name}}</option>
             {% endfor %}
         </select>    

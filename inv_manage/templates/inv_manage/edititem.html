@@ -1,0 +1,27 @@
+{% extends 'inv_manage/home.html' %}
+
+{% block main %}
+
+    {{item}}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="name">Name: </label>
+        <input class="form-input" type="text" name="name" id="name" value="{{ item.item_id.name }}" required>
+        
+        <label for="type_id">Type: </label>
+        <select id="type_id" name="type_id">
+            {% for type in types %}
+            {{type.name}}
+            <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
+            {% endfor %}
+            <option>Add New Type</option>
+        </select>
+        
+        <label for="quantity">Quantity: </label>
+            <input class="form-input" type="number" min="0" name="quantity" id="quantity" value="{{ item.quantity }}" required>
+        <label for="description">Description: </label>
+            <textarea class="form-input" name="description" id="description" value="">{{ item.item_id.description }}</textarea>
+        <button class="submit-btn" type="submit">Submit</button>
+    </form>
+
+{% endblock %}
