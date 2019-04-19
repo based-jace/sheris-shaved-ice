@@ -51,7 +51,7 @@ def home(request):
 
 @never_cache
 def neworder(request):
-    items = Item.objects.all() # < Unnecessary? Can change to just item?
+    items = Item.objects.filter(available=True) # < Unnecessary? Can change to just item?
     orders = PurchaseItem.objects.all()
     #TODO Make it so you can enter multipe items at one time.
     if request.method == 'POST':
@@ -62,7 +62,7 @@ def neworder(request):
 
 @never_cache
 def inv_manage(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(available=True)
 
     if request.method == "POST":
         db_methods.delete_selected(request.POST)
@@ -133,7 +133,7 @@ def add_type(request):
 
 @never_cache
 def edit_order(request,order_id):
-    items = Item.objects.all()
+    items = Item.objects.filter(available=True)
 
     try:
         order = PurchaseItem.objects.get(pk=order_id)

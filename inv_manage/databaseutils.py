@@ -105,10 +105,10 @@ class db_methods:
     def delete_selected(atts):        
         selected_stuff = atts.getlist('checkbox')
         
-        for i in selected_stuff:            
-            attribute = Item.objects.get(pk=i).item_id            
-            Item.objects.get(pk=i).delete()
-            attribute.delete()
+        for i in selected_stuff:          
+            item = Item.objects.get(pk=i)
+            item.available = False
+            item.save()
 
     @staticmethod 
     def editorder(atts,order):

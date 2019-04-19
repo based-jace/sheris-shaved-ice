@@ -18,6 +18,7 @@ class Attributes(models.Model):
 class Item(models.Model):
     item_id = models.ForeignKey(Attributes,on_delete=models.CASCADE)
     quantity = models.IntegerField()
+    available = models.BooleanField(default=True)
     def __str__(self):
         return self.item_id.name
 

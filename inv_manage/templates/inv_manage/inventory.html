@@ -1,10 +1,10 @@
-{% extends 'inv_manage/home.html' %}
+{% extends 'inv_manage/main.html' %}
 
 {% load static %}
 
 {% block main %}
 
-<h1 class="page-header">Inventory</h1>
+<h1 class="page-header dark-logo">Inventory</h1>
 <a href="{% url 'inv_manage:add_item' %}">add an item</a>
 <form action="" method="POST">
     {% csrf_token %}

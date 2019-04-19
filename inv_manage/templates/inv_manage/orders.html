@@ -1,9 +1,9 @@
-{% extends 'inv_manage/home.html' %}
+{% extends 'inv_manage/main.html' %}
 
 {% load static %}
 
 {% block main %}
-<h1 class="page-header">Past Orders</h1>
+<h1 class="page-header dark-logo">Previous Orders</h1>
 <div id='neworder'>
     <a href="{% url 'inv_manage:neworder' %}"><span>New Order</span></a>
 </div>
@@ -13,11 +13,11 @@
         <th>Purchase Date</th>
         <th>Number of Items</th>
         <th>Price of Purchase</th>
-        <th>Edit Order</th>
+        <th>View/Edit</th>
     </tr>
 {% for order in orders %}
     <tr>
-        <td> {{ order.item_id.item_id.name }}</td>
+        <td>{{ order.item_id.item_id.name }}</td>
         <td>{{ order.purchase_id.purchase_date }}</td>
         <td>{{ order.quantity }}</td>
         <td>{{ order.total_amount }}</td>

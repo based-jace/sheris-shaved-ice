@@ -1,8 +1,6 @@
 $input-width: 150px;
 $label-width: 80px;
 $primary: #0038AE;
-$white: white;
-$yellow: yellow;
 
 .main-cont{
     text-align: center;
@@ -13,12 +11,14 @@ $yellow: yellow;
         padding: 50px 100px;
         background: $primary;
         border-radius: 8px;
-        border:1px solid $yellow;
-        box-shadow: 0 0 0 2px $primary;
+        border: 2px solid $primary;
         transition: .15s ease-in-out;
-        &:hover{ 
-            border-color: $yellow;
-            box-shadow: 0 0 0 2px $primary, 0 0 16px 8px $yellow;
+        &:hover{
+            border-color: yellow;
+            box-shadow: 0 0 16px yellow;
+        }
+        h1{
+            color: yellow;
         }
     }
 }
@@ -26,7 +26,7 @@ $yellow: yellow;
 form{
     width: 80%;
     margin: auto;
-    color: white;
+    color: yellow;
     .form-input, #login-btn{
         border-radius: 3px;
     }
@@ -48,7 +48,7 @@ form{
             border-color: black;
         }
         &:focus{
-            border-color: $yellow;
+            border-color: yellow;
         }
     }
 }

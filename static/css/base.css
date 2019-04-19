@@ -1,8 +1,3 @@
-@font-face {
-  font-family: RAVIE;
-  src: url(RAVIE.TTF) format("truetype");
-}
-
 *, *:before, *:after {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -33,22 +28,15 @@ body, input {
   font-family: 'Niramit', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: RAVIE ,'Bevan', sans-serif;
+@font-face {
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bevan', cursive;
+    src: url("../fonts/RAVIE.TTF");
+  }
 }
 
 h1 {
   font-size: 3.5em;
-}
-
-.light-logo {
-  text-shadow: 1px 0 #0038AE, 0 1px #0038AE, -1px 0 #0038AE, 0 -1px #0038AE, 2px 0 white, 0 2px white, -2px 0 white, 0 -2px white;
-  color: yellow;
-}
-
-.dark-logo {
-  text-shadow: 1px 0 yellow, 0 1px yellow, -1px 0 yellow, 0 -1px yellow, 2px 0 #0038AE, 0 2px #0038AE, -2px 0 #0038AE, 0 -2px #0038AE;
-  color: #0038AE;
 }
 
 select, .form-input {
@@ -178,12 +166,5 @@ footer {
   height: 40px;
   background: #0038AE;
   width: 100%;
-}
-
-.hide {
-  -webkit-transition: .3s ease-in-out;
-  transition: .3s ease-in-out;
-  opacity: 0;
-  height: 0;
 }
 /*# sourceMappingURL=base.css.map */
