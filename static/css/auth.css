@@ -1,3 +1,64 @@
-div{
-    background: green;
+.main-cont {
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
+
+.main-cont main {
+  padding: 50px 100px;
+  background: #0038AE;
+  border-radius: 8px;
+  border: 2px solid #0038AE;
+  -webkit-transition: .15s ease-in-out;
+  transition: .15s ease-in-out;
+}
+
+.main-cont main:hover {
+  border-color: yellow;
+  -webkit-box-shadow: 0 0 16px yellow;
+          box-shadow: 0 0 16px yellow;
+}
+
+.main-cont main h1 {
+  color: yellow;
+}
+
+form {
+  width: 80%;
+  margin: auto;
+  color: yellow;
+}
+
+form .form-input, form #login-btn {
+  border-radius: 3px;
+}
+
+form label {
+  text-align: left;
+  display: inline-block;
+  width: 80px;
+}
+
+form .form-input {
+  width: 150px;
+  padding: 1px 3px;
+  border: 1px slategrey solid;
+  -webkit-transition: .15s;
+  transition: .15s;
+}
+
+form .form-input:hover {
+  border-color: black;
+}
+
+form .form-input:focus {
+  border-color: yellow;
+}
+/*# sourceMappingURL=auth.css.map */

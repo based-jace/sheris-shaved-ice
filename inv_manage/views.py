@@ -51,18 +51,22 @@ def home(request):
 
 @never_cache
 def neworder(request):
-    attributes = Attributes.objects.all() # < Unnecessary? Can change to just item?
+    items = Item.objects.filter(available=True) # < Unnecessary? Can change to just item?
     orders = PurchaseItem.objects.all()
     #TODO Make it so you can enter multipe items at one time.
     if request.method == 'POST':
         atts = dict(request.POST)
         db_methods.neworder(atts)
 
-    return check_auth(request, 'inv_manage/neworder.html',context={'attributes':attributes,'orders':orders})
+    return check_auth(request, 'inv_manage/neworder.html',context={'items':items,'orders':orders})
 
 @never_cache
 def inv_manage(request):
-    items = Item.objects.all()
+    items = Item.objects.filter(available=True)
+
+    if request.method == "POST":
+        db_methods.delete_selected(request.POST)
+
     return check_auth(request, 'inv_manage/inventory.html',context={'items':items})
 
 @never_cache
@@ -126,3 +130,19 @@ def edit_item(request,item_id):
 def add_type(request):
     if request.method == "POST":
         return JsonResponse({'message':'Thank You'})
+
+@never_cache
+def edit_order(request,order_id):
+    items = Item.objects.filter(available=True)
+
+    try:
+        order = PurchaseItem.objects.get(pk=order_id)
+    except PurchaseItem.DoesNotExist:
+        raise Http404("Order does not exist.")
+    
+    if request.method == "POST":
+        db_methods.editorder(atts=request.POST,order=order)
+        messages.success(request, 'Order has successfully been updated.')
+        return redirect('inv_manage:orders')
+
+    return check_auth(request,'inv_manage/editorder.html',context={'items':items,'order':order})

@@ -1,9 +1,6 @@
-{% extends 'inv_manage/home.html' %}
+{% extends 'inv_manage/main.html' %}
 
 {% block main %}
-<h2>Enter order info here.</h2>
-
-<h2>View past orders here.</h2>
 <table>
     <tr>
         <td>Item Name</td>
@@ -25,9 +22,9 @@
     {% csrf_token %}
     <div id='orderitem'>
         <select class="form-input" name='attname' required>
-            {% for attribute in attributes %}
-            {{attribute.name}}
-            <option value='{{ forloop.counter0 }}'>{{attribute.name}}</option>
+            {% for item in items %}
+            {{item.item_id.name}}
+            <option value='{{ item.id }}'>{{item.item_id.name}}</option>
             {% endfor %}
         </select>    
         <label for='quantity'>Quantity</label>

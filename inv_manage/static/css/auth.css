@@ -13,27 +13,25 @@
 
 .main-cont main {
   padding: 50px 100px;
-  background: darkblue;
+  background: #0038AE;
   border-radius: 8px;
-  border: 2px solid darkblue;
+  border: 1px solid yellow;
+  -webkit-box-shadow: 0 0 0 2px #0038AE;
+          box-shadow: 0 0 0 2px #0038AE;
   -webkit-transition: .15s ease-in-out;
   transition: .15s ease-in-out;
 }
 
 .main-cont main:hover {
   border-color: yellow;
-  -webkit-box-shadow: 0 0 16px yellow;
-          box-shadow: 0 0 16px yellow;
-}
-
-.main-cont main h1 {
-  color: yellow;
+  -webkit-box-shadow: 0 0 0 2px #0038AE, 0 0 16px 8px yellow;
+          box-shadow: 0 0 0 2px #0038AE, 0 0 16px 8px yellow;
 }
 
 form {
   width: 80%;
   margin: auto;
-  color: yellow;
+  color: white;
 }
 
 form .form-input, form #login-btn {

@@ -9,16 +9,16 @@
 {% endblock %}
 
 {% block main %}
-<h1 class="page-header">Welcome</h1>
+<h1 class="page-header light-logo">Welcome</h1>
 <form action="" method="POST">
     {% csrf_token %}
     <div class="row">
         <label for="username">Username: </label>
-        <input class="form-input" id="username" name="username" type="text">
+        <input class="form-input" id="username" name="username" type="text" required>
     </div>
     <div class="row">
         <label for="password">Password: </label>
-        <input class="form-input" id="password" name="password" type="password">
+        <input class="form-input" id="password" name="password" type="password" required>
     </div>
     <div class="row">
         <button type="submit" class="submit-btn">Login</button>
