@@ -71,6 +71,7 @@ select[type="number"]:hover, select[type="number"]:focus, .form-input[type="numb
     width: 100vw;
 } */
 header {
+  font-family: "Bree Serif", sans-serif;
   width: 100%;
   position: absolute;
   top: 0;
@@ -93,18 +94,29 @@ header {
 }
 
 .message-cont .message {
+  padding-bottom: 4px;
   height: 100%;
   width: 100%;
-  text-align: center;
-  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-items: center;
 }
 
 .message-cont .message-success {
-  background: green;
+  color: black;
+  background: #23db3e;
 }
 
 .message-cont .message-error {
-  background: red;
+  color: white;
+  background: #e22626;
 }
 
 .message-cont > button {
@@ -165,7 +177,7 @@ form .submit-btn:active {
 }
 
 footer {
-  color: white;
+  color: #fafcb5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -176,8 +188,9 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   height: 40px;
-  background: #0038AE;
+  background: #012d5e;
   width: 100%;
+  border-top: 1px #0038AE solid;
 }
 
 .hide {

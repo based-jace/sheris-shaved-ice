@@ -1,5 +1,7 @@
 from decimal import Decimal
 import datetime
+import json
+from django.urls import reverse
 
 from .models import Item, Attributes, Type, Purchase, PurchaseItem
 
@@ -116,3 +118,18 @@ class db_methods:
         order.quantity = atts['quantity']
         order.total_amount = atts['cost']
         order.save()
+
+    @staticmethod
+    def jsonify_items(items):
+        print(items[0].id)
+        json_items = [{
+            'id': item.id,
+            'name': item.item_id.name,
+            'quantity': item.quantity,
+            'available': item.available,
+            'type': item.item_id.type_id.name,
+            'description': item.item_id.description,
+            'edit_url': reverse('inv_manage:edititem', args=[item.id])
+            } for item in items
+        ]
+        return json.dumps(json_items)

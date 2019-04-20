@@ -1,22 +1,6 @@
 {% extends 'inv_manage/main.html' %}
 
 {% block main %}
-<table>
-    <tr>
-        <td>Item Name</td>
-        <td>Purchase Date</td>
-        <td>Quantity</td>
-        <td>Price of Purchase</td>
-    </tr>
-{% for order in orders %}
-    <tr>
-        <td> {{ order.item_id.item_id.name }}</td>
-        <td>{{ order.purchase_id.purchase_date }}</td>
-        <td>{{ order.quantity }}</td>
-        <td>{{ order.total_amount }}</td>
-    </tr>
-{% endfor %}
-</table>
 
 <form action="" method="POST">
     {% csrf_token %}
@@ -31,7 +15,35 @@
         <input class="form-input" type='number' name='quantity' id='quantity' min='0' required>   
         <label for='cost'>Cost</label>
         <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" required>    
+        <button class="submit-btn" type="button" id='submit-btn'>Add Item</button>
     </div>
+
+    <select multiple>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+    </select>
     <button class="submit-btn" type="submit" id='submit-btn'>Submit</button>
 </form>
+
+
+
+{% comment %} 
+    <table>
+    <tr>
+        <td>Item Name</td>
+        <td>Purchase Date</td>
+        <td>Quantity</td>
+        <td>Price of Purchase</td>
+    </tr>
+    {% for order in orders %}
+        <tr>
+            <td> {{ order.item_id.item_id.name }}</td>
+            <td>{{ order.purchase_id.purchase_date }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>{{ order.total_amount }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endcomment %}
 {% endblock %}

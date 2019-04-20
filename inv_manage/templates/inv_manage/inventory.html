@@ -3,6 +3,9 @@
 {% load static %}
 
 {% block main %}
+<script>
+    let table_items = {{ json_items|safe }};
+</script>
 
 <h1 class="page-header dark-logo">Inventory</h1>
 <a href="{% url 'inv_manage:add_item' %}">add an item</a>
@@ -10,40 +13,33 @@
     {% csrf_token %}
     <table id="data-table">
         <tr>
-                <th class='check-column'><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Type</th>
-                <th class="quantity-column">quantity</th>
-                <th class='add-column'>+</th>
-                <th class='edit-column'>Edit</th>
-                <th class="delete-column">X</th>
+            <th class='check-column'><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></th>
+            <th class="sort-column" sort-name="name">Name</th>
+            <th class="sort-column" sort-name="description">Description</th>
+            <th class="sort-column" sort-name="type">Type</th>
+            <th class="quantity-column sort-column" sort-name="quantity">quantity</th>
+            <th class='add-column'>+</th>
+            <th class='edit-column'>Edit</th>
+            <th class="delete-column">X</th>
         </tr>
-        
-        {% for item in items %}
-        
-            
-                <tr>
-                    
-                    <td class="center"><input type="checkbox" name="checkbox" value="{{item.id}}"></td>
-                    <td>{{item.item_id.name}}</td>
-                    <td>{{item.item_id.description}}</td>
-                    <td>{{item.item_id.type_id.name}}</td>
-                    <td class="center">{{item.quantity}}</td>
-                    <td></td>
-                    <td><a href="{% url 'inv_manage:edititem' item.id %}">x</a></td>
-                    <td></td>
-                </tr>
-                
-            
-        
-        {% endfor %}
-                
+
+        <tr v-for="item in items">
+            <td class="center"><input type="checkbox" name="checkbox" v-bind:value="item.id"></td>
+            <td>[[item.name]]</td>
+            <td>[[item.description]]</td>
+            <td>[[item.type]]</td>
+            <td class="center">[[item.quantity]]</td>
+            <td></td>
+            <td><a v-bind:href="item.edit_url">x</a></td>
+            <td></td>
+        </tr> 
     </table>
-    <button type="submit" id='submit-btn'>Delete Selected</button>
+    <button type="button" class='left-table-page'><</button>
+    <button type="button" class='right-table-page'>></button>
+    <button type="submit" class='submit-btn'>Delete Selected</button>
 </form>
 {% endblock %}
-{% block add_scripts %}
+{% block after_scripts %}
     <script src="{% static 'js/colResizable.min.js' %}"></script>
     <script src="{% static 'js/table.js' %}"></script>
 {% endblock %}

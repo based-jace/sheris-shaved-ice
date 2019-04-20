@@ -3,6 +3,8 @@ $label-width: 80px;
 $primary: #0038AE;
 $white: white;
 $yellow: yellow;
+$light-yellow: #fafcb5;
+$light-blue: #08458c;
 
 .main-cont{
     text-align: center;
@@ -18,7 +20,7 @@ $yellow: yellow;
         transition: .15s ease-in-out;
         &:hover{ 
             border-color: $yellow;
-            box-shadow: 0 0 0 2px $primary, 0 0 16px 8px $yellow;
+            box-shadow: 0 0 0 2px $primary, 0 0 16px 16px $light-yellow;
         }
     }
 }
@@ -53,3 +55,6 @@ form{
     }
 }
  
+#forgot-password{
+    color: $light-yellow;
+}
