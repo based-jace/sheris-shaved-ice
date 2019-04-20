@@ -1,6 +1,10 @@
 $primary: #0038AE;
 $white: white;
 $yellow: yellow;
+$light-yellow: #fafcb5;
+$light-blue: #012d5e;
+$success: #23db3e;
+$error: #e22626;
 
 $footer-height: 40px;
 $alert-height: 30px;
@@ -60,8 +64,6 @@ h1{
                 2px 0 $primary, 0 2px $primary, -2px 0 $primary, 0 -2px $primary;
     color: $primary;
 }
- 
-
 
 select, .form-input{
     font-size: .9em;
@@ -84,6 +86,7 @@ select, .form-input{
 } */
 
 header{
+    font-family: "Bree Serif", sans-serif;
     width: 100%;
     position: absolute;
     top: 0;
@@ -99,18 +102,23 @@ header{
     vertical-align: middle;
 
     .message{
+        padding-bottom: 4px;
         height: 100%;
         width: 100%;
-        text-align: center;
-        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
     }
     
     .message-success{
-        background: green;
+        color: black;
+        background: $success;
     }
     
     .message-error{
-        background: red;
+        color: white;
+        background: $error;
     }
     
     > button{
@@ -173,13 +181,14 @@ form{
 }
 
 footer{
-    color: white;
+    color: $light-yellow;
     display: flex;
     align-items: center;
     justify-content: center;
     height: $footer-height;
-    background: $primary;
+    background: $light-blue;
     width: 100%;
+    border-top: 1px $primary solid;
 }
 
 .hide{

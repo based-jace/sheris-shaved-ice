@@ -9,9 +9,9 @@
 {% block navbar %}
     <nav class="top-nav">
         <div class="nav-buttons">
-            <a href="{% url 'inv_manage:home' %}"><span>Home</span></a>
-            <a href="{% url 'inv_manage:inventory' %}"><span>Inventory</span></a>
-            <a href="{% url 'inv_manage:orders' %}"><span>Orders</span></a>
+            <a id="home" href="{% url 'inv_manage:home' %}"><span>Home</span></a>
+            <a id="inventory" href="{% url 'inv_manage:inventory' %}"><span>Inventory</span></a>
+            <a id="orders" href="{% url 'inv_manage:orders' %}"><span>Orders</span></a>
         </div>
         <div class="logout-btn">
             <a href="{% url 'inv_manage:logout' %}">
@@ -20,3 +20,10 @@
         </div>
     </nav>
 {% endblock navbar %}
+
+{% block before_scripts %}
+    {{ block.super }}
+    <script>
+        let make_active = "{{ active }}";
+    </script>
+{% endblock %}

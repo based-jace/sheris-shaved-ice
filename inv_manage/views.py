@@ -7,6 +7,7 @@ from django.http import Http404
 #from django.shortcuts import get_object_or_404
 #from decimal import Decimal
 #import datetime
+import json
 
 from .databaseutils import db_methods
 
@@ -45,7 +46,7 @@ def logout_user(request):
 @never_cache
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'inv_manage/home.html')
+        return render(request, 'inv_manage/home.html', context={"active":"home"})
     else:
         return login_user(request)
 
@@ -60,19 +61,28 @@ def neworder(request):
 
     return check_auth(request, 'inv_manage/neworder.html',context={'items':items,'orders':orders})
 
+# @never_cache
+# def inv_manage(request):
+#     items = Item.objects.filter(available=True)
+
+#     if request.method == "POST":
+#         db_methods.delete_selected(request.POST)
+
+#     return check_auth(request, 'inv_manage/inventory.html',context={'items':items, 'active':'inventory'})
 @never_cache
 def inv_manage(request):
     items = Item.objects.filter(available=True)
 
     if request.method == "POST":
         db_methods.delete_selected(request.POST)
-
-    return check_auth(request, 'inv_manage/inventory.html',context={'items':items})
+    print(items)
+    context = {'items': items, 'json_items': db_methods.jsonify_items(items), 'active':'inventory'}
+    return check_auth(request, 'inv_manage/inventory.html',context=context)
 
 @never_cache
 def previous_orders(request):
     orders = PurchaseItem.objects.all()
-    return check_auth(request, 'inv_manage/orders.html', context={'orders':orders})
+    return check_auth(request, 'inv_manage/orders.html', context={'orders':orders, 'active':'orders'})
         
 #Adding an attribute       
 # attribute = Attributes.objects.create(type_id=types[int(request.POST.get('typename'))])
@@ -108,7 +118,7 @@ def add_item(request):
     '''
 
 @never_cache
-def edit_item(request,item_id):
+def edit_item(request, item_id):
     #return check_auth(request)
     types = Type.objects.all()
     try:
