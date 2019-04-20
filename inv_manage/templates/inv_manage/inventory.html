@@ -4,7 +4,7 @@
 
 {% block main %}
 <script>
-    let items = {{ json_items|safe }};
+    let table_items = {{ json_items|safe }};
 </script>
 
 <h1 class="page-header dark-logo">Inventory</h1>
@@ -34,7 +34,9 @@
             <td></td>
         </tr> 
     </table>
-    <button type="submit" id='submit-btn'>Delete Selected</button>
+    <button type="button" class='left-table-page'><</button>
+    <button type="button" class='right-table-page'>></button>
+    <button type="submit" class='submit-btn'>Delete Selected</button>
 </form>
 {% endblock %}
 {% block after_scripts %}
