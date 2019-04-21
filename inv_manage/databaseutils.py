@@ -121,7 +121,6 @@ class db_methods:
 
     @staticmethod
     def jsonify_items(items):
-        print(items[0].id)
         json_items = [{
             'id': item.id,
             'name': item.item_id.name,
