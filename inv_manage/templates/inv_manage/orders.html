@@ -9,19 +9,17 @@
 </div>
 <table id="data-table">
     <tr>
-        <th>Item Name</th>
+        <th>Purchase Id</th>
         <th>Purchase Date</th>
-        <th>Number of Items</th>
         <th>Price of Purchase</th>
         <th>View/Edit</th>
     </tr>
-{% for order in orders %}
+{% for purchase in purchases %}
     <tr>
-        <td>{{ order.item_id.item_id.name }}</td>
-        <td>{{ order.purchase_id.purchase_date }}</td>
-        <td>{{ order.quantity }}</td>
-        <td>{{ order.total_amount }}</td>
-        <td><a href="{% url 'inv_manage:editorder' order.id  %}">X</a></td>
+        <td>{{ purchase.id }}</td>
+        <td>{{ purchase.purchase_date }}</td>
+        <td>{{ purchase.total_amount }}</td>
+        <td><a href="{% url 'inv_manage:editorder' purchase.id  %}">X</a></td>
     </tr>
 {% endfor %}
 </table>

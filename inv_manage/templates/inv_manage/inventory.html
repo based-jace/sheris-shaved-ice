@@ -22,7 +22,7 @@
             <th class='edit-column'>Edit</th>
             <th class="delete-column">X</th>
         </tr>
-
+        {% if items|length > 0 %}
         <tr v-for="item in items">
             <td class="center"><input type="checkbox" name="checkbox" v-bind:value="item.id"></td>
             <td>[[item.name]]</td>
@@ -33,10 +33,13 @@
             <td><a v-bind:href="item.edit_url">x</a></td>
             <td></td>
         </tr> 
+        {% endif %}
     </table>
+    {% if items|length > 0 %}
     <button type="button" class='left-table-page'><</button>
     <button type="button" class='right-table-page'>></button>
     <button type="submit" class='submit-btn'>Delete Selected</button>
+    {% endif %}
 </form>
 {% endblock %}
 {% block after_scripts %}

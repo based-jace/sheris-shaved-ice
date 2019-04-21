@@ -44,32 +44,46 @@ class db_methods:
 
     @staticmethod
     def neworder(atts):
+
+        orderlist = []
+        for item in atts['orderlist']:
+            t = item.split(",")
+            orderData = {
+                'itemid':t[0],
+                'quantity':t[1],
+                'cost':t[2]
+            }
+            orderlist.append(orderData)
+        
+        cost = 0.0
+        for order in orderlist:
+            cost += float(order['cost'])
+
+        print(cost)
         purchase_stuff = {
-            'total_amount': atts['cost'][0],
+            'total_amount': cost,
             'purchase_date': datetime.date.today(),
-            #'item_id': item_id
         }
 
         purchase = Purchase(**purchase_stuff)
         purchase.save()
 
-        #TODO set of a while loop to go through the different rows of orders.
+        count = 0
+        for order in orderlist:
+            item = Item.objects.get(id=int(order['itemid'])) # PK starts at 1
 
-        item = Item.objects.get(id=int(atts['attname'][0])) # PK starts at 1
+            item_stuff = {
+                'purchase_id': purchase,
+                'item_id': item,
+                'quantity': int(order['quantity']),
+                'total_amount': float(order['cost'])
+            }
 
-        item_stuff = {
-            'purchase_id': purchase,
-            'item_id': item,
-            'purchase_id':purchase,
-            'quantity': atts['quantity'][0],
-            'total_amount': atts['cost'][0]
-        }
+            purchase_item = PurchaseItem(**item_stuff)
+            purchase_item.save()
 
-        purchase_item = PurchaseItem(**item_stuff)
-        purchase_item.save()
-
-        item.quantity += int(item_stuff['quantity'])
-        item.save()
+            item.quantity += int(item_stuff['quantity'])
+            item.save()
 
         #purchaseItem = PurchaseItem.objects.create(item_id=attributes[int(request.POST.get('attname'))],purchase_id=purchase,quantity=int(request.POST.get('quantity')),total_amount=Decimal(request.POST.get('cost')))
         #purchaseItem.save()
@@ -121,15 +135,19 @@ class db_methods:
 
     @staticmethod
     def jsonify_items(items):
-        print(items[0].id)
-        json_items = [{
-            'id': item.id,
-            'name': item.item_id.name,
-            'quantity': item.quantity,
-            'available': item.available,
-            'type': item.item_id.type_id.name,
-            'description': item.item_id.description,
-            'edit_url': reverse('inv_manage:edititem', args=[item.id])
-            } for item in items
-        ]
-        return json.dumps(json_items)
+        if len(items) > 0:
+            print(items[0].id)
+            json_items = [{
+                'id': item.id,
+                'name': item.item_id.name,
+                'quantity': item.quantity,
+                'available': item.available,
+                'type': item.item_id.type_id.name,
+                'description': item.item_id.description,
+                'edit_url': reverse('inv_manage:edititem', args=[item.id])
+                } for item in items
+            ]
+            return json.dumps(json_items)
+
+    
+        

@@ -1,11 +1,11 @@
 {% extends 'inv_manage/main.html' %}
-
+{% load staticfiles%}
 {% block main %}
 
 <form action="" method="POST">
     {% csrf_token %}
     <div id='orderitem'>
-        <select class="form-input" name='attname' required>
+        <select class="form-input" id="attname" name='attname' required>
             {% for item in items %}
             {{item.item_id.name}}
             <option value='{{ item.id }}'>{{item.item_id.name}}</option>
@@ -15,15 +15,12 @@
         <input class="form-input" type='number' name='quantity' id='quantity' min='0' required>   
         <label for='cost'>Cost</label>
         <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" required>    
-        <button class="submit-btn" type="button" id='submit-btn'>Add Item</button>
+        <button class="submit-btn" type="button" id='add-btn' >Add Item</button>
     </div>
 
-    <select multiple>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
+    <select id='orderlist' name='orderlist' multiple>
     </select>
-    <button class="submit-btn" type="submit" id='submit-btn'>Submit</button>
+    <button class="submit-btn" type="submit" onclick="return selectItems()" id='submit-btn'>Submit</button>
 </form>
 
 
@@ -46,4 +43,8 @@
     {% endfor %}
     </table>
 {% endcomment %}
+
+{% endblock %}
+{% block after_scripts %}
+    <script src="{% static 'js/itemlist.js' %}"></script>
 {% endblock %}
