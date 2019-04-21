@@ -16,9 +16,11 @@
         <label for='cost'>Cost</label>
         <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" required>    
         <button class="submit-btn" type="button" id='add-btn' >Add Item</button>
+        <button class="submit-btn" type="button" id='rmv-btn' >Remove Item</button>
+        
     </div>
 
-    <select id='orderlist' name='orderlist' multiple>
+    <select id='orderlist' name='orderlist' multiple required>
     </select>
     <button class="submit-btn" type="submit" onclick="return selectItems()" id='submit-btn'>Submit</button>
 </form>

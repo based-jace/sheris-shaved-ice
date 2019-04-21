@@ -4,7 +4,7 @@ let orderItems = [];
 index = 0;
 
 function additem(){
-    attindex = document.getElementById("attname").selectedIndex;
+    let attindex = document.getElementById("attname").selectedIndex;
     let purchaseItem = {
         Attribute:atts.options[attindex].value,
         Quantity:document.getElementById("quantity").value,
@@ -25,5 +25,14 @@ function selectItems(){
     }
 }
 
+function removeItem(){
+    let orderindex = document.getElementById("orderlist");
+    for(let i = 0; i < orderindex.options.length; i++){
+        if (orderindex.options[i].selected == true){
+            orderindex.remove(orderindex.options.selectedIndex)
+        }
+    }
+}
+
 document.getElementById("add-btn").onclick = additem;
-document.getElementById("submit-btn").onsubmit = selectItems;
+document.getElementById("rmv-btn").onclick = removeItem;

@@ -146,7 +146,7 @@ def edit_order(request,order_id):
     items = Item.objects.filter(available=True)
 
     try:
-        order = PurchaseItem.objects.get(pk=order_id)
+        order = PurchaseItem.objects.filter(pk=order_id)
     except PurchaseItem.DoesNotExist:
         raise Http404("Order does not exist.")
     
