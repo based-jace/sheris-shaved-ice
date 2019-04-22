@@ -1,6 +1,7 @@
 {% extends 'inv_manage/main.html' %}
 
 {% load static %}
+{% load inv_manage_extras %}
 
 {% block main %}
 <script>
@@ -35,9 +36,11 @@
         </tr> 
         {% endif %}
     </table>
+    
+    <a id='backpage' href="{% url 'inv_manage:inventory' pagenumber|subtract %}"><</a>
+    <span id='pagenumber'>{{ pagenumber }}</span>
+    <a id='forwardpage' href="{% url 'inv_manage:inventory' pagenumber|add %}">></a>
     {% if items|length > 0 %}
-    <button type="button" class='left-table-page'><</button>
-    <button type="button" class='right-table-page'>></button>
     <button type="submit" class='submit-btn'>Delete Selected</button>
     {% endif %}
 </form>

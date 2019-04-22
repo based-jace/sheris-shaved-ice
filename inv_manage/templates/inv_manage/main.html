@@ -10,7 +10,7 @@
     <nav class="top-nav">
         <div class="nav-buttons">
             <a id="home" href="{% url 'inv_manage:home' %}"><span>Home</span></a>
-            <a id="inventory" href="{% url 'inv_manage:inventory' %}"><span>Inventory</span></a>
+            <a id="inventory" href="{% url 'inv_manage:inventory' 1 %}"><span>Inventory</span></a>
             <a id="orders" href="{% url 'inv_manage:orders' %}"><span>Orders</span></a>
         </div>
         <div class="logout-btn">

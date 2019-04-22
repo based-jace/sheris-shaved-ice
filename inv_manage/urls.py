@@ -24,7 +24,8 @@ urlpatterns = [
     path('orders/neworder/', views.neworder, name='neworder'),
     path('orders/', views.previous_orders, name='orders'),
     path('inventory/add/', views.add_item, name="add_item"),
-    path('inventory/', views.inv_manage, name='inventory'),
+    path('inventory/',views.inv_redirect,name='inventoryredirect'),
+    path('inventory/<int:pagenumber>/', views.inv_manage, name='inventory'),
     path('logout/', views.logout_user, name='logout'),
     path('', views.home, name='home'),
 ]

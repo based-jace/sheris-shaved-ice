@@ -69,14 +69,20 @@ def neworder(request):
 #         db_methods.delete_selected(request.POST)
 
 #     return check_auth(request, 'inv_manage/inventory.html',context={'items':items, 'active':'inventory'})
+
 @never_cache
-def inv_manage(request):
-    items = Item.objects.filter(available=True)
+def inv_redirect(request):
+    return redirect('inv_manage:inventory',1)
+
+@never_cache
+def inv_manage(request,pagenumber):
+    amountofitems = 10
+    items = Item.objects.filter(available=True)[(pagenumber*amountofitems)-amountofitems:pagenumber*amountofitems]
 
     if request.method == "POST":
         db_methods.delete_selected(request.POST)
     print(items)
-    context = {'items': items, 'json_items': db_methods.jsonify_items(items), 'active':'inventory'}
+    context = {'items': items, 'json_items': db_methods.jsonify_items(items), 'active':'inventory','pagenumber':pagenumber}
     return check_auth(request, 'inv_manage/inventory.html',context=context)
 
 @never_cache
