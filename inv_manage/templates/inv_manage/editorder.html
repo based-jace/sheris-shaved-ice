@@ -3,18 +3,22 @@
 {% block main %}
 <form action="" method="POST">
     {% csrf_token %}
+    {% for order in orders %}
     <div id='orderitem'>
-        <select class="form-input" name='attname' required>
+        <!-- TODO make it so the item in the list on page load is the item that was originally chosen for it. -->
+        <select class="form-input" name='attname{{ forloop.counter0 }}' required>
             {% for item in items %}
             {{item.item_id.name}}
             <option value='{{ item.id }}'>{{item.item_id.name}}</option>
             {% endfor %}
         </select>    
+ 
         <label for='quantity'>Quantity</label>
-        <input class="form-input" type='number' name='quantity' id='quantity' min='0' value='{{ order.quantity }}' required>   
+        <input class="form-input" type='number' name='quantity{{ forloop.counter0 }}' id='quantity' min='0' value='{{ order.quantity }}' required>   
         <label for='cost'>Cost</label>
-        <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" value='{{ order.total_amount }}'required>    
+        <input class="form-input" type='number' name='cost{{ forloop.counter0 }}' id='cost' min='0' step=".01" value='{{ order.total_amount }}'required> 
     </div>
+    {% endfor %}
     <button class="submit-btn" type="submit" id='submit-btn'>Submit</button>
 </form>
 {% endblock %}

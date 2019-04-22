@@ -19,7 +19,7 @@
         <td>{{ purchase.id }}</td>
         <td>{{ purchase.purchase_date }}</td>
         <td>{{ purchase.total_amount }}</td>
-        <td><a href="{% url 'inv_manage:editorder' purchase.id  %}">X</a></td>
+        <td><a href="{% url 'inv_manage:editorder' purchase.id  %}">{{purchase.id}}</a></td>
     </tr>
 {% endfor %}
 </table>

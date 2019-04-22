@@ -51,15 +51,14 @@ class db_methods:
             orderData = {
                 'itemid':t[0],
                 'quantity':t[1],
-                'cost':t[2]
+                'total_amount':t[2]
             }
             orderlist.append(orderData)
         
         cost = 0.0
         for order in orderlist:
-            cost += float(order['cost'])
+            cost += float(order['total_amount'])
 
-        print(cost)
         purchase_stuff = {
             'total_amount': cost,
             'purchase_date': datetime.date.today(),
@@ -76,7 +75,7 @@ class db_methods:
                 'purchase_id': purchase,
                 'item_id': item,
                 'quantity': int(order['quantity']),
-                'total_amount': float(order['cost'])
+                'total_amount': float(order['total_amount'])
             }
 
             purchase_item = PurchaseItem(**item_stuff)
@@ -127,11 +126,41 @@ class db_methods:
             item.save()
 
     @staticmethod 
-    def editorder(atts,order):
-        order.item_id = Item.objects.get(id=int(atts['attname']))
-        order.quantity = atts['quantity']
-        order.total_amount = atts['cost']
-        order.save()
+    def editorder(atts,orders,purchase):
+        #TODO make it so that editing the order also reflects on the inventory
+        orderlist = []
+        index = 0
+        #Total amount of items changed
+        difference = 0
+        for order in orders:
+            item = Item.objects.get(pk=int(atts.get("attname" + str(index))))
+            orderitems = {
+                'id':order.id,
+                'item_id':item,
+                'purchase_id':order.purchase_id,
+                'quantity':atts.get("quantity" + str(index)),
+                'total_amount':atts.get("cost" + str(index))
+            }
+            difference = int(atts.get("quantity" + str(index)))-order.quantity
+            if item.quantity + difference > 0:
+                item.quantity += difference
+            else:
+                item.quantity = 0
+                item.available = False
+            item.save()
+            orderlist.append(orderitems)
+            index += 1
+
+        index = 0
+        for order in orders:
+            order = PurchaseItem(**orderlist[index])
+            order.save()
+            index += 1
+            # print(order.quantity)
+            # order.item_id = Item.objects.get(id=int(atts['attname']))
+            # order.quantity = atts['quantity']
+            # order.total_amount = atts['cost']
+            # order.save()
 
     @staticmethod
     def jsonify_items(items):
