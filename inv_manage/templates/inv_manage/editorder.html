@@ -5,11 +5,14 @@
     {% csrf_token %}
     {% for order in orders %}
     <div id='orderitem'>
-        <!-- TODO make it so the item in the list on page load is the item that was originally chosen for it. -->
         <select class="form-input" name='attname{{ forloop.counter0 }}' required>
             {% for item in items %}
             {{item.item_id.name}}
-            <option value='{{ item.id }}'>{{item.item_id.name}}</option>
+            {% if order.item_id.id == item.id %}
+            <option value='{{ item.id }}' selected>{{item.item_id.name}}</option>
+            {% else %}
+            <option value='{{ item.id }}' >{{item.item_id.name}}</option>
+            {% endif %}
             {% endfor %}
         </select>    
  

@@ -72,7 +72,6 @@ class db_methods:
             item = Item.objects.get(id=int(order['itemid'])) # PK starts at 1
 
             item_stuff = {
-                'id':order.id,
                 'purchase_id': purchase,
                 'item_id': item,
                 'quantity': int(order['quantity']),
@@ -96,7 +95,7 @@ class db_methods:
     def edititem(atts,item_id,attribute_id):
 
         type_id1 = atts['type_id']
-        type_id = Type.objects.get(id=int(type_id1)+1 )
+        type_id = Type.objects.get(id=int(type_id) )
 
         attribute_stuff = {
             'id':attribute_id,
