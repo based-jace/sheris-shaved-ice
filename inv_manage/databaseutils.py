@@ -72,6 +72,7 @@ class db_methods:
             item = Item.objects.get(id=int(order['itemid'])) # PK starts at 1
 
             item_stuff = {
+                'id':order.id,
                 'purchase_id': purchase,
                 'item_id': item,
                 'quantity': int(order['quantity']),
@@ -127,11 +128,13 @@ class db_methods:
 
     @staticmethod 
     def editorder(atts,orders,purchase):
-        #TODO make it so that editing the order also reflects on the inventory
+        #TODO make it so you can remove entire PurchaseItems
         orderlist = []
         index = 0
         #Total amount of items changed
         difference = 0
+        #TODO clean up the code by breaking it down into different functions
+        #Unpacks the neccessary data and organizes it into a dictionary
         for order in orders:
             item = Item.objects.get(pk=int(atts.get("attname" + str(index))))
             orderitems = {
@@ -141,7 +144,9 @@ class db_methods:
                 'quantity':atts.get("quantity" + str(index)),
                 'total_amount':atts.get("cost" + str(index))
             }
+            orderlist.append(orderitems)
             difference = int(atts.get("quantity" + str(index)))-order.quantity
+            #Makes sure the item quantity cannot go below 0
             if item.quantity + difference > 0:
                 item.quantity += difference
             else:
@@ -152,6 +157,7 @@ class db_methods:
             index += 1
 
         index = 0
+        #Updates the existing order with the changed information
         for order in orders:
             order = PurchaseItem(**orderlist[index])
             order.save()
