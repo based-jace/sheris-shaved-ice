@@ -2,13 +2,15 @@ let num_items = table_items.length; // Total number of items
 let current_items = table_items.slice(0,10); // Items shown in table
 
 // Width that changes the 'quantity' column label to '#'
-let quantWidth = window.matchMedia("(max-width: 760px)");
+let quantWidth = 440;
+let quantWatch = window.matchMedia("(max-width: " + quantWidth + "px)");
 
 // For pagination
 // Buttons that clicking on changes the table page
 let left_pag_buttons = document.getElementsByClassName("left-table-page");
 let right_pag_buttons = document.getElementsByClassName("right-table-page"); 
 let curr_page = 0; // First page
+let last_page = Math.floor(num_items / 10);
 
 // For sorting
 let sort_columns = document.getElementsByClassName("sort-column"); // columns to sort by
@@ -35,14 +37,13 @@ vue = new Vue({
 // Function that changes quantity column label
 function replaceQuant(){
     let qc = $('.quantity-column');
-    if (quantWidth.matches){
-        qc.text("#");
+    if (quantWatch.matches){
+        qc.text("Q");
     }
     else{
-        qc.text("quantity");
+        qc.text("Quantity");
     }
 }
-window.addEventListener('resize', replaceQuant) // 
 
 // returns a function that sorts by the column you clicked on
 // I fucking hate javascript
@@ -54,6 +55,16 @@ function sortClick(column){
         function compare(a, b){
             a = a[col_name];
             b = b[col_name];
+            if(a == null || b == null){
+                if(a == null){
+                    return -1;
+                }
+                else if (b == null){
+                    return 1;
+                }
+                return 0;
+            }
+
             if(typeof(a) != 'string'){
                 if (a > b){
                     return 1;
@@ -89,6 +100,8 @@ function sortClick(column){
         }
         curr_page = 0; // Reset to first page
         vue.items = table_items.slice(curr_page, curr_page + 10); // Show first 10 items
+        checkPage();
+        numerateRows();
     }
 }
 
@@ -97,13 +110,76 @@ for(column of sort_columns){
     column.addEventListener('click', sortClick(column))
 };
 
+function disablePagination(btn){
+    btn.classList.add('disabled');
+}
+function enablePagination(btn){
+    btn.classList.remove('disabled')
+}
+function checkPage(){
+    for(page_number of $(".table-page-number")){
+        $(page_number).text(curr_page + 1);
+    }
+    if(curr_page == 0){
+        for(btn of left_pag_buttons){
+            disablePagination(btn);
+            
+        }
+    }
+    else{
+        for(btn of left_pag_buttons){
+            enablePagination(btn);
+        }
+    }
+    if(curr_page == last_page){
+        for(btn of right_pag_buttons){
+            disablePagination(btn);
+        }
+    }
+    else{
+        for(btn of right_pag_buttons){
+            enablePagination(btn);
+        }
+    }
+    
+}
+function changePage(norp){
+    if(norp > 0){
+        curr_page++; // Go up a page
+        let item_start = curr_page * 10; // Items to start from
+        vue.items = table_items.slice(item_start, item_start + 10) // Sets table rows to show
+    }
+    else if(norp < 0){
+        curr_page--; // Go back a page
+        let item_start = curr_page * 10; // Items to start from
+        vue.items = table_items.slice(item_start, item_start + 10) // Sets table rows to show
+    }
+    checkPage();
+    numerateRows();
+}
+
+// Numerates Rows (C'mon, man)
+function numerateRows(){
+    temp_items = [];
+    for(i in vue['items']){
+        temp_items[i] = vue.items[i];
+        temp_items[i]['number'] = (curr_page + 1) * 10 - 9 + Number(i); // Again, I really hate javascript
+    }
+    vue.items = temp_items;
+}
+
+// ** INIT **
+
 // Allows pagination from left page buttons
 for(btn of left_pag_buttons){
     btn.addEventListener('click', ()=>{
-        if(curr_page > 0){ // If greater than first page
-            curr_page--; // Go back a page
-            let item_start = curr_page * 10; // Items to start from
-            vue.items = table_items.slice(item_start, item_start + 10) // Sets table rows to show
+        if(curr_page > 0){
+            enablePagination(btn);
+        }
+        if(!btn.classList.contains('disabled')){
+            if(curr_page > 0){ // If greater than first page
+                changePage(-1);
+            }
         }
     })
 }
@@ -111,11 +187,21 @@ for(btn of left_pag_buttons){
 // Allows pagination from right page buttons
 for(btn of right_pag_buttons){
     btn.addEventListener('click', ()=>{
-        if(curr_page < Math.floor(num_items / 10)){ // If less than last page
-            curr_page++; // Go up a page
-            let item_start = curr_page * 10; // Items to start from
-            vue.items = table_items.slice(item_start, item_start + 10) // Sets table rows to show
+        if(curr_page < last_page){
+            enablePagination(btn);
+        }
+
+        if(!btn.classList.contains('disabled')){
+            if(curr_page < last_page){ // If less than last page
+                changePage(1);
+            }
         }
     })
 }
 
+if ($(window).width() <= quantWidth){
+    replaceQuant();
+}
+window.addEventListener('resize', replaceQuant) // 
+checkPage();
+numerateRows();

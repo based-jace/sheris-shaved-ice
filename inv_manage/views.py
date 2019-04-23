@@ -71,7 +71,9 @@ def neworder(request):
 #     return check_auth(request, 'inv_manage/inventory.html',context={'items':items, 'active':'inventory'})
 @never_cache
 def inv_manage(request):
-    items = Item.objects.filter(available=True)
+    items = {}
+    if Item.objects.all():
+        items = Item.objects.filter(available=True)
 
     if request.method == "POST":
         db_methods.delete_selected(request.POST)

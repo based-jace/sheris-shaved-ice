@@ -13,19 +13,19 @@
 
 .main-cont main {
   padding: 50px 100px;
-  background: #0038AE;
+  background: #08458c;
   border-radius: 8px;
   border: 1px solid yellow;
-  -webkit-box-shadow: 0 0 0 2px #0038AE;
-          box-shadow: 0 0 0 2px #0038AE;
+  -webkit-box-shadow: 0 0 0 2px #08458c;
+          box-shadow: 0 0 0 2px #08458c;
   -webkit-transition: .15s ease-in-out;
   transition: .15s ease-in-out;
 }
 
 .main-cont main:hover {
   border-color: yellow;
-  -webkit-box-shadow: 0 0 0 2px #0038AE, 0 0 16px 16px #fafcb5;
-          box-shadow: 0 0 0 2px #0038AE, 0 0 16px 16px #fafcb5;
+  -webkit-box-shadow: 0 0 0 2px #08458c, 0 0 16px 16px #fafcb5;
+          box-shadow: 0 0 0 2px #08458c, 0 0 16px 16px #fafcb5;
 }
 
 form {

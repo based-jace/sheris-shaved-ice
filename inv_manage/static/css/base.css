@@ -42,13 +42,13 @@ h1 {
 }
 
 .light-logo {
-  text-shadow: 1px 0 #0038AE, 0 1px #0038AE, -1px 0 #0038AE, 0 -1px #0038AE, 2px 0 white, 0 2px white, -2px 0 white, 0 -2px white;
+  text-shadow: 1px 0 #08458c, 0 1px #08458c, -1px 0 #08458c, 0 -1px #08458c, 2px 0 white, 0 2px white, -2px 0 white, 0 -2px white;
   color: yellow;
 }
 
 .dark-logo {
-  text-shadow: 1px 0 yellow, 0 1px yellow, -1px 0 yellow, 0 -1px yellow, 2px 0 #0038AE, 0 2px #0038AE, -2px 0 #0038AE, 0 -2px #0038AE;
-  color: #0038AE;
+  text-shadow: 1px 0 yellow, 0 1px yellow, -1px 0 yellow, 0 -1px yellow, 2px 0 #08458c, 0 2px #08458c, -2px 0 #08458c, 0 -2px #08458c;
+  color: #08458c;
 }
 
 select, .form-input {
@@ -188,9 +188,9 @@ footer {
       -ms-flex-pack: center;
           justify-content: center;
   height: 40px;
-  background: #012d5e;
+  background: #08458c;
   width: 100%;
-  border-top: 1px #0038AE solid;
+  border-top: 1px #08458c solid;
 }
 
 .hide {
