@@ -1,4 +1,3 @@
-from decimal import Decimal
 import datetime
 import json
 from django.urls import reverse
@@ -44,7 +43,7 @@ class db_methods:
 
     @staticmethod
     def neworder(atts):
-
+        #Grabs all the orders creates a dictionary with there data and adds them to a array
         orderlist = []
         for item in atts['orderlist']:
             t = item.split(",")
@@ -55,6 +54,7 @@ class db_methods:
             }
             orderlist.append(orderData)
         
+        #sums the total amount of all purchase items
         cost = 0.0
         for order in orderlist:
             cost += float(order['total_amount'])
@@ -67,6 +67,7 @@ class db_methods:
         purchase = Purchase(**purchase_stuff)
         purchase.save()
 
+        #Creates purhcase items and appends the new amount to the inventory item its associated with.
         count = 0
         for order in orderlist:
             item = Item.objects.get(id=int(order['itemid'])) # PK starts at 1
