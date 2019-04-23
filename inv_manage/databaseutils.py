@@ -171,7 +171,6 @@ class db_methods:
     @staticmethod
     def jsonify_items(items):
         if len(items) > 0:
-            print(items[0].id)
             json_items = [{
                 'id': item.id,
                 'name': item.item_id.name,
@@ -183,6 +182,3 @@ class db_methods:
                 } for item in items
             ]
             return json.dumps(json_items)
-
-    
-        

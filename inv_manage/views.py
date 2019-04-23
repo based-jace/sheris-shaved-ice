@@ -72,7 +72,9 @@ def neworder(request):
 
 @never_cache
 def inv_manage(request):
-    items = Item.objects.filter(available=True)
+    items = {}
+    if Item.objects.all():
+        items = Item.objects.filter(available=True)
 
     if request.method == "POST":
         db_methods.delete_selected(request.POST)

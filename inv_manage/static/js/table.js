@@ -118,4 +118,3 @@ for(btn of right_pag_buttons){
         }
     })
 }
-
