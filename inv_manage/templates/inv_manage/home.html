@@ -1,4 +1,57 @@
 {% extends 'inv_manage/main.html' %}
+
+{% load static %}
+
 {% block main %}
-Welcome back!
+
+<h1 class="page-header dark-logo">Welcome Back!</h1>
+<div class="table-layout">
+    <div class="table1">
+        <table id="data-table">
+            <caption class='caption'>You are currently low on the following items.</caption>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Type</th>
+                <th class="quantity-column">Quantity</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{item.item_id.name}}</td>
+                <td>{{item.item_id.description}}</td>
+                <td>{{item.item_id.type_id.name}}</td>
+                <td class="center">{{item.quantity}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="table2">
+        <table id="data-table">
+            <caption class='caption'>Recent Purchases</caption>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            {% for item in items %}
+            <tr>
+                <td>{{item.item_id.name}}</td>
+                <td>{{item.item_id.price}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+{% block add_scripts %}
+    <script src="{% static 'js/colResizable.min.js' %}"></script>
+    <script src="{% static 'js/table.js' %}"></script>
 {% endblock %}

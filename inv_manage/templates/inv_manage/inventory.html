@@ -14,10 +14,10 @@
     <table id="data-table">
         <tr>
             <th class='check-column'><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></th>
-            <th class="sort-column" sort-name="name">Name</th>
-            <th class="sort-column" sort-name="description">Description</th>
-            <th class="sort-column" sort-name="type">Type</th>
-            <th class="quantity-column sort-column" sort-name="quantity">quantity</th>
+            <th scope="col"><a class="sort-column" sort-name="name">Name</a></th>
+            <th scope="col"><a class="sort-column" sort-name="description">Description</a></th>
+            <th scope="col"><a class="sort-column" sort-name="type">Type</a></th>
+            <th scope="col"><a class="quantity-column sort-column" sort-name="quantity">Quantity</a></th>
             <th class='add-column'>+</th>
             <th class='edit-column'>Edit</th>
             <th class="delete-column">X</th>
@@ -34,9 +34,20 @@
             <td></td>
         </tr> 
     </table>
-    <button type="button" class='left-table-page'><</button>
-    <button type="button" class='right-table-page'>></button>
-    <button type="submit" class='submit-btn'>Delete Selected</button>
+    <div class="center-pagination">
+        <div class="pagination">
+            <button href="#" type="button" class='left-table-page'>&laquo;</button>
+        </div>
+        <div class="pagination-page-number">
+            <button href="#" class='table-page-number'>1</button>
+        </div>
+        <div class="pagination">
+            <button href="#" type="button" class='right-table-page'>&raquo;</button>
+        </div>
+        <div class="pagination">    
+            <button id="delete-selected" type="submit" class='submit-btn'>Delete Selected</button>  
+        </div> 
+    </div>
 </form>
 {% endblock %}
 {% block after_scripts %}
