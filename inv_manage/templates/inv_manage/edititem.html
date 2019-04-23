@@ -12,7 +12,12 @@
         <select id="type_id" name="type_id">
             {% for type in types %}
             {{type.name}}
-            <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
+            {% if type.id == item.item_id.type_id.id%}
+            <option value='{{ type.id }}' selected>{{type.name}}</option>
+            {% else %}
+            <option value='{{ type.id }}'>{{type.name}}</option>
+            {%endif%}
+
             {% endfor %}
             <option>Add New Type</option>
         </select>

@@ -21,11 +21,10 @@ app_name = 'inv_manage'
 urlpatterns = [
     path('orders/edit/<int:order_id>/',views.edit_order,name='editorder'),
     path('inventory/edit/<int:item_id>/',views.edit_item,name='edititem'),
-    path('orders/additem',views.add_item,name='additem'),
     path('orders/neworder/', views.neworder, name='neworder'),
     path('orders/', views.previous_orders, name='orders'),
     path('inventory/add/', views.add_item, name="add_item"),
-    path('inventory/', views.inv_manage, name='inventory'),
+    path('inventory/',views.inv_manage,name='inventory'),
     path('logout/', views.logout_user, name='logout'),
     path('', views.home, name='home'),
 ]

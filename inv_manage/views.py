@@ -52,9 +52,9 @@ def home(request):
 
 @never_cache
 def neworder(request):
-    items = Item.objects.filter(available=True) # < Unnecessary? Can change to just item?
+    items = Item.objects.filter(available=True) 
     orders = PurchaseItem.objects.all()
-    #TODO Make it so you can enter multipe items at one time.
+
     if request.method == 'POST':
         atts = dict(request.POST)
         db_methods.neworder(atts)
@@ -69,22 +69,23 @@ def neworder(request):
 #         db_methods.delete_selected(request.POST)
 
 #     return check_auth(request, 'inv_manage/inventory.html',context={'items':items, 'active':'inventory'})
+
 @never_cache
 def inv_manage(request):
     items = {}
     if Item.objects.all():
         items = Item.objects.filter(available=True)
-
     if request.method == "POST":
+        print(request.POST)
         db_methods.delete_selected(request.POST)
-    print(items)
+    # print(items)
     context = {'items': items, 'json_items': db_methods.jsonify_items(items), 'active':'inventory'}
     return check_auth(request, 'inv_manage/inventory.html',context=context)
 
 @never_cache
 def previous_orders(request):
-    orders = PurchaseItem.objects.all()
-    return check_auth(request, 'inv_manage/orders.html', context={'orders':orders, 'active':'orders'})
+    purchases = Purchase.objects.all()
+    return check_auth(request, 'inv_manage/orders.html', context={'purchases':purchases, 'active':'orders'})
         
 #Adding an attribute       
 # attribute = Attributes.objects.create(type_id=types[int(request.POST.get('typename'))])
@@ -146,15 +147,15 @@ def add_type(request):
 @never_cache
 def edit_order(request,order_id):
     items = Item.objects.filter(available=True)
-
+    purchase = Purchase.objects.get(id=order_id)
     try:
-        order = PurchaseItem.objects.get(pk=order_id)
+        orders = PurchaseItem.objects.filter(purchase_id=purchase)
     except PurchaseItem.DoesNotExist:
         raise Http404("Order does not exist.")
     
     if request.method == "POST":
-        db_methods.editorder(atts=request.POST,order=order)
+        db_methods.editorder(atts=request.POST,orders=orders,purchase=purchase)
         messages.success(request, 'Order has successfully been updated.')
         return redirect('inv_manage:orders')
 
-    return check_auth(request,'inv_manage/editorder.html',context={'items':items,'order':order})
+    return check_auth(request,'inv_manage/editorder.html',context={'items':items,'orders':orders})

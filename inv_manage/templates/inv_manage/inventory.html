@@ -8,7 +8,9 @@
 </script>
 
 <h1 class="page-header dark-logo">Inventory</h1>
+
 <div class="table-cont">
+    {% csrf_token %}
     <table id="data-table">
         <tr>
             <th class='check-column'><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></th>
@@ -30,6 +32,7 @@
             <td><a v-bind:href="item.edit_url">x</a></td>
             <td class="delete-column"></td>
         </tr> 
+        {% endif %}
     </table>
 </div>
 <div class="center-pagination">
@@ -39,10 +42,11 @@
 </div>
 <div class="table-controls">    
     <a href="{% url 'inv_manage:add_item' %}">add an item</a>
-    <button id="delete-selected" type="submit" class='submit-btn'>Delete Selected</button>  
+    <button id="delete-selected" type="button" class='submit-btn'>Delete Selected</button>  
 </div> 
 {% endblock %}
 {% block after_scripts %}
     <script src="{% static 'js/colResizable.min.js' %}"></script>
     <script src="{% static 'js/table.js' %}"></script>
+    <script src="{% static 'js/deleteItems.js' %}"></script>
 {% endblock %}
