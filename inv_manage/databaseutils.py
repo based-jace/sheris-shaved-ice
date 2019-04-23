@@ -118,9 +118,8 @@ class db_methods:
         updated_item.save()
         
     @staticmethod
-    def delete_selected(atts):        
-        selected_stuff = atts.getlist('checkbox')
-        
+    def delete_selected(atts):       
+        selected_stuff = atts.getlist('checkbox[]')
         for i in selected_stuff:          
             item = Item.objects.get(pk=i)
             item.available = False

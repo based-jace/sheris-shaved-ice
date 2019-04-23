@@ -75,10 +75,10 @@ def inv_manage(request):
     items = {}
     if Item.objects.all():
         items = Item.objects.filter(available=True)
-
     if request.method == "POST":
+        print(request.POST)
         db_methods.delete_selected(request.POST)
-    print(items)
+    # print(items)
     context = {'items': items, 'json_items': db_methods.jsonify_items(items), 'active':'inventory'}
     return check_auth(request, 'inv_manage/inventory.html',context=context)
 
