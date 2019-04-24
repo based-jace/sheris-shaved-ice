@@ -16,6 +16,10 @@ $disabled: lightgrey;
     grid-template-rows: auto auto 1fr;
 }
 .table-cont{
+    width: 100%;
+    > *{
+        width: 100%;
+    }
     min-height: 312px;
     grid-column: 1 / 2; 
     grid-row: 2 / 3;
@@ -26,6 +30,10 @@ $disabled: lightgrey;
 .table-controls{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 7px;
 }
 .grid-form{
     grid-template-columns: 3fr 2fr;
@@ -48,6 +56,46 @@ $disabled: lightgrey;
 .form-right-controls{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+}
+
+.modal-cont{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.3);
+    height: 100%;
+    width: 100%;
+    &.hidden{
+        display: none;
+    }
+    .modal{
+        position: relative;
+        width: 400px;
+        height: 200px;
+        background: white;
+        border: 1px $primary solid;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h2{
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .close-modal{
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: context-menu;
+        }
+        .input-cont{
+            margin-bottom: 5px;
+        }
+    }
 }
 
 .top-nav{
@@ -106,6 +154,9 @@ $disabled: lightgrey;
             //width: 50%;
         }
     }   
+}
+.main-cont{
+    width: 100%;
 }
 .main-cont > *{
     margin: 0 auto;
@@ -263,7 +314,8 @@ button.pagination{
     cursor: pointer;
     font-size: 1.8em;
     border: 1px solid $yellow;
-    
+    transition: .15s;
+
     &.left-table-page{
         border-radius: 12px 0 0 12px;
         border-right: none;
@@ -346,7 +398,7 @@ form{
         align-self: center;
         margin: 0;
         text-align: center;
-        font-size: 3em;
+        font-size: 2.4em;
     }
 
 }
@@ -372,7 +424,7 @@ form{
         }
     }
     .page-header{
-        font-size: 2.5em;
+        font-size: 1.8em;
     }
     .table-cont{
         min-height: 279px;
@@ -384,10 +436,13 @@ form{
 
     #data-table{
         font-size: .8em;
-        .quantity-column{
+        .quantity-column{ 
             width: 30px;
         }
         .delete-column{
+            display: none;
+        }
+        .description-column{
             display: none;
         }
     }

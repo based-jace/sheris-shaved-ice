@@ -123,7 +123,6 @@ function checkPage(){
     if(curr_page == 0){
         for(btn of left_pag_buttons){
             disablePagination(btn);
-            
         }
     }
     else{
@@ -143,16 +142,21 @@ function checkPage(){
     }
     
 }
+
+ // Sets table rows to show
+function updateVue(){
+    let item_start = curr_page * 10; // Items to start from
+    vue.items = table_items.slice(item_start, item_start + 10)
+}
+
 function changePage(norp){
     if(norp > 0){
         curr_page++; // Go up a page
-        let item_start = curr_page * 10; // Items to start from
-        vue.items = table_items.slice(item_start, item_start + 10) // Sets table rows to show
+        updateVue();
     }
     else if(norp < 0){
         curr_page--; // Go back a page
-        let item_start = curr_page * 10; // Items to start from
-        vue.items = table_items.slice(item_start, item_start + 10) // Sets table rows to show
+        updateVue();
     }
     checkPage();
     numerateRows();

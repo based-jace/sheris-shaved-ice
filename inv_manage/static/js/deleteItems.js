@@ -22,7 +22,6 @@ function getSelectedCheckboxes(){
     let checkboxes = [];
     for(let i = 0; i < boxes.length;++i){
         if(boxes[i].checked == true){
-            
             checkboxes.push(boxes[i].value);
         }
     }
@@ -30,18 +29,21 @@ function getSelectedCheckboxes(){
 }
 
 function removeItem(box){
-    let elem = box.parentElement.parentElement;
-    elem.parentNode.removeChild(elem);
+    for(i in table_items){
+        if(table_items[i]['id'] == box.value){
+            table_items.splice(i,1); 
+            num_items--;
+            box.checked = false;
+        }
+    }
 }
 
-
-
 function removeItems(){
-    let elements = [];
-    for(let i = boxes.length-1; i >= 0;--i){
+    for(i in boxes){
         if(boxes[i].checked == true){
-            let elem = boxes[i].parentElement.parentElement;
-            elem.parentNode.removeChild(elem);                   
+            table_items.splice(i,1);   
+            boxes[i].checked = false;
+            num_items--;
         }
     }
 }
@@ -56,12 +58,19 @@ function deleteItem(box){
         },
         success:function(data){
             removeItem(box);
-            setUpButtons();
+            refreshTable();
     },
         failure:function(data){
             alert('Theres a problem');
         }
     })
+}
+
+function refreshTable(){
+    updateVue();
+    numerateRows();
+    last_page = Math.floor(num_items / 10);
+    checkPage();
 }
 
 function deleteItems(){
@@ -75,7 +84,7 @@ function deleteItems(){
         },
         success:function(data){
             removeItems();
-            
+            refreshTable();
     },
         failure:function(data){
             alert('Theres a problem');
@@ -89,7 +98,9 @@ function setUpButtons(){
     boxes = document.getElementsByName('checkbox');
 
     for(let i = 0; i < subButtons.length;++i){
-        subButtons[i].onclick = function(){deleteItem(boxes[i]);};
+        subButtons[i].onclick = function(){
+            deleteItem(boxes[i]);
+        };
     }
     groupDeleteButton.onclick = deleteItems;    
 }
