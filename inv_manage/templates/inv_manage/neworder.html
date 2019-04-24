@@ -10,7 +10,7 @@
     {% csrf_token %}
     <div id='orderitem' class="form-left">
         <div class="input-cont">
-            <label for="attname">Item</label>
+            <label class='new-order-labels' for="attname">Item</label>
             <select class="form-input" id="attname" name='attname' required>
                 {% for item in items %}
                 {{item.item_id.name}}
@@ -19,11 +19,11 @@
             </select>    
         </div>
         <div class="input-cont">
-            <label for='quantity'>Quantity</label>
+            <label class='new-order-labels' for='quantity'>Quantity</label>
             <input class="form-input" type='number' name='quantity' id='quantity' min='0' required>   
         </div>
         <div class="input-cont">
-            <label for='cost'>Cost</label>
+            <label class='new-order-labels'for='cost'>Cost</label>
             <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" required>    
         </div>
     </div>

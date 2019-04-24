@@ -12,7 +12,7 @@
             <input class="form-input" type="text" name="name" id="name" required>
         </div>
         <div class="input-cont">
-            <label for="type_id">Type: </label>
+            <label id='form-type' for="type_id">Type: </label>
             <select id="type_id" name="type_id">
                 {% for type in types %}
                 <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
@@ -30,7 +30,7 @@
         </div>
     </div>
     <div class="form-left-controls">
-        <button class="submit-btn" type="submit">Submit</button>
+        <button class="submit-btn" type="submit" id='add-item-submit-btn'>Submit</button>
     </div>
 </form>
 {% endblock %}
