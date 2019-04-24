@@ -1,23 +1,36 @@
 {% extends 'inv_manage/main.html' %}
 
+{% block main_class %}form-main{% endblock %}
+
 {% block main %}
-<form action="{% url 'inv_manage:add_item' %}" method="POST">
+<h1 class="page-header dark-logo">Add Item</h1>
+<form class="grid-form" action="{% url 'inv_manage:add_item' %}" method="POST">
     {% csrf_token %}
-    <label for="name">Name: </label>
-        <input class="form-input" type="text" name="name" id="name" required>
-
-    <label for="type_id">Type: </label>
-    <select id="type_id" name="type_id">
-        {% for type in types %}
-        <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
-        {% endfor %}
-        <option>Add New Type</option>
-    </select>
-
-    <label for="quantity">Quantity: </label>
-        <input class="form-input" type="number" min="0" name="quantity" id="quantity" required>
-    <label for="description">Description: </label>
-        <textarea class="form-input" name="description" id="description"></textarea>
-    <button class="submit-btn" type="submit">Submit</button>
+    <div class="form-left">
+        <div class="input-cont">
+            <label for="name">Name: </label>
+            <input class="form-input" type="text" name="name" id="name" required>
+        </div>
+        <div class="input-cont">
+            <label for="type_id">Type: </label>
+            <select id="type_id" name="type_id">
+                {% for type in types %}
+                <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
+                {% endfor %}
+                <option>Add New Type</option>
+            </select>
+        </div>
+        <div class="input-cont">
+            <label for="quantity">Quantity: </label>
+            <input class="form-input" type="number" min="0" name="quantity" id="quantity" required>
+        </div>
+        <div class="input-cont">
+            <label for="description">Description: </label>
+            <textarea class="form-input" name="description" id="description"></textarea>
+        </div>
+    </div>
+    <div class="form-left-controls">
+        <button class="submit-btn" type="submit">Submit</button>
+    </div>
 </form>
 {% endblock %}

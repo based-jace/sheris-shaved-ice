@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{% block main_class %}table-main{% endblock %}
+
 {% block main %}
 <script>
     let table_items = {{ json_items|safe }};
@@ -32,7 +34,6 @@
             <td><a v-bind:href="item.edit_url">x</a></td>
             <td class="delete-column"></td>
         </tr> 
-        {% endif %}
     </table>
 </div>
 <div class="center-pagination">

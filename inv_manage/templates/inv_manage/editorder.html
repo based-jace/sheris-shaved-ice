@@ -1,5 +1,7 @@
 {% extends 'inv_manage/main.html' %}
 
+{% block main_class %}form-main{% endblock %}
+
 {% block main %}
 <form action="" method="POST">
     {% csrf_token %}
