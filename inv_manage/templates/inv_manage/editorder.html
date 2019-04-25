@@ -1,7 +1,8 @@
-
+{% extends 'inv_manage/main.html' %}
 {% block main_class %}form-main{% endblock %}
-
+{% load static %}
 {% block main %}
+
 
 <form action="" method="POST">
     {% csrf_token %}
@@ -13,9 +14,9 @@
             {% endfor %}
         </select>    
         <label for='quantity'>Quantity</label>
-        <input class="form-input" type='number' name='quantity' id='quantity' min='0' >   
+        <input class="form-input" type='number' name='quantity' id='quantity' min='0' required>   
         <label for='cost'>Cost</label>
-        <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" >    
+        <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" required>    
         <button class="submit-btn" type="button" id="add-btn">Add Item</button>
         <button class="submit-btn" type="button" id='update-btn' >Update Item</button>
         <button class="submit-btn" type="button" id='rmv-btn' >Remove Item</button>

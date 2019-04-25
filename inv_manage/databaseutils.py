@@ -1,6 +1,7 @@
 import datetime
 import json
 from django.urls import reverse
+from decimal import Decimal
 
 from .models import Item, Attributes, Type, Purchase, PurchaseItem
 
@@ -141,11 +142,13 @@ class db_methods:
                     'item_id':item,
                     'purchase_id':purchase,
                     'quantity':int(splitdata[2]),
-                    'total_amount':float(splitdata[3])
+                    'total_amount':Decimal(splitdata[3])
                 }
                 if item.available == True:
                     item.quantity += purchaseItem['quantity']
                     item.save()
+                purchase.total_amount += purchaseItem['total_amount']
+                purchase.save()
                 orderData.append(purchaseItem)
             else:
                 #update an item
@@ -155,12 +158,14 @@ class db_methods:
                     'item_id':item,
                     'purchase_id':purchase,
                     'quantity':int(splitdata[2]),
-                    'total_amount':float(splitdata[3])
+                    'total_amount':Decimal(splitdata[3])
                     }
-                    if item.available == True:
-                        orderItem = PurchaseItem.objects.get(id=purchaseItem['id'])
+                    orderItem = PurchaseItem.objects.get(id=purchaseItem['id'])
+                    if item.available == True:                        
                         item.quantity += (purchaseItem['quantity'] - orderItem.quantity)
                         item.save()
+                    purchase.total_amount += (purchaseItem['total_amount'] - orderItem.total_amount)
+                    purchase.save()
                     orderData.append(purchaseItem)
                 #delete an item
                 elif splitdata[4] == '-1' and splitdata[0] != '-2':
