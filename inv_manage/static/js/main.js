@@ -7,3 +7,10 @@ $('.close-parent').on('click', function(){
 if(make_active){
     $('#' + make_active).addClass('active');
 }
+
+$('.close-modal').on('click', function(){
+        $('.modal-cont').addClass('hide');
+        setTimeout(()=>{
+            $('.modal-cont').addClass('hidden');
+        }, 300);
+})

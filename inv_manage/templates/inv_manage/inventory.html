@@ -18,7 +18,7 @@
             <th class='check-column'><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></th>
             <th class="num-column">#</th>
             <th class="sort-column" sort-name="name">Name</th>
-            <th class="sort-column" sort-name="description">Description</th>
+            <th class="sort-column description-column" sort-name="description">Description</th>
             <th class="sort-column" sort-name="type">Type</th>
             <th class="quantity-column sort-column" sort-name="quantity">Quantity</th>
             <th class='edit-column'>Edit</th>
@@ -28,11 +28,11 @@
             <td class="center"><input type="checkbox" name="checkbox" v-bind:value="item.id"></td>
             <td class="center">[[item.number]]</td>
             <td>[[item.name]]</td>
-            <td>[[item.description]]</td>
+            <td class="description-column">[[item.description]]</td>
             <td>[[item.type]]</td>
             <td class="center">[[item.quantity]]</td>
-            <td><a v-bind:href="item.edit_url">x</a></td>
-            <td class="delete-column"></td>
+            <td class="center"><a v-bind:href="item.edit_url">x</a></td>
+            <td class="delete-column single-delete">X</td>
         </tr> 
     </table>
 </div>
@@ -41,9 +41,9 @@
     <span class='pagination table-page-number'>1</span>
     <button href="#" type="button" class='pagination right-table-page'>&raquo;</button>
 </div>
-<div class="table-controls">    
-    <a href="{% url 'inv_manage:add_item' %}">add an item</a>
-    <button id="delete-selected" type="button" class='submit-btn'>Delete Selected</button>  
+<div class="table-controls">   
+    <a class="btn wide-btn" draggable=false href="{% url 'inv_manage:add_item' %}">Add Item</a>
+    <button id="delete-selected" type="button" class='btn wide-btn'>Delete Selected</button>  
 </div> 
 {% endblock %}
 {% block after_scripts %}

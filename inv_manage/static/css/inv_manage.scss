@@ -15,7 +15,17 @@ $disabled: lightgrey;
     grid-template-columns: 5fr 2fr;
     grid-template-rows: auto auto 1fr;
 }
+.form-main{
+    > .page-header{
+        align-self: center;
+        text-align: center;
+    }
+}
 .table-cont{
+    width: 100%;
+    > *{
+        width: 100%;
+    }
     min-height: 312px;
     grid-column: 1 / 2; 
     grid-row: 2 / 3;
@@ -26,18 +36,28 @@ $disabled: lightgrey;
 .table-controls{
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 7px;
 }
 .grid-form{
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 3fr 3fr;
     grid-template-rows: auto 1fr;
 }
 .form-left{
+    width: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
 .form-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 }
@@ -46,8 +66,52 @@ $disabled: lightgrey;
     grid-row: 2 / 3;
 }
 .form-right-controls{
+    margin: 4px 0;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    > .btn{
+        margin-bottom: 8px;
+    }
+}
+
+.modal-cont{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.3);
+    height: 100%;
+    width: 100%;
+    &.hidden{
+        display: none;
+    }
+    .modal{
+        position: relative;
+        width: 400px;
+        height: 200px;
+        background: white;
+        border: 1px $primary solid;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        h2{
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .close-modal{
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: context-menu;
+        }
+        .input-cont{
+            margin-bottom: 5px;
+        }
+    }
 }
 
 .top-nav{
@@ -106,6 +170,9 @@ $disabled: lightgrey;
             //width: 50%;
         }
     }   
+}
+.main-cont{
+    width: 100%;
 }
 .main-cont > *{
     margin: 0 auto;
@@ -263,7 +330,8 @@ button.pagination{
     cursor: pointer;
     font-size: 1.8em;
     border: 1px solid $yellow;
-    
+    transition: .15s;
+
     &.left-table-page{
         border-radius: 12px 0 0 12px;
         border-right: none;
@@ -296,6 +364,26 @@ form{
 
 #orderlist{
     width: 95%;
+}
+
+
+.new-order-labels {
+    justify-self: center;
+}
+
+.form-input {
+    justify-self: center;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.form-left {
+    text-align: left;  
+}
+
+#form-type {
+    margin-top: 30px; 
+    margin-left: 10px;   
 }
 
 @media only screen and (max-width: 1080px){
@@ -333,6 +421,14 @@ form{
         grid-template-columns: 1fr;
         grid-template-rows: repeat(4, auto);
     }
+    .form-left {
+        margin: auto;    
+    }
+    .form-left-controls {
+        margin-top: 25px; 
+        margin-bottom: 15px;
+
+    }
     .form-right{
         grid-column: 1 / 2;
         grid-row: 3 / 4;
@@ -344,9 +440,9 @@ form{
 
     .page-header{
         align-self: center;
-        margin: 0;
         text-align: center;
-        font-size: 3em;
+        margin: 0;
+        font-size: 2.4em;
     }
 
 }
@@ -372,7 +468,7 @@ form{
         }
     }
     .page-header{
-        font-size: 2.5em;
+        font-size: 1.8em;
     }
     .table-cont{
         min-height: 279px;
@@ -384,10 +480,13 @@ form{
 
     #data-table{
         font-size: .8em;
-        .quantity-column{
+        .quantity-column{ 
             width: 30px;
         }
         .delete-column{
+            display: none;
+        }
+        .description-column{
             display: none;
         }
     }
