@@ -135,48 +135,96 @@ header{
 
 }
 
-form{
-    label{
-        text-align: left;
-        display: inline-block; 
-        width: $label-width;
+label{
+    text-align: left;
+    display: inline-block; 
+    width: $label-width;
+}
+
+.form-input, select{
+    width: $input-width;
+    padding: 1px 3px;
+    border: 1px slategrey solid;
+    
+    transition: .15s;
+
+    &:hover{
+        border-color: black;
+    }
+    &:focus{
+        border-color: lightseagreen;
+    }
+}
+
+
+.btn{
+    font-weight: normal;
+    background-color: #08458c;
+    color: #fafcb5;
+    text-decoration: none;
+    border: #79a0af solid 1px;
+    padding: 2px 0;
+    margin: 6px 0;
+    transition: .1s;
+    cursor: context-menu;
+    display: block;
+
+    &:hover{
+        background: lightskyblue;
+        border-color: #678793;
     }
 
-    .form-input, select{
-        width: $input-width;
-        padding: 1px 3px;
-        border: 1px slategrey solid;
-        
-        transition: .15s;
+    &:active{
+        background: cadetblue;
+        border-color: #3e5963;
+        color: white;
+    }
+}
+.red-btn{
+    font-weight: normal;
+    background-color: darkred;
+    color: #fafcb5;
+    text-decoration: none;
+    border: red solid 1px;
+    padding: 2px 0;
+    margin: 6px 0;
+    transition: .1s;
+    cursor: context-menu;
+    display: block;
 
-        &:hover{
-            border-color: black;
-        }
-        &:focus{
-            border-color: lightseagreen;
-        }
+    &:hover{
+        background: red;
+        border-color: #678793;
     }
 
-    .submit-btn{
-        background: white;
-        width: calc(#{$input-width} + #{$label-width} + 14px);
-        border: #79a0af solid 1px;
+    &:active{
+        background: black;
+        border-color: #3e5963;
+        color: white;
+    }
+}
+
+button.btn{
+    padding: 7px 0;
+}
+
+a.btn{
+    font-size: 17px;
+}
+
+.wide-btn{
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    > span{
         padding: 2px 0;
-        margin: 6px 0;
-
-        transition: .1s;
-
-        &:hover{
-            background: lightskyblue;
-            border-color: #678793;
-        }
-
-        &:active{
-            background: cadetblue;
-            border-color: #3e5963;
-            color: white;
-        }
+        display: block;
     }
+}
+
+.submit-btn{
+    width: calc(#{$input-width} + #{$label-width} + 14px);
+    margin: 5px auto 0;
 }
 
 footer{

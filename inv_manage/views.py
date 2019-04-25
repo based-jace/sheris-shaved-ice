@@ -46,7 +46,8 @@ def logout_user(request):
 @never_cache
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'inv_manage/home.html', context={"active":"home"})
+        context = {"active":"home", "json_items":db_methods.jsonify_items(Item.objects.all())}
+        return render(request, 'inv_manage/home.html', context=context)
     else:
         return login_user(request)
 
@@ -60,15 +61,6 @@ def neworder(request):
         db_methods.neworder(atts)
 
     return check_auth(request, 'inv_manage/neworder.html',context={'items':items,'orders':orders})
-
-# @never_cache
-# def inv_manage(request):
-#     items = Item.objects.filter(available=True)
-
-#     if request.method == "POST":
-#         db_methods.delete_selected(request.POST)
-
-#     return check_auth(request, 'inv_manage/inventory.html',context={'items':items, 'active':'inventory'})
 
 @never_cache
 def inv_manage(request):
@@ -85,7 +77,8 @@ def inv_manage(request):
 @never_cache
 def previous_orders(request):
     purchases = Purchase.objects.all()
-    return check_auth(request, 'inv_manage/orders.html', context={'purchases':purchases, 'active':'orders'})
+    context = {'purchases':purchases, 'active':'orders', 'json_items':db_methods.jsonify_orders(purchases)}
+    return check_auth(request, 'inv_manage/orders.html', context=context)
         
 #Adding an attribute       
 # attribute = Attributes.objects.create(type_id=types[int(request.POST.get('typename'))])

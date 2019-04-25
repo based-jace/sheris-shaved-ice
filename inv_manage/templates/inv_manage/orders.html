@@ -2,27 +2,38 @@
 
 {% load static %}
 
+{% block main_class %}table-main{% endblock %}
+
 {% block main %}
+<script>
+    let table_items = {{ json_items|safe }};
+</script>
+
 <h1 class="page-header dark-logo">Previous Orders</h1>
-<div id='neworder'>
-    <a href="{% url 'inv_manage:neworder' %}"><span>New Order</span></a>
+<div class="table-cont">
+    <table id="data-table">
+        <tr>
+            <th class="num-column">#</th>
+            <th class="sort-column" sort-name="date">Purchase Date</th>
+            <th class="sort-column" sort-name="total">Price of Purchase</th>
+            <th class="edit-column">View/Edit</th>
+        </tr>
+        <tr v-for="item in items">
+            <td class="center">[[ item.number ]]</td>
+            <td class="center">[[ item.date ]]</td>
+            <td class="center">[[ item.total ]]</td>
+            <td class="center"><a v-bind:href="item.edit_url">X</a></td>
+        </tr>
+    </table>
 </div>
-<table id="data-table">
-    <tr>
-        <th>Purchase Id</th>
-        <th>Purchase Date</th>
-        <th>Price of Purchase</th>
-        <th>View/Edit</th>
-    </tr>
-{% for purchase in purchases %}
-    <tr>
-        <td>{{ purchase.id }}</td>
-        <td>{{ purchase.purchase_date }}</td>
-        <td>{{ purchase.total_amount }}</td>
-        <td><a href="{% url 'inv_manage:editorder' purchase.id  %}">{{purchase.id}}</a></td>
-    </tr>
-{% endfor %}
-</table>
+<div class="center-pagination">
+    <button href="#" type="button" class='pagination left-table-page'>&laquo;</button>
+    <span class='pagination table-page-number'>1</span>
+    <button href="#" type="button" class='pagination right-table-page'>&raquo;</button>
+</div>
+<div id='neworder' class="table-controls">
+    <a class="btn wide-btn" href="{% url 'inv_manage:neworder' %}">New Order</a>
+</div>
 {% endblock %}
 
 {% block after_scripts %}

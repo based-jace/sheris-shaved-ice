@@ -30,5 +30,13 @@ function removeItem(){
     }
 }
 
-document.getElementById("add-btn").onclick = additem;
+//document.getElementById("add-btn").onclick = additem; <- removed for form validation
 document.getElementById("rmv-btn").onclick = removeItem;
+
+// form validation
+function checkForBlank() {
+    if (document.getElementById('quantity').value == 0 || document.getElementById('cost').value == 0) {
+        alert('Please enter an amount.');
+    }
+    else additem();
+}
