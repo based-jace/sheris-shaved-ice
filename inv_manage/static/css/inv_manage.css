@@ -85,6 +85,10 @@
   grid-row: 1 / 2;
 }
 
+.form-left .form-input, .form-left #type_id {
+  margin-bottom: 10px;
+}
+
 .form-right {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -291,7 +295,7 @@
   min-height: calc(100vh - (40px + 60px));
 }
 
-#data-table {
+#data-table, #data-table2 {
   table-layout: fixed;
   border: 1px solid black;
   font-size: .9em;
@@ -301,58 +305,58 @@
   width: 100%;
 }
 
-#data-table .sort-column:hover {
+#data-table .sort-column:hover, #data-table2 .sort-column:hover {
   background-color: #0c61c2;
   color: #fbff00;
 }
 
-#data-table tr {
+#data-table tr, #data-table2 tr {
   max-height: 29px;
   overflow: hidden;
 }
 
-#data-table td, #data-table th {
+#data-table td, #data-table th, #data-table2 td, #data-table2 th {
   overflow: hidden;
   max-height: 29px;
   white-space: nowrap;
 }
 
-#data-table td {
+#data-table td, #data-table2 td {
   text-indent: 5px;
   border-right: 1px solid #dddddd;
   text-align: left;
 }
 
-#data-table th {
+#data-table th, #data-table2 th {
   background-color: #08458c;
   color: #f5f89f;
   border-right: 1px black solid;
 }
 
-#data-table tr:nth-child(even) {
+#data-table tr:nth-child(even), #data-table2 tr:nth-child(even) {
   background-color: #7ec7f1;
   color: #2b2b29;
 }
 
-#data-table tr:nth-child(odd) {
+#data-table tr:nth-child(odd), #data-table2 tr:nth-child(odd) {
   color: #2b2b29;
 }
 
-#data-table tr > td:last-child, #data-table tr > th:last-child {
+#data-table tr > td:last-child, #data-table tr > th:last-child, #data-table2 tr > td:last-child, #data-table2 tr > th:last-child {
   border-right: none;
 }
 
-#data-table .center, #data-table th {
+#data-table .center, #data-table th, #data-table2 .center, #data-table2 th {
   text-indent: 0;
   text-align: center;
 }
 
-#data-table .delete-column, #data-table .edit-column, #data-table .add-column, #data-table .check-column, #data-table .num-column {
+#data-table .delete-column, #data-table .edit-column, #data-table .add-column, #data-table .check-column, #data-table .num-column, #data-table2 .delete-column, #data-table2 .edit-column, #data-table2 .add-column, #data-table2 .check-column, #data-table2 .num-column {
   width: 30px;
   min-width: 30px;
 }
 
-#data-table .quantity-column {
+#data-table .quantity-column, #data-table2 .quantity-column {
   width: 80px;
 }
 
@@ -483,17 +487,24 @@ form * .center-label {
 .form-input {
   -ms-grid-column-align: center;
       justify-self: center;
-  margin-top: 30px;
   margin-left: 10px;
 }
 
 .form-left {
+  margin-top: 30px;
   text-align: left;
 }
 
-#form-type {
-  margin-top: 30px;
+#type_id {
   margin-left: 10px;
+}
+
+#type-input-cont {
+  margin-right: -16px;
+}
+
+#add-item-submit-btn {
+  margin-top: 30px;
 }
 
 @media only screen and (max-width: 1080px) {

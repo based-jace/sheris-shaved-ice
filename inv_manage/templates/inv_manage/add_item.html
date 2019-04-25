@@ -3,12 +3,12 @@
 {% block main_class %}form-main{% endblock %}
 
 {% block main %}
-<div class="modal-cont">
-    <div class="modal">
+<div class="modal-cont hide hidden">
+    <div id="new-type-modal" class="modal hide">
         <h2 class="dark-logo">Add a Type</h2>
         <div class="input-cont">
-            <label for="new_type">Name:</label>
-            <input type="text" class="form-input" name="new_type" id="new_type" required>
+            <label for="new-type-input">Name:</label>
+            <input type="text" class="form-input" name="new-type-input" id="new-type-input" required>
         </div>
         <button class="submit-btn btn" id="#submit-type">Add</button>
         <button class="close-parent close-modal">X</button>
@@ -22,14 +22,14 @@
             <label for="name">Name: </label>
             <input class="form-input" type="text" name="name" id="name" required>
         </div>
-        <div class="input-cont">
+        <div class="input-cont" id="type-input-cont">
             <label id='form-type' for="type_id">Type: </label>
             <select id="type_id" name="type_id">
                 {% for type in types %}
                 <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
                 {% endfor %}
-                <option>Add New Type</option>
             </select>
+            <button id="add-type" type="button">+</button>
         </div>
         <div class="input-cont">
             <label for="quantity">Quantity: </label>

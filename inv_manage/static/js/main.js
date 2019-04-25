@@ -1,7 +1,6 @@
 // Hide parent of clicked item
 $('.close-parent').on('click', function(){
     $(this).parent().addClass('hide');
-    $(this).addClass('hide');
 }) 
 
 if(make_active){
@@ -13,4 +12,10 @@ $('.close-modal').on('click', function(){
         setTimeout(()=>{
             $('.modal-cont').addClass('hidden');
         }, 300);
+})
+
+$("#add-type").on('click', ()=>{
+    let type_modal = $("#new-type-modal");
+    $(type_modal).removeClass("hide");
+    $(type_modal).parent().removeClass('hide hidden')
 })

@@ -46,7 +46,8 @@ def logout_user(request):
 @never_cache
 def home(request):
     if request.user.is_authenticated:
-        return render(request, 'inv_manage/home.html', context={"active":"home"})
+        context = {"active":"home", "json_items":db_methods.jsonify_items(Item.objects.all())}
+        return render(request, 'inv_manage/home.html', context=context)
     else:
         return login_user(request)
 
