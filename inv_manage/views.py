@@ -146,7 +146,7 @@ def add_type(request):
 
 @never_cache
 def edit_order(request,order_id):
-    items = Item.objects.filter(available=True)
+    items = Item.objects.all()
     purchase = Purchase.objects.get(id=order_id)
     try:
         orders = PurchaseItem.objects.filter(purchase_id=purchase)
@@ -154,7 +154,7 @@ def edit_order(request,order_id):
         raise Http404("Order does not exist.")
     
     if request.method == "POST":
-        db_methods.editorder(atts=request.POST,orders=orders,purchase=purchase)
+        db_methods.editorder(atts=request.POST,purchase=purchase)
         messages.success(request, 'Order has successfully been updated.')
         return redirect('inv_manage:orders')
 

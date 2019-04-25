@@ -1,27 +1,38 @@
-{% extends 'inv_manage/main.html' %}
 
+
+{% extends 'inv_manage/main.html' %}
+{% load staticfiles%}
 {% block main %}
+
 <form action="" method="POST">
     {% csrf_token %}
-    {% for order in orders %}
     <div id='orderitem'>
-        <select class="form-input" name='attname{{ forloop.counter0 }}' required>
+        <select class="form-input" id="attname" name='attname' required>
             {% for item in items %}
             {{item.item_id.name}}
-            {% if order.item_id.id == item.id %}
-            <option value='{{ item.id }}' selected>{{item.item_id.name}}</option>
-            {% else %}
-            <option value='{{ item.id }}' >{{item.item_id.name}}</option>
-            {% endif %}
+            <option class="itemNames" value='{{ item.id }}'>{{item.item_id.name}}</option>
             {% endfor %}
         </select>    
- 
         <label for='quantity'>Quantity</label>
-        <input class="form-input" type='number' name='quantity{{ forloop.counter0 }}' id='quantity' min='0' value='{{ order.quantity }}' required>   
+        <input class="form-input" type='number' name='quantity' id='quantity' min='0' >   
         <label for='cost'>Cost</label>
-        <input class="form-input" type='number' name='cost{{ forloop.counter0 }}' id='cost' min='0' step=".01" value='{{ order.total_amount }}'required> 
+        <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" >    
+        <button class="submit-btn" type="button" id="add-btn">Add Item</button>
+        <button class="submit-btn" type="button" id='update-btn' >Update Item</button>
+        <button class="submit-btn" type="button" id='rmv-btn' >Remove Item</button>
+        
     </div>
-    {% endfor %}
-    <button class="submit-btn" type="submit" id='submit-btn'>Submit</button>
+    
+    <select id='orderlist' name='orderlist' multiple required>
+        {% for order in orders%}
+        <option value="{{order.id}},{{order.item_id.id}},{{order.quantity}},{{order.total_amount}},0">{{order.item_id.item_id.name}}</option>
+        {% endfor %}
+    </select>
+    
+    <button class="submit-btn" type="submit" onclick="return selectItems()" id='submit-btn'>Submit</button>
 </form>
+
+{% endblock %}
+{% block after_scripts %}
+    <script src="{% static 'js/editItems.js' %}"></script>
 {% endblock %}

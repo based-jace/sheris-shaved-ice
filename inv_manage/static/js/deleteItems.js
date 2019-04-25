@@ -2,6 +2,7 @@ let subButtons = document.getElementsByClassName('single-delete');
 let groupDeleteButton = document.getElementById('delete-selected');
 let boxes = document.getElementsByName('checkbox');
 
+//Gets a cookie based on the cookies name
 function getCookie(name) {
     var cookieValue = null;
     if (document.cookie && document.cookie != '') {
@@ -18,6 +19,7 @@ function getCookie(name) {
     return cookieValue;
 }
 
+//gets all the selected checkboxes and returns them
 function getSelectedCheckboxes(){
     let checkboxes = [];
     for(let i = 0; i < boxes.length;++i){
@@ -34,8 +36,6 @@ function removeItem(box){
     elem.parentNode.removeChild(elem);
 }
 
-
-
 function removeItems(){
     let elements = [];
     for(let i = boxes.length-1; i >= 0;--i){
@@ -46,6 +46,7 @@ function removeItems(){
     }
 }
 
+//uses ajax to delete an item out of the database
 function deleteItem(box){
     $.ajax({
         type:"POST",
@@ -64,6 +65,7 @@ function deleteItem(box){
     })
 }
 
+//uses ajax to delete multiple items out of the database
 function deleteItems(){
     checkboxes = getSelectedCheckboxes()
     $.ajax({
@@ -83,6 +85,7 @@ function deleteItems(){
     })
 }
 
+//sets up all the buttons with there click events
 function setUpButtons(){
     subButtons = document.getElementsByClassName('single-delete');
     groupDeleteButton = document.getElementById('delete-selected');
