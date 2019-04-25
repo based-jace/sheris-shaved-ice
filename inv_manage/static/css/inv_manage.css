@@ -10,6 +10,13 @@
       grid-template-rows: auto auto 1fr;
 }
 
+.form-main > .page-header {
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  text-align: center;
+}
+
 .table-cont {
   width: 100%;
   min-height: 312px;
@@ -52,16 +59,20 @@
 }
 
 .grid-form {
-  -ms-grid-columns: 3fr 2fr;
-      grid-template-columns: 3fr 2fr;
+  -ms-grid-columns: 3fr 3fr;
+      grid-template-columns: 3fr 3fr;
   -ms-grid-rows: auto 1fr;
       grid-template-rows: auto 1fr;
 }
 
 .form-left {
+  width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -75,6 +86,19 @@
 }
 
 .form-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2 / 3;
@@ -93,12 +117,17 @@
 }
 
 .form-right-controls {
+  margin: 4px 0;
   -ms-grid-column: 2;
   -ms-grid-column-span: 1;
   grid-column: 2 / 3;
   -ms-grid-row: 2;
   -ms-grid-row-span: 1;
   grid-row: 2 / 3;
+}
+
+.form-right-controls > .btn {
+  margin-bottom: 8px;
 }
 
 .modal-cont {
@@ -446,66 +475,6 @@ form * .center-label {
   width: 95%;
 }
 
-#add-btn {
-  background-color: #08458c;
-  color: #f5f89f;
-  border: 1px solid #08458c;
-  width: 100px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
-#add-btn:hover {
-  background-color: #0c61c2;
-  color: #fbff00;
-}
-
-#rmv-btn {
-  background-color: #08458c;
-  color: #f5f89f;
-  border: 1px solid #08458c;
-  width: 135px;
-  margin-left: 15px;
-  padding: 1px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
-#rmv-btn:hover {
-  background-color: #0c61c2;
-  color: #fbff00;
-}
-
-.form-left-controls {
-  margin-left: 30px;
-}
-
-.form-right-controls {
-  margin-left: 20px;
-}
-
-#submit-btn {
-  background-color: #08458c;
-  color: #f5f89f;
-  border: 1px solid #08458c;
-  width: 100px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-}
-
-#add-item-submit-btn {
-  background-color: #08458c;
-  color: #f5f89f;
-  margin-top: 30px;
-  margin-left: 75px;
-  width: 100px;
-}
-
-#submit-btn:hover {
-  background-color: #0c61c2;
-  color: #fbff00;
-}
-
 .new-order-labels {
   -ms-grid-column-align: center;
       justify-self: center;
@@ -580,7 +549,6 @@ form * .center-label {
     margin: auto;
   }
   .form-left-controls {
-    margin: auto;
     margin-top: 25px;
     margin-bottom: 15px;
   }
@@ -604,8 +572,8 @@ form * .center-label {
     -ms-flex-item-align: center;
         -ms-grid-row-align: center;
         align-self: center;
-    margin: 0;
     text-align: center;
+    margin: 0;
     font-size: 2.4em;
   }
 }

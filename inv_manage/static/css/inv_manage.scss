@@ -15,6 +15,12 @@ $disabled: lightgrey;
     grid-template-columns: 5fr 2fr;
     grid-template-rows: auto auto 1fr;
 }
+.form-main{
+    > .page-header{
+        align-self: center;
+        text-align: center;
+    }
+}
 .table-cont{
     width: 100%;
     > *{
@@ -36,16 +42,22 @@ $disabled: lightgrey;
     margin-bottom: 7px;
 }
 .grid-form{
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 3fr 3fr;
     grid-template-rows: auto 1fr;
 }
 .form-left{
+    width: 100%;
     display: flex;
+    align-items: center;
     flex-direction: column;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
 }
 .form-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
 }
@@ -54,8 +66,12 @@ $disabled: lightgrey;
     grid-row: 2 / 3;
 }
 .form-right-controls{
+    margin: 4px 0;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
+    > .btn{
+        margin-bottom: 8px;
+    }
 }
 
 .modal-cont{
@@ -350,65 +366,6 @@ form{
     width: 95%;
 }
 
-#add-btn {
-    background-color: #08458c;
-    color: #f5f89f;
-    border: 1px solid $light-blue;
-    width: 100px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-
-#add-btn:hover {
-    background-color: #0c61c2;
-    color: #fbff00;
-}
-
-#rmv-btn {
-    background-color: #08458c;
-    color: #f5f89f;
-    border: 1px solid $light-blue;
-    width: 135px;
-    margin-left: 15px;
-    padding: 1px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-
-#rmv-btn:hover {
-    background-color: #0c61c2;
-    color: #fbff00;
-}
-
-.form-left-controls {
-    margin-left: 30px;  
-}
-
-.form-right-controls {
-    margin-left: 20px;  
-}
-
-#submit-btn {
-    background-color: #08458c;
-    color: #f5f89f;  
-    border: 1px solid $light-blue;
-    width: 100px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-}
-
-#add-item-submit-btn {
-    background-color: #08458c;
-    color: #f5f89f;  
-    margin-top: 30px;
-    margin-left: 75px;
-    width: 100px;
-}
-
-#submit-btn:hover {
-    background-color: #0c61c2;
-    color: #fbff00;
-}
 
 .new-order-labels {
     justify-self: center;
@@ -468,7 +425,6 @@ form{
         margin: auto;    
     }
     .form-left-controls {
-        margin: auto;
         margin-top: 25px; 
         margin-bottom: 15px;
     }
@@ -483,8 +439,8 @@ form{
 
     .page-header{
         align-self: center;
-        margin: 0;
         text-align: center;
+        margin: 0;
         font-size: 2.4em;
     }
 
