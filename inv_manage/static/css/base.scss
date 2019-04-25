@@ -179,8 +179,31 @@ label{
         border-color: #3e5963;
         color: white;
     }
-    
 }
+.red-btn{
+    font-weight: normal;
+    background-color: darkred;
+    color: #fafcb5;
+    text-decoration: none;
+    border: red solid 1px;
+    padding: 2px 0;
+    margin: 6px 0;
+    transition: .1s;
+    cursor: context-menu;
+    display: block;
+
+    &:hover{
+        background: red;
+        border-color: #678793;
+    }
+
+    &:active{
+        background: black;
+        border-color: #3e5963;
+        color: white;
+    }
+}
+
 button.btn{
     padding: 7px 0;
 }
@@ -201,8 +224,7 @@ a.btn{
 
 .submit-btn{
     width: calc(#{$input-width} + #{$label-width} + 14px);
-    margin: auto;
-    margin-top: 20px;
+    margin: 5px auto 0;
 }
 
 footer{

@@ -180,6 +180,31 @@ label {
   color: white;
 }
 
+.red-btn {
+  font-weight: normal;
+  background-color: darkred;
+  color: #fafcb5;
+  text-decoration: none;
+  border: red solid 1px;
+  padding: 2px 0;
+  margin: 6px 0;
+  -webkit-transition: .1s;
+  transition: .1s;
+  cursor: context-menu;
+  display: block;
+}
+
+.red-btn:hover {
+  background: red;
+  border-color: #678793;
+}
+
+.red-btn:active {
+  background: black;
+  border-color: #3e5963;
+  color: white;
+}
+
 button.btn {
   padding: 7px 0;
 }
@@ -201,8 +226,7 @@ a.btn {
 
 .submit-btn {
   width: calc(150px + 80px + 14px);
-  margin: auto;
-  margin-top: 20px;
+  margin: 5px auto 0;
 }
 
 footer {
