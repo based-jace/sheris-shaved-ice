@@ -181,3 +181,15 @@ class db_methods:
                 } for item in items
             ]
             return json.dumps(json_items)
+
+    @staticmethod
+    def jsonify_orders(orders):
+        if len(orders) > 0:
+            json_items = [{
+                'id': order.id,
+                'date': str(order.purchase_date),
+                'total': "$" + str(order.total_amount),
+                'edit_url': reverse('inv_manage:editorder', args=[order.id])
+            } for order in orders
+        ]
+        return json.dumps(json_items)

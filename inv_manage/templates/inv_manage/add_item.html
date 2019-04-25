@@ -3,6 +3,17 @@
 {% block main_class %}form-main{% endblock %}
 
 {% block main %}
+<div class="modal-cont">
+    <div class="modal">
+        <h2 class="dark-logo">Add a Type</h2>
+        <div class="input-cont">
+            <label for="new_type">Name:</label>
+            <input type="text" class="form-input" name="new_type" id="new_type" required>
+        </div>
+        <button class="submit-btn btn" id="#submit-type">Add</button>
+        <button class="close-parent close-modal">X</button>
+    </div>
+</div>
 <h1 class="page-header dark-logo">Add Item</h1>
 <form class="grid-form" action="{% url 'inv_manage:add_item' %}" method="POST">
     {% csrf_token %}
@@ -30,7 +41,7 @@
         </div>
     </div>
     <div class="form-left-controls">
-        <button class="submit-btn" type="submit" id='add-item-submit-btn'>Submit</button>
+        <button id='add-item-submit-btn' class="submit-btn btn" type="submit">Submit</button>
     </div>
 </form>
 {% endblock %}
