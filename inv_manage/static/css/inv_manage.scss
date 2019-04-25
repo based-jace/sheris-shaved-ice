@@ -52,6 +52,9 @@ $disabled: lightgrey;
     flex-direction: column;
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+    .form-input, #type_id{
+        margin-bottom: 10px;
+    }
 }
 .form-right{
     display: flex;
@@ -201,7 +204,7 @@ $disabled: lightgrey;
     min-height: calc(100vh - (#{$footer-height} + #{$navbar-height}));
 }
 
-#data-table {
+#data-table, #data-table2 {
     table-layout: fixed;
     border: 1px solid black;
     font-size: .9em;
@@ -373,17 +376,24 @@ form{
 
 .form-input {
     justify-self: center;
-    margin-top: 30px;
     margin-left: 10px;
 }
 
 .form-left {
+    margin-top: 30px; 
     text-align: left;  
 }
 
-#form-type {
-    margin-top: 30px; 
-    margin-left: 10px;   
+#type_id{
+    margin-left: 10px;
+}
+
+#type-input-cont{
+    margin-right: -16px;
+}
+
+#add-item-submit-btn{
+    margin-top: 30px;
 }
 
 @media only screen and (max-width: 1080px){
