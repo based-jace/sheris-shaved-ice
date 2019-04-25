@@ -159,8 +159,8 @@ label{
 
 .btn{
     font-weight: normal;
-    background: white;
-    color: black;
+    background-color: #08458c;
+    color: #fafcb5;
     text-decoration: none;
     border: #79a0af solid 1px;
     padding: 2px 0;
@@ -201,6 +201,8 @@ a.btn{
 
 .submit-btn{
     width: calc(#{$input-width} + #{$label-width} + 14px);
+    margin: auto;
+    margin-top: 20px;
 }
 
 footer{
