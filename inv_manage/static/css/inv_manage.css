@@ -446,6 +446,87 @@ form * .center-label {
   width: 95%;
 }
 
+#add-btn {
+  background-color: #08458c;
+  color: #f5f89f;
+  border: 1px solid #08458c;
+  width: 100px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+#add-btn:hover {
+  background-color: #0c61c2;
+  color: #fbff00;
+}
+
+#rmv-btn {
+  background-color: #08458c;
+  color: #f5f89f;
+  border: 1px solid #08458c;
+  width: 135px;
+  margin-left: 15px;
+  padding: 1px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+#rmv-btn:hover {
+  background-color: #0c61c2;
+  color: #fbff00;
+}
+
+.form-left-controls {
+  margin-left: 30px;
+}
+
+.form-right-controls {
+  margin-left: 20px;
+}
+
+#submit-btn {
+  background-color: #08458c;
+  color: #f5f89f;
+  border: 1px solid #08458c;
+  width: 100px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+#add-item-submit-btn {
+  background-color: #08458c;
+  color: #f5f89f;
+  margin-top: 30px;
+  margin-left: 75px;
+  width: 100px;
+}
+
+#submit-btn:hover {
+  background-color: #0c61c2;
+  color: #fbff00;
+}
+
+.new-order-labels {
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.form-input {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
+.form-left {
+  text-align: left;
+}
+
+#form-type {
+  margin-top: 30px;
+  margin-left: 10px;
+}
+
 @media only screen and (max-width: 1080px) {
   .main-cont > * {
     width: 960px;
@@ -494,6 +575,14 @@ form * .center-label {
         grid-template-columns: 1fr;
     -ms-grid-rows: (auto)[4];
         grid-template-rows: repeat(4, auto);
+  }
+  .form-left {
+    margin: auto;
+  }
+  .form-left-controls {
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 15px;
   }
   .form-right {
     -ms-grid-column: 1;
