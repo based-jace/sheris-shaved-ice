@@ -11,6 +11,10 @@ class Attributes(models.Model):
     type_id = models.ForeignKey(Type,on_delete=models.CASCADE)
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=256,blank=True,null=True)
+
+    class Meta:
+        order_with_respect_to = 'name'
+
     def __str__(self):
         return self.name + " - " + self.type_id.name
 

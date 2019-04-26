@@ -19,16 +19,23 @@
             {% endblock %}
             {% if messages %}
                 {% for message in messages %}
-                    <div class="message-cont">
-                        <div class="message message-{{ message.tags }}">
-                            {{ message }}
-                        </div>
-                        <button class="close-parent">
-                            X
-                        </button>
+                <div class="message-cont">
+                    <div class="message message-{{ message.tags }}">
+                        {{ message }}
                     </div>
+                    <button class="close-parent">
+                        X
+                    </button>
+                </div>
                 {% endfor %}
             {% endif %}
+            <div class="message-cont hide hidden">
+                <div id="ajax-message" class="message">
+                </div>
+                <button class="close-parent">
+                    X
+                </button>
+            </div>
         </header>
         <div class="main-cont">
             <main class="{% block main_class %}{% endblock %}">

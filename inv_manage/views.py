@@ -4,10 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
 from django.http import Http404
-#from django.shortcuts import get_object_or_404
-#from decimal import Decimal
-#import datetime
 import json
+from django.db.models.functions import Lower
 
 from .databaseutils import db_methods
 
@@ -46,7 +44,12 @@ def logout_user(request):
 @never_cache
 def home(request):
     if request.user.is_authenticated:
-        context = {"active":"home", "json_items":db_methods.jsonify_items(Item.objects.all())}
+        context = {
+            "active":"home", 
+            "json_items":db_methods.jsonify_items(Item.objects.all()),
+            "recent_purchases": Purchase.objects.all().order_by('-id')[:5],
+            "low_inventory":{}
+        }
         return render(request, 'inv_manage/home.html', context=context)
     else:
         return login_user(request)
@@ -66,7 +69,7 @@ def neworder(request):
 def inv_manage(request):
     items = {}
     if Item.objects.all():
-        items = Item.objects.filter(available=True)
+        items = Item.objects.filter(available=True).order_by(Lower('item_id'))
     if request.method == "POST":
         print(request.POST)
         db_methods.delete_selected(request.POST)
@@ -137,7 +140,12 @@ def add_type(request):
     types = Type.objects.all()
     if request.method == "POST":
         db_methods.create_type(request.POST)
-        return JsonResponse({'name':types[len(types)-1].name,'id':types[len(types)-1].id})
+        name = types[len(types)-1].name
+        return JsonResponse({
+            'name':name,
+            'id':types[len(types)-1].id,
+            'message': 'New type, ' + name + ', has been successfully added'
+        })
 
 @never_cache
 def edit_order(request,order_id):

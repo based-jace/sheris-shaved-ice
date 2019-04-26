@@ -5,10 +5,11 @@
 {% block main_class %}table-main{% endblock %}
 
 {% block main %}
+<h1 class="page-header dark-logo">Welcome Back!</h1>
+{% if low_inventory %}
 <script>
     let table_items = {{ json_items|safe }};
 </script>
-<h1 class="page-header dark-logo">Welcome Back!</h1>
 <div class="table-cont">
     <caption class='caption'>You are currently low on the following items.</caption>
     <table id="data-table">
@@ -28,25 +29,24 @@
         {% endfor %}
     </table>
 </div>
-<div class="table-controls">
+{% endif %}
+{% if recent_purchases %}
+<div class="recent-purchases">
     <caption class='caption'>Recent Purchases</caption>
     <table  id="data-table2">
         <tr>
             <th>Date</th>
             <th>Cost</th>
         </tr>
-        {% for item in items %}
+        {% for purchase in recent_purchases %}
         <tr>
-            <td>{{item.item_id.name}}</td>
-            <td>{{item.item_id.price}}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{purchase.purchase_date}}</td>
+            <td>{{purchase.total_amount}}</td>
         </tr>
         {% endfor %}
     </table>
 </div>
+{% endif %}
 {% endblock %}
 {% block after_scripts %}
     <script src="{% static 'js/colResizable.min.js' %}"></script>

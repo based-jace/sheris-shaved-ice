@@ -109,4 +109,8 @@ function setUpButtons(){
     groupDeleteButton.onclick = deleteItems;    
 }
 
+$('button.pagination').on('click', ()=>{
+    setUpButtons();
+});
+
 setUpButtons();

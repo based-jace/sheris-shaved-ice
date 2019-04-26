@@ -32,7 +32,9 @@
     <button href="#" type="button" class='pagination right-table-page'>&raquo;</button>
 </div>
 <div id='neworder' class="table-controls">
-    <a class="btn wide-btn" href="{% url 'inv_manage:neworder' %}">New Order</a>
+    <div class="table-buttons">
+        <a class="btn wide-btn" draggable='false' href="{% url 'inv_manage:neworder' %}">New Order</a>
+    </div>
 </div>
 {% endblock %}
 

@@ -34,13 +34,13 @@ function addType(){
         },
         success:function(data){
             addOption(data);
+            hideNewTypeModal();
+            showMessage('success', data.message)
     },
         failure:function(data){
-            alert('Theres a problem');
+            alert('Unable to add type');
         }
     })
 }
-
-
 
 document.getElementById("#submit-type").onclick = function(){addType();}
