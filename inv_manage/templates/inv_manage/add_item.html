@@ -1,5 +1,5 @@
 {% extends 'inv_manage/main.html' %}
-
+{% load static %}
 {% block main_class %}form-main{% endblock %}
 
 {% block main %}
@@ -26,7 +26,7 @@
             <label id='form-type' for="type_id">Type: </label>
             <select id="type_id" name="type_id">
                 {% for type in types %}
-                <option value='{{ forloop.counter0 }}'>{{type.name}}</option>
+                <option value='{{ type.id }}'>{{type.name}}</option>
                 {% endfor %}
             </select>
             <button id="add-type" type="button">+</button>
@@ -44,4 +44,7 @@
         <button id='add-item-submit-btn' class="submit-btn btn" type="submit">Submit</button>
     </div>
 </form>
+{% endblock %}
+{% block after_scripts %}
+    <script src="{% static 'js/addType.js' %}"></script>
 {% endblock %}

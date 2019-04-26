@@ -6,6 +6,12 @@ from decimal import Decimal
 from .models import Item, Attributes, Type, Purchase, PurchaseItem
 
 class db_methods:
+
+    @staticmethod
+    def create_type(atts):
+        newType = Type(name=atts.get("name"))
+        newType.save()
+
     @staticmethod
     def item_creation(count,purchaseItem):
         if count == 0: 

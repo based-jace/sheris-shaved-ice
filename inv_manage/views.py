@@ -134,8 +134,10 @@ def edit_item(request, item_id):
 
 @never_cache
 def add_type(request):
+    types = Type.objects.all()
     if request.method == "POST":
-        return JsonResponse({'message':'Thank You'})
+        db_methods.create_type(request.POST)
+        return JsonResponse({'name':types[len(types)-1].name,'id':types[len(types)-1].id})
 
 @never_cache
 def edit_order(request,order_id):
