@@ -13,7 +13,7 @@
     {% csrf_token %}
     <table id="data-table">
         <tr>
-            <th class='check-column'><input type="checkbox" name="{{item.id}}" value="{{item.id}}"></th>
+            <th class='check-column'><input id="check-all" type="checkbox"></th>
             <th class="num-column">#</th>
             <th class="sort-column" sort-name="name">Name</th>
             <th class="sort-column" sort-name="type">Type</th>
@@ -42,7 +42,7 @@
 <div class="table-controls">
     <div class="items-selected-cont">
         <div class="message">
-            You currently have 0 items selected
+            You currently have <span id="num-selected-items">0</span> items selected
         </div>
     </div>
     <div class="table-buttons">

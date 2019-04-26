@@ -1,3 +1,5 @@
+let boxes = document.getElementsByName('checkbox');
+
 let num_items = table_items.length; // Total number of items
 let current_items = table_items.slice(0,10); // Items shown in table
 
@@ -160,6 +162,7 @@ function changePage(norp){
     }
     checkPage();
     numerateRows();
+    document.getElementsByName('checkbox');
 }
 
 // Numerates Rows (C'mon, man)
