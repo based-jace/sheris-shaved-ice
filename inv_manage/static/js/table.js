@@ -132,7 +132,7 @@ function checkPage(){
             enablePagination(btn);
         }
     }
-    if(curr_page == last_page){
+    if(curr_page == last_page || num_items == current_items[9].number){
         for(btn of right_pag_buttons){
             disablePagination(btn);
         }
@@ -210,5 +210,5 @@ if ($(window).width() <= quantWidth){
     replaceQuant();
 }
 window.addEventListener('resize', replaceQuant) // 
-checkPage();
 numerateRows();
+checkPage();
