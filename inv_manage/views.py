@@ -48,8 +48,11 @@ def home(request):
             "active":"home", 
             "json_items":db_methods.jsonify_items(Item.objects.all()),
             "recent_purchases": Purchase.objects.all().order_by('-id')[:5],
-            "low_inventory":{}
+            "low_inventory":{},
+            "json_items":{}
         }
+        context["low_inventory"] = Item.objects.exclude(item_id__type_id__name = 'Syrup').filter(quantity__lt = 100)
+        context["json_items"] = db_methods.jsonify_items(context["low_inventory"])
         return render(request, 'inv_manage/home.html', context=context)
     else:
         return login_user(request)
@@ -62,25 +65,36 @@ def neworder(request):
     if request.method == 'POST':
         atts = dict(request.POST)
         db_methods.neworder(atts)
+        messages.success(request, 'Order has been successfully added.')
 
     return check_auth(request, 'inv_manage/neworder.html',context={'items':items,'orders':orders})
 
 @never_cache
 def inv_manage(request):
-    items = {}
-    if Item.objects.all():
-        items = Item.objects.filter(available=True).order_by(Lower('item_id'))
+    #items = {}
+    items = Item.objects.filter(available=True).order_by(Lower('item_id'))
+    context = {
+        'items': items, 
+        'json_items': db_methods.jsonify_items(items), 
+        'active':'inventory'
+    }
+
     if request.method == "POST":
-        print(request.POST)
         db_methods.delete_selected(request.POST)
-    # print(items)
-    context = {'items': items, 'json_items': db_methods.jsonify_items(items), 'active':'inventory'}
+
     return check_auth(request, 'inv_manage/inventory.html',context=context)
 
 @never_cache
 def previous_orders(request):
     purchases = Purchase.objects.all()
-    context = {'purchases':purchases, 'active':'orders', 'json_items':db_methods.jsonify_orders(purchases)}
+    context = {
+        'purchases':purchases, 
+        'active':'orders', 
+        'json_items':db_methods.jsonify_orders(purchases)
+    }
+    if request.method == "POST":
+        print(request.POST)
+        db_methods.delete_orders(request.POST)
     return check_auth(request, 'inv_manage/orders.html', context=context)
         
 #Adding an attribute       
@@ -92,9 +106,6 @@ def previous_orders(request):
 
 @never_cache
 def add_item(request):
-        # This is ambiguous, because it's not strictly "items" able to be added, but anything in the database,
-        # including categories.
-
     types = Type.objects.all()
     
     if request.method == 'POST':
@@ -102,23 +113,9 @@ def add_item(request):
         messages.success(request, 'Item has been successfully added.')
 
     return check_auth(request, "inv_manage/add_item.html", context={'types':types})
-  
-    '''
-    #Grabs all possible attributes out of the database
-    attributes = Attributes.objects.all() 
-    #if the user hits submit creates an item and saves it to the database   
-    if request.method == 'POST':
-        item = Item.objects.create(item_id=attributes[int(request.POST.get('attname'))],quantity=int(request.POST.get('quantity')))        
-        item.save()
-        return render(request,'inv_manage/additem.html',{'attributes':attributes})
-        #return redirect('inv_manage:orders')
-    else:    
-        return render(request,'inv_manage/additem.html',{'attributes':attributes})
-    '''
 
 @never_cache
 def edit_item(request, item_id):
-    #return check_auth(request)
     types = Type.objects.all()
     try:
         item = Item.objects.get(pk=item_id)
@@ -126,8 +123,8 @@ def edit_item(request, item_id):
         raise Http404("Item is not in the inventory")
 
     if request.method == 'POST':
-        db_methods.edititem(atts=request.POST,item_id=item_id,attribute_id=item.item_id.id)
-        messages.success(request, 'Item has successfully been updated.')
+        db_methods.edititem(atts=request.POST,item_id=item_id)
+        messages.success(request, 'Item has been successfully updated.')
         return redirect('inv_manage:inventory')
 
     return check_auth(request,'inv_manage/edititem.html',context={'item':item,'types':types})
@@ -157,7 +154,7 @@ def edit_order(request,order_id):
         raise Http404("Order does not exist.")
     
     if request.method == "POST":
-        db_methods.editorder(atts=request.POST,purchase=purchase)
+        db_methods.editorder(atts=request.POST, purchase=purchase)
         messages.success(request, 'Order has successfully been updated.')
         return redirect('inv_manage:orders')
 

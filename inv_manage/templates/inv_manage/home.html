@@ -11,23 +11,26 @@
     let table_items = {{ json_items|safe }};
 </script>
 <div class="table-cont">
-    <caption class='caption'>You are currently low on the following items.</caption>
-    <table id="data-table">
+    <caption class='caption'>You are currently low on the following items:</caption>
+    <table class="red-table" id="data-table">
         <tr>
             <th>Name</th>
-            <th>Description</th>
             <th>Type</th>
+            <th>Description</th>
             <th class="quantity-column">Quantity</th>
         </tr>
-        {% for item in items %}
-        <tr>
-            <td>{{item.item_id.name}}</td>
-            <td>{{item.item_id.description}}</td>
-            <td>{{item.item_id.type_id.name}}</td>
-            <td class="center">{{item.quantity}}</td>
+        <tr v-for="item in items">
+            <td>[[item.name]]</td>
+            <td>[[item.type]]</td>
+            <td>[[item.description]]</td>
+            <td class="center">[[item.quantity]]</td>
         </tr>
-        {% endfor %}
     </table>
+</div>
+<div class="center-pagination">
+    <button href="#" type="button" class='pagination left-table-page'>&laquo;</button>
+    <span class='pagination table-page-number'>1</span>
+    <button href="#" type="button" class='pagination right-table-page'>&raquo;</button>
 </div>
 {% endif %}
 {% if recent_purchases %}

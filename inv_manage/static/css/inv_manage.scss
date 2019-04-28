@@ -79,7 +79,7 @@ $disabled: lightgrey;
 }
 .form-left-controls{
     margin: 8px 0;
-    grid-column: 1 / 2;
+    grid-column: 1 / 2; 
     grid-row: 2 / 3;
     > .btn{
         margin-bottom: 8px;
@@ -221,7 +221,7 @@ $disabled: lightgrey;
     min-height: calc(100vh - (#{$footer-height} + #{$navbar-height}));
 }
 
-#data-table, #data-table2 {
+table {
     table-layout: fixed;
     border: 1px solid black;
     font-size: .9em;
@@ -279,6 +279,28 @@ $disabled: lightgrey;
     }
     .quantity-column{
         width: 80px;
+    }
+}
+
+.red-table{
+    color: white;
+    background-color: #fc6a5f;
+
+    td {
+        border-right: 1px solid black;
+    }
+    
+    th {
+        background-color: #a82117;
+        color: white;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #e84e43;
+        color: black;
+    }
+    tr:nth-child(odd) {
+        color: black;
     }
 }
 

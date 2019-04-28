@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path('admin/', admin.site.urls), # last resort
+    #path('admin/', admin.site.urls), # debug
     path('',  include('inv_manage.urls', namespace = 'inv_manage'), name="inv_manage"),
 ]

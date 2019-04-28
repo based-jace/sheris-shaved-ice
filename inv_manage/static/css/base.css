@@ -253,4 +253,8 @@ footer {
   opacity: 0;
   height: 0;
 }
+
+.hidden {
+  display: none;
+}
 /*# sourceMappingURL=base.css.map */

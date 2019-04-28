@@ -11,18 +11,25 @@
 
 <h1 class="page-header dark-logo">Previous Orders</h1>
 <div class="table-cont">
+    {% csrf_token %}
     <table id="data-table">
         <tr>
+            <th class='check-column hidden'><input id="check-all" type="checkbox"></th>
             <th class="num-column">#</th>
             <th class="sort-column" sort-name="date">Purchase Date</th>
+            <th class="sort-column" sort-name="quantity">Number of Items</th>
             <th class="sort-column" sort-name="total">Price of Purchase</th>
-            <th class="edit-column">View/Edit</th>
+            <th class="edit-column">View</th>
+            <th class="delete-column">X</th>
         </tr>
         <tr v-for="item in items">
+            <td class="hidden center"><input type="checkbox" name="checkbox" v-bind:value="item.id"></td>
             <td class="center">[[ item.number ]]</td>
             <td class="center">[[ item.date ]]</td>
+            <td class="center">[[ item.num_items ]]</td>
             <td class="center">[[ item.total ]]</td>
             <td class="center"><a v-bind:href="item.edit_url">X</a></td>
+            <td class="delete-column single-delete center">X</td>
         </tr>
     </table>
 </div>
@@ -41,4 +48,5 @@
 {% block after_scripts %}
 <script src="{% static 'js/colResizable.min.js' %}"></script>
 <script src="{% static 'js/table.js' %}"></script>
+<script src="{% static 'js/deleteItems.js' %}"></script>
 {% endblock %}

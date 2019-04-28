@@ -16,7 +16,7 @@ class Attributes(models.Model):
         order_with_respect_to = 'name'
 
     def __str__(self):
-        return self.name + " - " + self.type_id.name
+        return self.name
 
     #TODO talk to team about creation of items
 class Item(models.Model):

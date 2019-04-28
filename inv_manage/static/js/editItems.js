@@ -25,14 +25,24 @@ function additem(){
 }
 
 function loadEditField(self){
-    selectedItem = self;
-    let data = selectedItem.value;
+    // selectedItem = self;
+    // let data = selectedItem.value;
+    // let splitdata = data.split(",");
+    // for(let i = 0; i < itemNames.length;++i){
+    //     if(itemNames[i].value == splitdata[1]){
+    //         itemNames[i].selected = true;
+    //     }
+    // }
+    // quantityField.value = parseInt(splitdata[2]);
+    // costField.value = parseFloat(splitdata[3]);
+    let data = self;
     let splitdata = data.split(",");
-    for(let i = 0; i < itemNames.length;++i){
-        if(itemNames[i].value == splitdata[1]){
-            itemNames[i].selected = true;
-        }
-    }
+    // for(let i = 0; i < itemNames.length;++i){
+    //     if(itemNames[i].value == splitdata[1]){
+    //         itemNames[i].selected = true;
+    //     }
+    // }
+    items.value = itemNames[splitdata[1] - 1].text;
     quantityField.value = parseInt(splitdata[2]);
     costField.value = parseFloat(splitdata[3]);
 }
@@ -72,6 +82,9 @@ function selectItems(){
 }
 
 setUpOrderOptions();
-document.getElementById("update-btn").onclick = function(){updateOrder()}
-document.getElementById("rmv-btn").onclick = function(){removeItem();setUpOrderOptions();}
-document.getElementById("add-btn").onclick = function(){additem();}
+// document.getElementById("update-btn").onclick = function(){updateOrder()}
+// document.getElementById("rmv-btn").onclick = function(){removeItem();setUpOrderOptions();}
+// document.getElementById("add-btn").onclick = function(){additem();}
+document.getElementById("view-item-btn").addEventListener('click', ()=>{
+    loadEditField(orderList.value);
+});

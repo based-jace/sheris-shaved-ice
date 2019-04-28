@@ -118,23 +118,26 @@ function setUpButtons(){
             deleteItem(boxes[i]);
         };
     }
-    groupDeleteButton.onclick = deleteItems;    
+    if(groupDeleteButton){
+        groupDeleteButton.onclick = deleteItems;  
+    }
 }
 
-
-checkAll.addEventListener('click', ()=>{
-    if(checkAll.checked == true){
-        for(box of boxes){
-            box.checked = true;
+if(checkAll){
+    checkAll.addEventListener('click', ()=>{
+        if(checkAll.checked == true){
+            for(box of boxes){
+                box.checked = true;
+            }
         }
-    }
-    else{
-        for(box of boxes){
-            box.checked = false;
+        else{
+            for(box of boxes){
+                box.checked = false;
+            }
         }
-    }
-    javascriptSucks();
-})
+        javascriptSucks();
+    })
+};
 
 // Sets up checkboxes
 for(b in 'button.pagination'){
@@ -142,7 +145,9 @@ for(b in 'button.pagination'){
         $(numItemsSelected).text(0);
         setUpButtons();
         makeBoxesWork();
-        checkAll.checked = false;
+        if(checkAll){
+            checkAll.checked = false;
+        }
         for(box of boxes){
             box.checked = false;
         }
