@@ -180,6 +180,16 @@ label {
   color: white;
 }
 
+.light-btn {
+  background-color: white;
+  color: #08458c;
+}
+
+.light-btn:hover {
+  color: white;
+  border-color: #fafcb5;
+}
+
 .red-btn {
   background-color: #8c0301;
   color: #fafcb5;

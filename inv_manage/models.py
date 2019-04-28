@@ -24,7 +24,7 @@ class Item(models.Model):
     quantity = models.IntegerField()
     available = models.BooleanField(default=True)
     def __str__(self):
-        return self.item_id.name
+        return self.item_id.name + " - " + self.item_id.type_id.name
 
 class Purchase(models.Model):
     purchase_date = models.DateField('purchase date')
@@ -35,3 +35,6 @@ class PurchaseItem(models.Model):
     purchase_id = models.ForeignKey(Purchase,on_delete=models.CASCADE)
     quantity = models.IntegerField()
     total_amount = models.DecimalField(max_digits=10,decimal_places=2)
+    def __str__(self):
+        return self.item_id.name + " - " + self.item_id.type_id.name
+

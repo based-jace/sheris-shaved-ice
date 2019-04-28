@@ -78,11 +78,15 @@ $disabled: lightgrey;
     grid-row: 1 / 2;
 }
 .form-left-controls{
+    margin: 8px 0;
     grid-column: 1 / 2;
     grid-row: 2 / 3;
+    > .btn{
+        margin-bottom: 8px;
+    }
 }
 .form-right-controls{
-    margin: 4px 0;
+    margin: 8px 0;
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     > .btn{

@@ -14,8 +14,8 @@
             <label class='new-order-labels' for="attname">Item</label>
             <select class="form-input" id="attname" name='attname' required>
                 {% for item in items %}
-                {{item.item_id.name}}
-                <option value='{{ item.id }}'>{{item.item_id.name}}</option>
+                {% comment %} {{item.item_id.name}} {% endcomment %}
+                <option value='{{ item.id }}'>{{item.item_id.name}} - {{item.item_id.type_id.name}}</option>
                 {% endfor %}
             </select>    
         </div>

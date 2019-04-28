@@ -102,8 +102,10 @@ class db_methods:
     @staticmethod
     def edititem(atts,item_id,attribute_id):
         type_id1 = atts['type_id']
-        type_id = Type.objects.get(id=int(type_id) )
-
+        print(type_id1)
+        type_id = Type.objects.get(id=int(type_id1) )
+        print(type_id)
+        print(attribute_id)
         attribute_stuff = {
             'id':attribute_id,
             'type_id':type_id,
