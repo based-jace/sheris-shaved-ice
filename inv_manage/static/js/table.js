@@ -1,3 +1,5 @@
+let boxes = document.getElementsByName('checkbox');
+
 let num_items = table_items.length; // Total number of items
 let current_items = table_items.slice(0,10); // Items shown in table
 
@@ -110,6 +112,10 @@ for(column of sort_columns){
     column.addEventListener('click', sortClick(column))
 };
 
+function howManyItems(){
+    return num_items == current_items[9].number;
+}
+
 function disablePagination(btn){
     btn.classList.add('disabled');
 }
@@ -130,12 +136,12 @@ function checkPage(){
             enablePagination(btn);
         }
     }
-    if(curr_page == last_page){
+    if(curr_page == last_page || howManyItems()){
         for(btn of right_pag_buttons){
             disablePagination(btn);
         }
     }
-    else{
+    else if(!howManyItems()){
         for(btn of right_pag_buttons){
             enablePagination(btn);
         }
@@ -160,6 +166,7 @@ function changePage(norp){
     }
     checkPage();
     numerateRows();
+    document.getElementsByName('checkbox');
 }
 
 // Numerates Rows (C'mon, man)
@@ -167,7 +174,7 @@ function numerateRows(){
     temp_items = [];
     for(i in vue['items']){
         temp_items[i] = vue.items[i];
-        temp_items[i]['number'] = (curr_page + 1) * 10 - 9 + Number(i); // Again, I really hate javascript
+        temp_items[i]['number'] = (curr_page + 1) * 10 - 9 + Number(i); // Again, I hate javascript
     }
     vue.items = temp_items;
 }
@@ -191,12 +198,13 @@ for(btn of left_pag_buttons){
 // Allows pagination from right page buttons
 for(btn of right_pag_buttons){
     btn.addEventListener('click', ()=>{
-        if(curr_page < last_page){
+        if(curr_page < last_page && !howManyItems()){
             enablePagination(btn);
         }
 
         if(!btn.classList.contains('disabled')){
-            if(curr_page < last_page){ // If less than last page
+            console.log(howManyItems());
+            if(curr_page < last_page && !howManyItems()){ // If less than last page
                 changePage(1);
             }
         }
@@ -207,5 +215,5 @@ if ($(window).width() <= quantWidth){
     replaceQuant();
 }
 window.addEventListener('resize', replaceQuant) // 
-checkPage();
 numerateRows();
+checkPage();

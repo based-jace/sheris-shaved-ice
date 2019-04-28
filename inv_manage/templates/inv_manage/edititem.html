@@ -3,31 +3,40 @@
 {% block main_class %}form-main{% endblock %}
 
 {% block main %}
-    {{item}}
-    <form action="" method="POST">
+    <h1 class="page-header dark-logo">Editing Item</h1>
+    <form class="grid-form" action="" method="POST">
         {% csrf_token %}
-        <label for="name">Name: </label>
-        <input class="form-input" type="text" name="name" id="name" value="{{ item.item_id.name }}" required>
+        <div class="form-left">
+            <div class="input-cont">
+                <label for="name">Name: </label>
+                <input class="form-input" type="text" name="name" id="name" value="{{ item.item_id.name }}" required>
+            </div>
+            <div class="input-cont">
+                <label for="type_id">Type: </label>
+                <select id="type_id" name="type_id">
+                    {% for type in types %}
+                    {{type.name}}
+                    {% if type.id == item.item_id.type_id.id%}
+                    <option value='{{ type.id }}' selected>{{type.name}}</option>
+                    {% else %}
+                    <option value='{{ type.id }}'>{{type.name}}</option>
+                    {%endif%}
         
-        <label for="type_id">Type: </label>
-        <select id="type_id" name="type_id">
-            {% for type in types %}
-            {{type.name}}
-            {% if type.id == item.item_id.type_id.id%}
-            <option value='{{ type.id }}' selected>{{type.name}}</option>
-            {% else %}
-            <option value='{{ type.id }}'>{{type.name}}</option>
-            {%endif%}
-
-            {% endfor %}
-            <option>Add New Type</option>
-        </select>
-        
-        <label for="quantity">Quantity: </label>
-            <input class="form-input" type="number" min="0" name="quantity" id="quantity" value="{{ item.quantity }}" required>
-        <label for="description">Description: </label>
-            <textarea class="form-input" name="description" id="description" value="">{{ item.item_id.description }}</textarea>
-        <button class="submit-btn" type="submit">Submit</button>
+                    {% endfor %}
+                    <option>Add New Type</option>
+                </select>
+            </div>
+            <div class="input-cont">
+                <label for="quantity">Quantity: </label>
+                <input class="form-input" type="number" min="0" name="quantity" id="quantity" value="{{ item.quantity }}" required>
+            </div>
+            <div class="input-cont">
+                <label for="description">Description: </label>
+                <textarea class="form-input" name="description" id="description" value="">{{ item.item_id.description }}</textarea>
+            </div>
+        </div>
+        <div class="form-left-controls">
+            <button id="add-item-submit-btn" class="btn submit-btn" type="submit">Submit</button>
+        </div>
     </form>
-
 {% endblock %}

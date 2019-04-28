@@ -19,6 +19,7 @@ from . import views
 app_name = 'inv_manage'
 
 urlpatterns = [
+    path('addtype',views.add_type,name='addtype'),
     path('orders/edit/<int:order_id>/',views.edit_order,name='editorder'),
     path('inventory/edit/<int:item_id>/',views.edit_item,name='edititem'),
     path('orders/neworder/', views.neworder, name='neworder'),

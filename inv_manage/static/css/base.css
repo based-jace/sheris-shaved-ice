@@ -66,10 +66,10 @@ select[type="number"]:hover, select[type="number"]:focus, .form-input[type="numb
   -moz-appearance: number-input;
 }
 
-/* .container{
-    min-height: 100vh;
-    width: 100vw;
-} */
+.container {
+  min-width: 100%;
+}
+
 header {
   font-family: "Bree Serif", sans-serif;
   width: 100%;
@@ -160,7 +160,7 @@ label {
   background-color: #08458c;
   color: #fafcb5;
   text-decoration: none;
-  border: #79a0af solid 1px;
+  border: #043166 solid 1px;
   padding: 2px 0;
   margin: 6px 0;
   -webkit-transition: .1s;
@@ -170,39 +170,40 @@ label {
 }
 
 .btn:hover {
-  background: lightskyblue;
-  border-color: #678793;
+  background: #2277d8;
+  border-color: #08458c;
 }
 
 .btn:active {
-  background: cadetblue;
-  border-color: #3e5963;
+  background: #043166;
+  border-color: #011935;
   color: white;
+}
+
+.light-btn {
+  background-color: white;
+  color: #08458c;
+}
+
+.light-btn:hover {
+  color: white;
+  border-color: #fafcb5;
 }
 
 .red-btn {
-  font-weight: normal;
-  background-color: darkred;
+  background-color: #8c0301;
   color: #fafcb5;
-  text-decoration: none;
-  border: red solid 1px;
-  padding: 2px 0;
-  margin: 6px 0;
-  -webkit-transition: .1s;
-  transition: .1s;
-  cursor: context-menu;
-  display: block;
+  border: #510200 solid 1px;
 }
 
 .red-btn:hover {
-  background: red;
-  border-color: #678793;
+  background: #d31e1b;
+  border-color: #510200;
 }
 
 .red-btn:active {
-  background: black;
-  border-color: #3e5963;
-  color: white;
+  background: #510200;
+  border-color: #2d0000;
 }
 
 button.btn {
@@ -251,5 +252,9 @@ footer {
   transition: .3s ease-in-out;
   opacity: 0;
   height: 0;
+}
+
+.hidden {
+  display: none;
 }
 /*# sourceMappingURL=base.css.map */

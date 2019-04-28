@@ -1,10 +1,17 @@
 import datetime
 import json
 from django.urls import reverse
+from decimal import Decimal
 
 from .models import Item, Attributes, Type, Purchase, PurchaseItem
 
 class db_methods:
+
+    @staticmethod
+    def create_type(atts):
+        newType = Type(name=atts.get("name"))
+        newType.save()
+
     @staticmethod
     def item_creation(count,purchaseItem):
         if count == 0: 
@@ -32,7 +39,7 @@ class db_methods:
             if i in atts:
                 att_stuff[i] = atts[i][0]
 
-        type_id = Type.objects.get(id=int(att_stuff['type_id']) + 1 )
+        type_id = Type.objects.get(id=int(att_stuff['type_id']))
         att_stuff['type_id'] = type_id
         attributes = Attributes(**att_stuff)
         attributes.save()
@@ -85,32 +92,26 @@ class db_methods:
             item.quantity += int(item_stuff['quantity'])
             item.save()
 
-        #purchaseItem = PurchaseItem.objects.create(item_id=attributes[int(request.POST.get('attname'))],purchase_id=purchase,quantity=int(request.POST.get('quantity')),total_amount=Decimal(request.POST.get('cost')))
-        #purchaseItem.save()
-        #Checks to see if there are any instances of the object in the datbase
-        #count = Item.objects.filter(item_id=purchaseItem.item_id).count()
-        #Creates an item       
-        #db_methods.item_creation(count,purchaseItem)
-
     @staticmethod
-    def edititem(atts,item_id,attribute_id):
-
-        type_id1 = atts['type_id']
-        type_id = Type.objects.get(id=int(type_id) )
-
+    def edititem(atts,item_id):
+        type_id = atts['type_id']
+        type_object = Type.objects.get(id=int(type_id))
         attribute_stuff = {
-            'id':attribute_id,
-            'type_id':type_id,
+            'type_id':type_object,
             'name':atts['name'],
             'description':atts['description']
         }
 
-        updated_attribute = Attributes(**attribute_stuff)
-        updated_attribute.save()
+        updated_attributes = Attributes.objects.get(pk=int(item_id))
+
+        for i, j in zip(attribute_stuff.keys(), attribute_stuff.values()):
+            setattr(updated_attributes, i, j)
+
+        updated_attributes.save()
 
         item_stuff = {
             'id':item_id,
-            'item_id':updated_attribute,
+            'item_id':updated_attributes,
             'quantity':atts['quantity']
         }
 
@@ -125,50 +126,66 @@ class db_methods:
             item.available = False
             item.save()
 
-    @staticmethod 
-    def editorder(atts,orders,purchase):
-        #TODO make it so you can remove entire PurchaseItems
-        orderlist = []
-        index = 0
-        #Total amount of items changed
-        difference = 0
-        #TODO clean up the code by breaking it down into different functions
-        #Unpacks the neccessary data and organizes it into a dictionary
-        for order in orders:
-            item = Item.objects.get(pk=int(atts.get("attname" + str(index))))
-            orderitems = {
-                'id':order.id,
-                'item_id':item,
-                'purchase_id':order.purchase_id,
-                'quantity':atts.get("quantity" + str(index)),
-                'total_amount':atts.get("cost" + str(index))
-            }
-            orderlist.append(orderitems)
-            difference = int(atts.get("quantity" + str(index)))-order.quantity
-            #Makes sure the item quantity cannot go below 0
-            if item.quantity + difference > 0:
-                item.quantity += difference
-            else:
-                item.quantity = 0
-                item.available = False
-            item.save()
-            orderlist.append(orderitems)
-            index += 1
+    @staticmethod
+    def delete_orders(orders):       
+        selected_stuff = orders.getlist('checkbox[]')
+        for i in selected_stuff:     
+            print(i)     
+            Purchase.objects.get(pk=i).delete()
 
-        index = 0
-        #Updates the existing order with the changed information
-        for order in orders:
-            order = PurchaseItem(**orderlist[index])
-            order.save()
-            index += 1
-            # print(order.quantity)
-            # order.item_id = Item.objects.get(id=int(atts['attname']))
-            # order.quantity = atts['quantity']
-            # order.total_amount = atts['cost']
-            # order.save()
+    # update = 0
+    # delete = -1
+    # create new = -2
+    @staticmethod 
+    def editorder(atts,purchase):
+        orderData = []
+        for order in atts.getlist('orderlist'):
+            # 0 = <code above>??, 1 = item id, 2 = quantity, 3 = cost for item, 4 = <code above>??
+            splitdata = order.split(',')
+            item = Item.objects.get(id=int(splitdata[1]))
+            #make a new purchaseItem
+            if splitdata[0] == '-2' and splitdata[4] == '0':               
+                purchaseItem = {
+                    'item_id':item,
+                    'purchase_id':purchase,
+                    'quantity':int(splitdata[2]),
+                    'total_amount':Decimal(splitdata[3])
+                }
+                if item.available == True:
+                    item.quantity += purchaseItem['quantity']
+                    item.save()
+                purchase.total_amount += purchaseItem['total_amount']
+                purchase.save()
+                orderData.append(purchaseItem)
+            else:
+                #update an item
+                if splitdata[4] == '0':
+                    purchaseItem = {
+                    'id':int(splitdata[0]),
+                    'item_id':item,
+                    'purchase_id':purchase,
+                    'quantity':int(splitdata[2]),
+                    'total_amount':Decimal(splitdata[3])
+                    }
+                    orderItem = PurchaseItem.objects.get(id=purchaseItem['id'])
+                    if item.available == True:                        
+                        item.quantity += (purchaseItem['quantity'] - orderItem.quantity)
+                        item.save()
+                    purchase.total_amount += (purchaseItem['total_amount'] - orderItem.total_amount)
+                    purchase.save()
+                    orderData.append(purchaseItem)
+                #delete an item
+                elif splitdata[4] == '-1' and splitdata[0] != '-2':
+                    deleteItem = PurchaseItem.objects.get(id=int(splitdata[0]))
+                    deleteItem.delete()
+
+        for order in orderData:
+            purchase = PurchaseItem(**order)    
+            purchase.save()   
 
     @staticmethod
     def jsonify_items(items):
+        json_items = []
         if len(items) > 0:
             json_items = [{
                 'id': item.id,
@@ -180,16 +197,19 @@ class db_methods:
                 'edit_url': reverse('inv_manage:edititem', args=[item.id])
                 } for item in items
             ]
-            return json.dumps(json_items)
+        return json.dumps(json_items)
 
     @staticmethod
     def jsonify_orders(orders):
+        json_items = []
+        print(json_items)
         if len(orders) > 0:
             json_items = [{
                 'id': order.id,
                 'date': str(order.purchase_date),
+                'num_items': len((PurchaseItem.objects.filter(purchase_id = order.id))),
                 'total': "$" + str(order.total_amount),
-                'edit_url': reverse('inv_manage:editorder', args=[order.id])
+                'edit_url': reverse('inv_manage:editorder', args=[order.id]),
             } for order in orders
         ]
         return json.dumps(json_items)
