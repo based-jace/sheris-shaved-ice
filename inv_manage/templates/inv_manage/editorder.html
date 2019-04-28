@@ -8,8 +8,8 @@
     <div class="form-left" id='orderitem'>
         <div class="input-cont">
             <label for="attname">Name</label>
-            <input class="form-input" type='text' name='attname' id='attname' readonly>   
-            <select class="hidden form-input" id="attname" name='attname'>
+            <!-- <input class="form-input" type='text' name='attname' id='attname' readonly>    -->
+            <select  id="attname" name='attname'>
                 {% for item in items %}
                 {{item.item_id.name}}
                 <option readonly class="itemNames" value='{{ item.id }}'>{{item.item_id.name}} - {{item.item_id.type_id.name}}</option>
@@ -18,29 +18,29 @@
         </div>
         <div class="input-cont">
             <label for='quantity'>Quantity</label>
-            <input class="form-input" type='number' name='quantity' id='quantity' min='0' readonly>   
+            <input class="form-input" type='number' name='quantity' id='quantity' min='0'>   
         </div>
         <div class="input-cont">
             <label for='cost'>Cost</label>
-            <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01" readonly>
+            <input class="form-input" type='number' name='cost' id='cost' min='0' step=".01">
         </div>
     </div>
-    <!-- <div class="form-left-controls">
+    <div class="form-left-controls">
         <button class="btn wide-btn" type="button" id="add-btn">Add Item</button>
         <button class="btn wide-btn" type="button" id='update-btn' >Update Item</button>
-    </div> -->
+    </div>
     <div class="form-right">
         <label class="center center-label" for="orderlist">Order</label>
-        <select id='orderlist' name='orderlist' size='8' required>
+        <select id='orderlist' name='orderlist' size='8' multiple required>
             {% for order in orders%}
             <option value="{{order.id}},{{order.item_id.id}},{{order.quantity}},{{order.total_amount}},0">{{order.item_id.item_id.name}} - {{order.item_id.item_id.type_id.name}}</option>
             {% endfor %}
         </select>
     </div>
     <div class="form-right-controls">
-        <!-- <button class="btn wide-btn red-btn" type="button" id='rmv-btn' >Remove Item</button> -->
-        <!-- <button class="btn wide-btn" type="submit" onclick="return selectItems()" id='submit-btn'>Submit</button> -->
-        <button id="view-item-btn" class="btn wide-btn" type="button">View Item</button>
+        <button class="btn wide-btn red-btn" type="button" id='rmv-btn' >Remove Item</button>
+        <button class="btn wide-btn" type="submit" onclick="return selectItems()" id='submit-btn'>Submit</button>
+        <!-- <button id="view-item-btn" class="btn wide-btn" type="button">View Item</button> -->
     </div>
 </form>
 {% endblock %}

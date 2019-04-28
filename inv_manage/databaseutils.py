@@ -177,6 +177,10 @@ class db_methods:
                 #delete an item
                 elif splitdata[4] == '-1' and splitdata[0] != '-2':
                     deleteItem = PurchaseItem.objects.get(id=int(splitdata[0]))
+                    item.quantity -= deleteItem.quantity
+                    item.save()
+                    purchase.total_amount -= deleteItem.total_amount
+                    purchase.save()
                     deleteItem.delete()
 
         for order in orderData:
