@@ -140,7 +140,8 @@ class db_methods:
     def editorder(atts,purchase):
         orderData = []
         for order in atts.getlist('orderlist'):
-            # 0 = <code above>??, 1 = item id, 2 = quantity, 3 = cost for item, 4 = <code above>??
+            #
+            # 0 = create new or purchaseItem id, 1 = item id, 2 = quantity, 3 = cost for item, 4 = update,delete codes
             splitdata = order.split(',')
             item = Item.objects.get(id=int(splitdata[1]))
             #make a new purchaseItem
@@ -167,10 +168,15 @@ class db_methods:
                     'quantity':int(splitdata[2]),
                     'total_amount':Decimal(splitdata[3])
                     }
+                    #TODO change it so that when changing the item associated with the purchaseItem and the quantity/total_amount 
+                    #it deletes teh old purchase item and creates a new one
                     orderItem = PurchaseItem.objects.get(id=purchaseItem['id'])
-                    if item.available == True:                        
+                    if item.available == True and purchaseItem['item_id'] == orderItem.item_id:                        
                         item.quantity += (purchaseItem['quantity'] - orderItem.quantity)
                         item.save()
+                    elif item.available == True and purchaseItem['item_id'] != orderItem.item_id:
+                        item.quantity += purchaseItem['quantity']
+                        orderItem.delete()
                     purchase.total_amount += (purchaseItem['total_amount'] - orderItem.total_amount)
                     purchase.save()
                     orderData.append(purchaseItem)
