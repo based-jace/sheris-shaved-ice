@@ -41,8 +41,9 @@ function additem(){
     
 }
 
-function loadEditField(self){
-    selectedItem = self;
+function loadEditField(){
+    selectedIndex = orderList.selectedIndex;
+    selectedItem = orderList.options[selectedIndex];
     let data = selectedItem.value;
     let splitdata = data.split(",");
     for(let i = 0; i < itemNames.length;++i){
@@ -67,7 +68,7 @@ function loadEditField(self){
 function setUpOrderOptions(){
     document.getElementById("submit-btn").onclick = function(){selectItems();}
     for(let i = 0;i < orderList.options.length;++i){
-        orderList.options[i].onclick = function(){loadEditField(orderList.options[i])};
+        orderList.options[i].onclick = function(){loadEditField()};
     }
 }
 
@@ -120,8 +121,8 @@ function selectItems(){
 
 setUpOrderOptions();
 document.getElementById("update-btn").onclick = function(){updateOrder()}
-document.getElementById("rmv-btn").onclick = function(){removeItem();setUpOrderOptions();}
+document.getElementById("rmv-btn").onclick = function(){removeItem();}
 document.getElementById("add-btn").onclick = function(){additem();}
-//document.getElementById("view-item-btn").addEventListener('click', ()=>{
-//     loadEditField(orderList.value);
+// document.getElementById("view-item-btn").addEventListener('click', ()=>{
+//     loadEditField();
 // });
