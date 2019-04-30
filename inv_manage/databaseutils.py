@@ -168,8 +168,6 @@ class db_methods:
                     'quantity':int(splitdata[2]),
                     'total_amount':Decimal(splitdata[3])
                     }
-                    #TODO change it so that when changing the item associated with the purchaseItem and the quantity/total_amount 
-                    #it deletes teh old purchase item and creates a new one
                     orderItem = PurchaseItem.objects.get(id=purchaseItem['id'])
                     if item.available == True and purchaseItem['item_id'] == orderItem.item_id:                        
                         item.quantity += (purchaseItem['quantity'] - orderItem.quantity)
@@ -177,6 +175,10 @@ class db_methods:
                     elif item.available == True and purchaseItem['item_id'] != orderItem.item_id:
                         item.quantity += purchaseItem['quantity']
                         item.save()
+                        orderItem.item_id.quantity -= orderItem.quantity
+                        orderItem.item_id.save()
+                        orderItem.delete()
+                    elif item.available != True and orderItem.item_id.available == True and purchaseItem['item_id'] != orderItem.item_id:
                         orderItem.item_id.quantity -= orderItem.quantity
                         orderItem.item_id.save()
                         orderItem.delete()
