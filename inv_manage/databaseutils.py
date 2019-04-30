@@ -176,6 +176,9 @@ class db_methods:
                         item.save()
                     elif item.available == True and purchaseItem['item_id'] != orderItem.item_id:
                         item.quantity += purchaseItem['quantity']
+                        item.save()
+                        orderItem.item_id.quantity -= orderItem.quantity
+                        orderItem.item_id.save()
                         orderItem.delete()
                     purchase.total_amount += (purchaseItem['total_amount'] - orderItem.total_amount)
                     purchase.save()

@@ -42,7 +42,7 @@ function additem(){
 }
 
 function loadEditField(){
-    selectedIndex = orderList.selectedIndex;
+    let selectedIndex = orderList.selectedIndex;
     selectedItem = orderList.options[selectedIndex];
     let data = selectedItem.value;
     let splitdata = data.split(",");
