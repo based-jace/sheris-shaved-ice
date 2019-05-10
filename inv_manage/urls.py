@@ -19,7 +19,7 @@ from . import views
 app_name = 'inv_manage'
 
 urlpatterns = [
-    path('addtype',views.add_type,name='addtype'),
+    path('addtype/',views.add_type,name='addtype'),
     path('orders/edit/<int:order_id>/',views.edit_order,name='editorder'),
     path('inventory/edit/<int:item_id>/',views.edit_item,name='edititem'),
     path('orders/neworder/', views.neworder, name='neworder'),
@@ -27,6 +27,8 @@ urlpatterns = [
     path('inventory/add/', views.add_item, name="add_item"),
     path('inventory/',views.inv_manage,name='inventory'),
     path('logout/', views.logout_user, name='logout'),
+    path('forgotpassword/<str:reset_key>/', views.reset_password, name='reset_password'),
+    path('forgotpassword/', views.forgot_password, name='forgotpassword'),
     path('', views.home, name='home'),
 ]
 

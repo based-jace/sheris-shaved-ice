@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -38,3 +39,6 @@ class PurchaseItem(models.Model):
     def __str__(self):
         return self.item_id.name + " - " + self.item_id.type_id.name
 
+class TempPassKey(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    pass_key = models.CharField(max_length=256)

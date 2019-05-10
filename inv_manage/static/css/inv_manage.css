@@ -19,7 +19,7 @@
 
 .table-cont {
   width: 100%;
-  min-height: 312px;
+  min-height: 315px;
   -ms-grid-column: 1;
   -ms-grid-column-span: 1;
   grid-column: 1 / 2;
@@ -387,7 +387,7 @@ table .center, table th {
 }
 
 table .delete-column, table .edit-column, table .add-column, table .check-column, table .num-column {
-  width: 30px;
+  width: 50px;
   min-width: 30px;
 }
 
@@ -465,6 +465,7 @@ th {
   -ms-grid-column-align: center;
       justify-self: center;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .pagination {
@@ -587,6 +588,12 @@ form * .center-label {
   margin-top: 30px;
 }
 
+.icon {
+  height: 20px;
+  margin-bottom: -4px;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 1080px) {
   .main-cont > * {
     width: 960px;
@@ -618,6 +625,7 @@ form * .center-label {
     -ms-grid-row-span: 1;
     grid-row: 2 / 3;
     width: 90%;
+    min-height: 400px;
     margin: auto;
   }
   .center-pagination {
@@ -691,6 +699,10 @@ form * .center-label {
     margin: 0;
     font-size: 2.4em;
   }
+  .icon {
+    height: 36px;
+    margin-bottom: -8px;
+  }
 }
 
 @media only screen and (max-width: 440px) {
@@ -718,7 +730,6 @@ form * .center-label {
     font-size: 1.8em;
   }
   .table-cont {
-    min-height: 279px;
     width: 100%;
     -ms-grid-column: 1;
     -ms-grid-column-span: 2;
