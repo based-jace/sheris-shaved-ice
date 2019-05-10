@@ -63,4 +63,14 @@ form .form-input:focus {
 #forgot-password {
   color: #fafcb5;
 }
+
+@media only screen and (max-width: 860px) {
+  .main-cont {
+    height: 100%;
+  }
+  .main-cont main {
+    padding: 80px 0;
+    width: 100%;
+  }
+}
 /*# sourceMappingURL=auth.css.map */

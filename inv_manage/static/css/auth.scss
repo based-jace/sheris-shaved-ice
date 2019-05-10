@@ -58,3 +58,13 @@ form{
 #forgot-password{
     color: $light-yellow;
 }
+
+@media only screen and (max-width: 860px){
+    .main-cont{
+        height: 100%;
+        main{
+            padding: 80px 0;
+            width: 100%;
+        }
+    }
+}

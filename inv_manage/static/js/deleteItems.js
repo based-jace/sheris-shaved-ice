@@ -42,10 +42,12 @@ function removeItem(box){
 }
 
 function removeItems(){
-    for(i in boxes){
+    for(i = boxes.length - 1; i >= 0; i--){
+        console.log(i);
         if(boxes[i].checked == true){
-            table_items.splice(i,1);   
+            console.log(boxes[i]);
             boxes[i].checked = false;
+            table_items.splice(i,1);   
             num_items--;
         }
     }
@@ -78,7 +80,7 @@ function refreshTable(){
 }
 
 function deleteItems(){
-    checkboxes = getSelectedCheckboxes()
+    checkboxes = getSelectedCheckboxes();
     $.ajax({
         type:"POST",
         url:window.location.href,                

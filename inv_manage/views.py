@@ -1,11 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.decorators.cache import never_cache
 from django.http import Http404
 import json
 from django.db.models.functions import Lower
+
+from . import password_reset
+
+# Forgot password reset
+import secrets
 
 from .databaseutils import db_methods
 
@@ -46,16 +52,44 @@ def home(request):
     if request.user.is_authenticated:
         context = {
             "active":"home", 
-            "json_items":db_methods.jsonify_items(Item.objects.all()),
+            "json_items":"",
             "recent_purchases": Purchase.objects.all().order_by('-id')[:5],
             "low_inventory":{},
             "json_items":{}
         }
-        context["low_inventory"] = Item.objects.exclude(item_id__type_id__name = 'Syrup').filter(quantity__lt = 100)
+        context["low_inventory"] = Item.objects.exclude(item_id__type_id__name = 'Syrup').filter(quantity__lt = 100, available=True)
         context["json_items"] = db_methods.jsonify_items(context["low_inventory"])
         return render(request, 'inv_manage/home.html', context=context)
     else:
         return login_user(request)
+
+@never_cache
+def forgot_password(request):
+    if request.method == 'POST':
+        if request.POST:
+            email = request.POST['emailaddress']
+            try:
+                this_user = User.objects.get(email=email)
+                password_reset.send_link(this_user)
+                messages.success(request, 'Check your email for further instructions.')
+            except:
+                messages.error(request, 'User not found')
+            
+    return render(request, 'inv_manage/forgotpassword.html')
+
+@never_cache
+def reset_password(request, reset_key):
+    if request.method == 'POST':
+        try:
+            password_reset.new_password(reset_key, request.POST['password'])
+            messages.success(request, 'Password successfully changed')
+        except:
+            messages.error('Something went wrong')
+        return redirect('inv_manage:home')
+    if not password_reset.test_key(reset_key):
+        messages.error(request, 'Your key is invalid.')
+        return redirect('inv_manage:home')
+    return render(request, 'inv_manage/resetpassword.html')
 
 @never_cache
 def neworder(request):

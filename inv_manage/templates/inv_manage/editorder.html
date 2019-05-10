@@ -7,7 +7,7 @@
     {% csrf_token %}
     <div class="form-left" id='orderitem'>
         <div class="input-cont">
-            <label for="attname">Name</label>
+            <label for="attname">Item</label>
             <input class="form-input" type='text' name='attname' id='attname' readonly>   
             <select class="hidden form-input" id="attname" name='attname'>
                 {% for item in items %}
